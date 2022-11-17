@@ -178,7 +178,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		var backend_url  = '<?php echo base_url(); ?>';
 
 		//document.addEventListener('DOMContentLoaded', function() {
-			$(document).ready(function(){
+		$(document).ready(function(){
 				
     		var calendarEl = document.getElementById('calendar');
 			var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -204,7 +204,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				eventClick: function(event, element)
 					{
 						mostra(event.event.id);
-
+						console.log(event.event.title);
+						console.log(event.event.startStr);
+						
 						//document.location.href = "id ="+event.event.id;
 					},
 			
@@ -228,15 +230,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 		function mostra(id){
 			console.log(id);
-			
-			
+			//console.log(event.event.startStr);
 			//<input type="hidden" name="calendar_id" value="0">
 			var nome = "<?php echo $ag['nome'];?>"
 			var hora = "<?php echo $ag['hora'];?>"
 			var dti = "<?php echo $ag['dtinicial'] ;?>"
+
+			//$('#modal_mostra input[name=nome]').val(event.nome);
 			
 			$('#modal_mostra input[name=nome]').val(nome);
 			$('#modal_mostra input[name=hora]').val(hora);
+			//$('#modal_mostra input[name=start]').val(event.event.startStr);
 			$('#modal_mostra input[name=start]').val(moment(dti).format('DD/MM/YYYY'));
 			
 			$("#modal_mostra").modal({show: true }); 

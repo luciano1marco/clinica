@@ -72,7 +72,7 @@
                         </div>   
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-light">
-                                <a href="/coworking/auth/login">Login</a>
+                                <a href="/clinica/admin/">Login</a>
                             </button>
                         </div>              
                     </div>  
