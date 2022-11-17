@@ -20,7 +20,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="box-body">
                         <?php echo $message; ?>
 
-                        <?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form-create_user')); ?>
+                        <?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form_create')); ?>
 
                         <?php echo form_fieldset('Dados'); ?>
 

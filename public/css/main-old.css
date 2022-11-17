@@ -4,8 +4,9 @@ body {
     /*font-family: 'Poppins', sans-serif;*/
     font-family: 'Open Sans', sans-serif;
 }
-.questionario{
-    background-color: transparent;
+
+.questionario {
+    background-color: #FFFFFF;
 }
 
 .jumbotron {
@@ -20,7 +21,6 @@ body {
     background: #296a7dd5;
     padding: 2rem;
     border: 1px solid rgba(107, 106, 44, 0);
-    
 }
 
 .jumbotron-background {
@@ -76,7 +76,7 @@ label {
 
 .search-text {
     margin-top: 50px;
-    background-color: #e9b3aa;
+    background-color: #7dabdb;
     padding-top: 60px;
     padding-bottom: 60px;
 }
@@ -89,7 +89,7 @@ label {
 }
 
 .search-text .btn-search {
-    background-color: #e9b3aa;
+    background-color: #7dabdb;
     border: 1px solid #FFF;
     color: #FFF;
     padding: 11px 22px;
@@ -97,11 +97,85 @@ label {
 
 .search-text .btn-search:hover {
     background-color: #FFF;
-    color: #e9b3aa;
+    color: #7dabdb;
+}
+
+
+/* Mymenu */
+
+#Mymenu {
+    background-color: #E1E1E1;
+    color: white;
+    position: relative;
+    margin-top: 0 !important;
+}
+
+#Mymenu h1 {
+    font-size: 60px;
+    text-align: center;
+    margin-top: 30px;
+    color: #73C9F8;
+}
+
+#Mymenu h3 {
+    font-size: 40px;
+    text-align: center;
+    margin-top: 30px;
+    color: #73C9F8;
+}
+
+#Mymenu h4 {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 30px;
+    color: #2B082B;
+}
+
+#Mymenu h5 {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    color: #337AB7;
+}
+
+#Mymenu h6 {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    color: #337AB7;
+}
+
+#Mymenu p {
+    text-align: center;
+}
+
+li {
+    list-style-type: none;
+}
+
+.drop-content {
+    display: none;
+    background-color: white;
+}
+
+.drop-content a {
+    color: white;
+    padding: 6px 0px;
+    text-decoration: none;
+    display: block;
+    font-size: 15px;
+    z-index: 1000;
+    position: relative;
+}
+
+.menu-drop:hover .drop-content {
+    display: block;
 }
 
 footer {
-    /*background-color: #661a1a;*/
+    background-color: #222222;
     padding: 60px 0px;
 }
 
@@ -124,7 +198,7 @@ footer .menu li a:hover {
 fa-tumblr,
 .fa.fa-google-plus,
 .fa.fa-tumblr {
-    color: #516EAE;
+    color: #182bd8;
     font-size: 20px;
     padding: 10px;
 }
@@ -138,12 +212,7 @@ fa-tumblr,
 fa-tumblr:hover,
 .fa.fa-google-plus:hover,
 .fa.fa-tumblr:hover {
-    color: #fafafa;
-}
-.fa.fa-facebook {
-    color: #38529A;
-    font-size: 20px;
-    padding: 10px;
+    color: #6794c2;
 }
 
 .fa.fa-twitter {
@@ -153,7 +222,7 @@ fa-tumblr:hover,
 }
 
 .fa.fa-twitter:hover {
-    color: #fafafa;
+    color: #c1e5e7;
 }
 
 .fa.fa-instagram {
@@ -163,7 +232,7 @@ fa-tumblr:hover,
 }
 
 .fa.fa-instagram:hover {
-    color: #fafafa;
+    color: #d31111;
 }
 
 .fa.fa-youtube {
@@ -173,7 +242,7 @@ fa-tumblr:hover,
 }
 
 .fa.fa-youtube:hover {
-    color: #fafafa;
+    color: #dab2b2;
 }
 
 .copyright {
@@ -199,7 +268,7 @@ fa-tumblr:hover,
 }
 
 .modal-header {
-    background-color: #4662ad;
+    background-color: #337ab7;
 }
 
 .modal-title {

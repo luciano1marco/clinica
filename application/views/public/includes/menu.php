@@ -10,47 +10,88 @@
 
   </head>
  <!--- script para o menu  -->           
+ <style>
+    #Mymenu{
+        background-image: linear-gradient(to left, #016A7Db9, #083D77b9 );
+        position: relative;
+        margin-top: 0 !important;
+    }
+    #Mymenu h2{
+        font-size: 60px;
+        font-weight: 900;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 40px;
+        color: #fff;
+    }
+    #Mymenu h4{
+        font-size: 20px;
+        font-weight: 200;
+        text-align: center;
+        margin-top: 5px;
+        color: #fff;
+    }
+    #botoes{
+        margin-top: 80 !important;
+        text-decoration: none;
+    }
+    #botoes :hover{
+        color: #265476;
+        
+    }
+    #sociais{
+        margin-top: 200 !important;  
+    }
+    #Mymenu p{
+        text-align: center;
+    }
+    #Mymenu a{
+        color:#fff;
+    }
+</style>  
 
-
-<div id="Mymenu">
-    <section class="content-fluid">
-            <div class="row ">
-                <div class="col-lg-12">
-                   
-                    <div class="col-md-3" >
-                        <a href="#"><img src="/clinica/public/images/logo.png" width="50%" height="50%"/></a>
-                    </div>
-                    
-                    <div class="col-md-4" >
-                        <h3>Espaço Terapeutico</h3>
-                        <h5> Simone Loretto</h5>
-                    </div>
-                    
-                    <div class="col-md-3" >
-                        <div class="row" id="botoes">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-outline-light"> 
-                                    <a href="/riograndeporelas/">Home</a>
-                                </button>
-                            </div>
-                        </div>    
-                    </div>
-                    <div class="col-md-2">
-                        <span><h4>
-                            <ul class="list-inline">
-                                <li><a target="_blank" href="http://www.facebook.com/PrefeituraMunicipaldoRG"           class="facebook"> <i class="fa fa-facebook" > </i></a></li>
-                                <li><a target="_blank" href="http://twitter.com/PMRGoficial"                            class="twitter">  <i class="fa fa-twitter" >  </i></a></li>
-                                <li><a target="_blank" href="https://www.instagram.com/prefeituradoriogrande/"          class="instagram"><i class="fa fa-instagram"> </i></a></li>
-                                <li><a target="_blank" href="https://www.youtube.com/channel/UCKp-F9htcpRVXTJUzEaSxzA"  class="youtube">  <i class="fa fa-youtube" >  </i></a></li>
-                            </ul>
-                        </h4></span>
-                    </div>
+<div id="Mymenu">  
+    <section class="flex-box" id="topo">
+        <div class="row ">
+            <div class="col-lg-12">
+                <div class="col-md-2">
+                    <a href="#">
+                        <img class="img-responsive" src="public/images/logo.png" >
+                    </a>
+                </div>
+                <div class="col-md-6" >
+                    <h2> <a href="#"><img src="/clinica/public/images/simone1.png" width="80%" height="80%"/></a>
+                    </h2>
+                </div>
+                <div class="col-md-2" >
+                    <div class="row" id="botoes">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light " type="button" >
+                                <a href="#sobre">Sobre</a> 
+                            </button>
+                        </div>   
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-outline-light">
+                                <a href="/coworking/auth/login">Login</a>
+                            </button>
+                        </div>              
+                    </div>  
+                </div>
+                <div class="col-md-2" id="sociais">
+                    <span><h4>
+                        <ul class="list-inline">
+                            <li><a target="_blank" href="https://www.facebook.com/PrefeituraMunicipaldoRG" class="facebook"> <i class="fa fa-facebook" > </i></a></li>
+                            <li><a target="_blank" href="https://twitter.com/PMRGoficial"                  class="twitter">  <i class="fa fa-twitter" >  </i></a></li>
+                            <li><a target="_blank" href="https://www.instagram.com/prefeituradoriogrande/?igshid=mp5sdc6oejlu" class="instagram"><i class="fa fa-instagram"> </i></a></li>
+                            <li><a target="_blank" href="https://www.youtube.com/channel/UCeCOe03FRXNUGfOE1VO0lwQ/videos"  class="youtube">  <i class="fa fa-youtube" >  </i></a></li>
+                        </ul>
+                    </h4></span>
                 </div>
             </div>
-       
-    </section>    
-
+        </div>
+    </section>
 </div>
+
 <body>
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->

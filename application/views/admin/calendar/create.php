@@ -25,30 +25,45 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <?php echo form_fieldset('Dados'); ?>
 
                         <div class="form-group">
-                        <label class="col-sm-2 control-label" for="hora">Hora</label>
+							<label class="control-label col-sm-2">Nome  </label>
+							<div class="col-sm-3">
+								<?php echo form_dropdown($idpaciente);?>
+							</div>
+						</div>
+                        
+                        <div class="form-group">
+                        <label class="col-sm-2 control-label" for="hora">Horário</label>
                             <div class="col-sm-3">
                                 <?php echo form_dropdown($hora); ?>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <?php echo form_label('data', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-3">
-                                <?php echo form_input($dagenda); ?>
-                            </div>
-                        </div>
+							<label for="color" class="col-sm-2 control-label">Color</label>
+							<div class="col-sm-3">
+								<select name="color" class="form-control">
+									<option value="">Selecione uma Cor</option>
+									<option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
+									<option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
+									<option style="color:#008000;" value="#008000">&#9724; Green</option>                       
+									<option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
+									<option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
+									<option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
+								</select>
+							</div>
+						</div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="psicologa">Psicologa</label>
-                            <div class="col-sm-4">
-                                <?php echo form_dropdown($idpsico); ?>
-                            </div>
-                        </div>
+                        <div class="form-group row">
+							<label class="col-sm-2 col-form-label text-right" name="start_date" for="start_date">Início </label>
+							<div class="col-sm-3">
+								<?php echo form_input($start_date);?>
+							</div>
+						</div>
 
                         <?php echo form_fieldset_close(); ?>
 
                         <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
+                            <div class="col-sm-offset-2 col-sm-3">
                                 <div class="btn-group">
                                     <?php
                                     $submit = '<i class="fa fa-check"></i> <span>Enviar</span>';

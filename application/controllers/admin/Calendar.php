@@ -26,35 +26,31 @@ class calendar extends Admin_Controller {
         }
         else
         {
-			/* dados  */
 			// load calendar
             $this->load->library('calendar');
-		  
-			//dados do banco events
-			//$this->data['evento'] = R::findAll("events");
-			//$this->data['agend'] = R::findAll("agenda");
+			//$this->data['agenda'] = R::load("agenda", $id);
+
 			$sql = "SELECT  	
 						ag.id,
 						te.hora as hora,
-						dagenda,
-						concat(us.first_name, ' ',us.last_name)  as nome	     
+						ag.start_date as dtinicial,
+						ag.end_date as dtfinal,
+						ag.color as color,
+						SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
 
 				FROM agenda as ag
 
-				inner join users as us
-				on us.id = ag.idpsico
-
 				inner join tempo as te
-				on ag.hora = te.id
+				on te.id = ag.hora
+
+				inner join pacientes as pa
+				on pa.id = ag.idpaciente
 
 				";
 
-		$this->data['agend'] = R::getAll($sql);
-
-
-
-
-           /* Breadcrumbs */
+			$this->data['agend'] = R::getAll($sql);
+           
+			/* Breadcrumbs */
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 			/* Nome do Botão Criar do INDEX */
@@ -62,6 +58,28 @@ class calendar extends Admin_Controller {
 
 			/* Data */
 			$this->data['error'] = NULL;
+			
+			$this->data['idpaciente'] = array(
+                'name'  => 'idpaciente',
+                'id'    => 'idpaciente',
+                'options' => $this->getpaciente(),
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('idpaciente'),
+            );
+			$this->data['hora'] = array(
+                'name'  => 'hora',
+                'id'    => 'hora',
+                'options' => $this->gettempo(),
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('hora'),
+            );
+			$this->data['start_date'] = array(
+				'name'  => 'start_date',
+				'id'    => 'start_date',
+				'type'  => 'date',
+				'class' => 'form-control',
+				'value' => $this->form_validation->set_value('start_date'),
+			);
 
 			/* Load Template */
 			$this->template->admin_render('admin/calendar/index', $this->data);
@@ -70,25 +88,24 @@ class calendar extends Admin_Controller {
 
 	public function create(){
         /* Breadcrumbs */
-		$this->breadcrumbs->unshift(2, "Novo Atendimento", 'admin/calendar/create');
+		$this->breadcrumbs->unshift(2, "Novo Horário", 'admin/calendar/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Marcar Hora';
+		$this->data['texto_create'] = 'Criar Calendario';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 
 		/* Validate form input */
-		$this->form_validation->set_rules('hora', 'hora', 'required');
-		$this->form_validation->set_rules('dagenda', 'dagenda', 'required');
-		$this->form_validation->set_rules('idpsico', 'idpsico', 'required');
-		        
+		$this->form_validation->set_rules('idpaciente', 'Nome', 'required');
+                
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
-			$agend = R::dispense("agenda");
-            $agend->hora = $this->input->post('hora');
-            $agend->dagenda = $this->input->post('dagenda');
-            $agend->idpsico = $this->input->post('idpsico');
+			$age = R::dispense("agenda");
+            $age->idpaciente = $this->input->post('idpaciente');
+            $age->hora = $this->input->post('hora');
+            $age->color = $this->input->post('color');
+            $age->start_date = $this->input->post('start_date');
             
-			R::store($agend);
+			R::store($age);
 
 			$this->session->set_flashdata('message', "Dados gravados");
             redirect('admin/calendar', 'refresh');
@@ -96,6 +113,13 @@ class calendar extends Admin_Controller {
         else {
             $this->data['message'] = (validation_errors() ? validation_errors() : "");
 
+			$this->data['idpaciente'] = array(
+                'name'  => 'idpaciente',
+                'id'    => 'idpaciente',
+                'options' => $this->getpaciente(),
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('idpaciente'),
+            );
 			$this->data['hora'] = array(
                 'name'  => 'hora',
                 'id'    => 'hora',
@@ -103,24 +127,13 @@ class calendar extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('hora'),
             );
-			
-            
-            $this->data['dagenda'] = array(
-                'name'  => 'dagenda',
-                'id'    => 'dagenda',
-                'type'  => 'Date',
-                'class' => 'form-control',
-                'value' => $this->form_validation->set_value('dagenda'),
-            );
-
-			$this->data['idpsico'] = array(
-                'name'  => 'idpsico',
-                'id'    => 'idpsico',
-                'options' => $this->getusers(),
-                'class' => 'form-control',
-                'value' => $this->form_validation->set_value('idpsico'),
-            );
-			
+			$this->data['start_date'] = array(
+				'name'  => 'start_date',
+				'id'    => 'start_date',
+				'type'  => 'date',
+				'class' => 'form-control',
+				'value' => $this->form_validation->set_value('start_date'),
+			);
         }         
         /* Load Template */
         $this->template->admin_render('admin/calendar/create', $this->data);
@@ -149,8 +162,7 @@ class calendar extends Admin_Controller {
         }
 		return $options;
     }
-    
-	public function gettempo() {
+  	public function gettempo() {
         $sql = "SELECT id,hora FROM tempo ";
 
         $options = array("0" => "Selecione uma Hora");
@@ -159,6 +171,18 @@ class calendar extends Admin_Controller {
 
 		foreach ($tem as $t) {   
             $options[$t['id']] = $t['hora'];           
+        }
+		return $options;
+    }
+	public function getpaciente() {
+        $sql = "SELECT id,nome FROM pacientes ";
+
+        $options = array("0" => "Selecione um Paciente");
+                
+        $tem = R::getAll($sql);        
+
+		foreach ($tem as $t) {   
+            $options[$t['id']] = $t['nome'];           
         }
 		return $options;
     }
@@ -273,9 +297,49 @@ class calendar extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/calendar/edit', $this->data);
 	}
+	public function save()	{
+		
+		$idpac = $this->input->post('idpaciente');
+		$hor   = $this->input->post('hora');
+		$st    = $this->input->post('start_date');
+		$cor   = $this->input->post('color');
 
+		$this->form_validation->set_rules('idpaciente', 'Nome do paciente é obrigatório ', 'required');
+		if ($this->form_validation->run() == TRUE){
+			$agend = R::dispense("agenda");
+			$agend->idpaciente = $idpac;
+            $agend->hora = $hor;
+			$agend->color = $cor;
+            $agend->start_date = $st;
+            
+			R::store($agend);
+		}
+		
+		$this->session->set_flashdata('message', "Dados gravados");
+        redirect('admin/calendar', 'refresh');
 
+		
+	}
 
+	public function idmostra($id=null){
+		$sqlid = "SELECT  	
+						ag.id as id,
+						te.hora as hora,
+						ag.start_date as dtinicial,
+						ag.end_date as dtfinal,
+						ag.color as color,
+						SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
 
+				FROM agenda as ag
 
+				inner join tempo as te
+				on te.id = ag.hora
+
+				inner join pacientes as pa
+				on pa.id = ag.idpaciente
+
+				where ag.id =".$id; 
+		$this->data['agenda'] = R::getAll($sqlid);
+
+	}
 }//fim da classe
