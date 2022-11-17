@@ -139,7 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="content-fluid">
             <div class="col-sm-3">
                 <a href="#">
-                    <img class="img-responsive" src="public/images/logo.png" width="200" height="150" >
+                    <img class="img-responsive" src="public/images/logo4.png" width="200" height="150" >
                 </a>
             </div>
             <div class="col-sm-6">
