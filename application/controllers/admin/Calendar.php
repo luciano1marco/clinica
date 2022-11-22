@@ -85,7 +85,6 @@ class calendar extends Admin_Controller {
 			$this->template->admin_render('admin/calendar/index', $this->data);
         }
     }
-
 	public function create(){
         /* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Novo Horário", 'admin/calendar/create');
@@ -138,7 +137,6 @@ class calendar extends Admin_Controller {
         /* Load Template */
         $this->template->admin_render('admin/calendar/create', $this->data);
     }
-	
 	public function getusers() {
         $sql = "SELECT 	concat(u.first_name, ' ',u.last_name)  as username,
 						u.id 
@@ -186,48 +184,25 @@ class calendar extends Admin_Controller {
         }
 		return $options;
     }
-
-    public function deleteyes($dt,$hr) {
+    public function deleteyes($id) {
 		if ( ! $this->ion_auth->logged_in() ) {
 			return show_error('voce não esta logado');
 		}
 		
-		$time = strtotime($dt);
-		$dat = date('y-m-d',$time); 
+		$sql = "SELECT  id from agenda as a
 
-		//var_dump($dat,$hr);
-		//die;		
-		
-		$sql = "SELECT  t.id,
-						t.hora as ht,
-						ag.id as iddel,
-						ag.hora as ha,
-						ag.dagenda,
-						ag.idpsico
-				from tempo as t
-
-				inner join agenda as ag
-				on t.id = ag.hora
-
-				where t.hora = '$hr' AND ag.dagenda = '$dat' "; 
+				where a.id = '$id' "; 
 
 		 $this->data['agend'] = R::getAll($sql);
 
-		//var_dump($this->data['agend']);
-		//die;
-
-		 foreach ($this->data['agend'] as $pa){ }
-
-		// var_dump($pa['iddel']);
-		// die;
+		foreach ($this->data['agend'] as $pa){ }
 
 		if ($this->ion_auth->logged_in()) {
-			$lixo = R::load("agenda", $pa['iddel']);
+			$lixo = R::load("agenda", $pa['id']);
 			R::trash($lixo);
 		}
 		redirect('admin/calendar', 'refresh');
 	}
-
     public function edit($id) {
 		$id = (int) $id;
 
@@ -320,7 +295,6 @@ class calendar extends Admin_Controller {
 
 		
 	}
-
 	public function idmostra($id=null){
 		$sqlid = "SELECT  	
 						ag.id as id,

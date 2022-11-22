@@ -12,7 +12,11 @@
  <!--- script para o menu  -->           
  <style>
     #Mymenu{
-        background-image: linear-gradient(to left, #016A7Db9, #083D77b9 );
+        /*background-image: linear-gradient(to left, #016A7Db9, #083D77b9 );*/
+        /*background-image: linear-gradient(to left, #d8d8fcc1, #d8d8fcc1);*/
+        /*background-image: linear-gradient(to left, #1b5a05d0, #009302d0);*/
+        background-image: linear-gradient(to left, #000000a4, #000000a4);
+        
         position: relative;
         margin-top: 0 !important;
     }
@@ -32,15 +36,16 @@
         color: #fff;
     }
     #botoes{
-        margin-top: 80 !important;
         text-decoration: none;
+        margin-top: 180;
+        margin-bottom: 10%;
     }
     #botoes :hover{
         color: #265476;
         
     }
     #sociais{
-        margin-top: 200 !important;  
+        margin-top: 180 !important;  
     }
     #Mymenu p{
         text-align: center;
@@ -56,11 +61,11 @@
             <div class="col-lg-12">
                 <div class="col-md-2">
                     <a href="#">
-                        <img class="img-responsive" src="public/images/logo.png" >
+                        <img class="img-responsive" src="public/images/logo4.png" width="150" height="100" >
                     </a>
                 </div>
                 <div class="col-md-6" >
-                    <h2> <a href="#"><img src="/clinica/public/images/simone1.png" width="80%" height="80%"/></a>
+                    <h2> <a href="#"><img src="/clinica/public/images/simone2.png" width="80%" height="80%"/></a>
                     </h2>
                 </div>
                 <div class="col-md-2" >

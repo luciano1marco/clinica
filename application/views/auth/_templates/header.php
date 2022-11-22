@@ -7,11 +7,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <head>
         <meta charset="<?php echo $charset; ?>">
         <title><?php echo $title; ?></title>
-<?php if ($mobile === FALSE): ?>
-        <!--[if IE 8]>
-            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <![endif]-->
-<?php endif; ?>
+        <?php if ($mobile === FALSE): ?>
+            <!--[if IE 8]>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <![endif]-->
+        <?php endif; ?>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <meta name="google" content="notranslate">
         <meta name="robots" content="noindex, nofollow">
@@ -21,12 +21,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="stylesheet" href="<?php echo base_url($frameworks_dir . '/font-awesome/css/font-awesome.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url($frameworks_dir . '/adminlte/css/adminlte.min.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url($plugins_dir . '/icheck/css/blue.css'); ?>">
-<?php if ($mobile === FALSE): ?>
-        <!--[if lt IE 9]>
-            <script src="<?php echo base_url($plugins_dir . '/html5shiv/html5shiv.min.js'); ?>"></script>
-            <script src="<?php echo base_url($plugins_dir . '/respond/respond.min.js'); ?>"></script>
-        <![endif]-->
-<?php endif; ?>
+        <?php if ($mobile === FALSE): ?>
+            <!--[if lt IE 9]>
+                <script src="<?php echo base_url($plugins_dir . '/html5shiv/html5shiv.min.js'); ?>"></script>
+                <script src="<?php echo base_url($plugins_dir . '/respond/respond.min.js'); ?>"></script>
+            <![endif]-->
+        <?php endif; ?>
     </head>
+
+    <!--fundo do login--->
+    <style>
+        html, body {
+            overflow: hidden;
+        }
+        .login-page {
+            position: relative;
+            background-image: url(http://localhost/clinica/public/images/auth/flores1.jpg);            
+            background-repeat: no-repeat;
+        }
+    </style>
     <body class="hold-transition login-page">
         <div class="login-box">

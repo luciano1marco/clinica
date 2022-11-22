@@ -143,12 +143,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </a>
             </div>
             <div class="col-sm-6">
-                
                 <div class="col-sm-6">
                 <h5>Simone Loretto Silveira</h5>
                     <h5>Cassino - Rio Grande - Rio Grande do Sul</h5>
                     <h5>WhatsApp: (53)99999-9999 </h5>
-                       
                 </div>
                 <div class="col-sm-6">
                     <h5>Localização - Cassino</h5>
@@ -157,8 +155,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>        
             </div>
-            
-            
             <div class="col-md-3" id="sociais">
                         <span><h4>
                         <ul class="list-inline">
@@ -170,15 +166,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </h4></span>
                     </div>
             </div>
-           
         <div class="topo">
             <a href="#topo"><i class="fa fa-angle-up" > </i></a>
         </div>
         
     </footer>
+   
     <span> Todos direitos reseverdos ₢2022 - @luciano1marco </span> 
-             
-    
     <!-- END -->
 
     <!-- BASICO -->
@@ -236,20 +230,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 dir_plugins = "<?php echo $public_plugins; ?>";         
     </script>
 
-<script type="text/javascript">
- $(document).ready(function ($) {    
-        $('#datatable').DataTable({
-            'dom' : '<"top"+<"right"f>>rt<"bottom"p>+<"right"i><"clear">',
-            'language': { 'url': dir_base+'/assets/plugins/datatables/portugues-br.json' },
-            'lengthMenu': [[15, 25, 50,100, -1], [15, 25, 50, 100, 'All']]
-        });
+    <script type="text/javascript">
+        $(document).ready(function ($) {    
+                $('#datatable').DataTable({
+                    'dom' : '<"top"+<"right"f>>rt<"bottom"p>+<"right"i><"clear">',
+                    'language': { 'url': dir_base+'/assets/plugins/datatables/portugues-br.json' },
+                    'lengthMenu': [[15, 25, 50,100, -1], [15, 25, 50, 100, 'All']]
+                });
 
-       // $('.icheck').iCheck({
-       //     checkboxClass: 'icheckbox_square-blue',
-       //     radioClass: 'iradio_square-blue',
-       //     increaseArea: '100%' // optional
-       // });
-
-        $.backstretch(dir_base+'public/images/sala3.jpg');     
-    });
-</script>   
+                $.backstretch(dir_base+'public/images/flores.jpg');     
+            });
+    </script>   
