@@ -19,7 +19,7 @@ class calendar extends Admin_Controller {
 
 
 	}
-	public function index()	{  
+	public function index($id = null)	{  
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
@@ -49,7 +49,21 @@ class calendar extends Admin_Controller {
 				";
 
 			$this->data['agend'] = R::getAll($sql);
-           
+           if($id != 0 ){
+			//--busca para mostrar no modal_mostra
+				$sqlid = "SELECT  ag.id as id,	te.hora as hora, ag.start_date as dtinicial, ag.color as color, pa.nome as nome, pa.email,pa.telefone, pa.endereco
+							FROM agenda as ag
+
+							inner join tempo as te
+							on te.id = ag.hora
+
+							inner join pacientes as pa
+							on pa.id = ag.idpaciente
+
+							where ag.id =".$id; 
+				$this->data['agenda'] = R::getAll($sqlid);
+				
+			}
 			/* Breadcrumbs */
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
@@ -189,16 +203,9 @@ class calendar extends Admin_Controller {
 			return show_error('voce não esta logado');
 		}
 		
-		$sql = "SELECT  id from agenda as a
-
-				where a.id = '$id' "; 
-
-		 $this->data['agend'] = R::getAll($sql);
-
-		foreach ($this->data['agend'] as $pa){ }
-
+		
 		if ($this->ion_auth->logged_in()) {
-			$lixo = R::load("agenda", $pa['id']);
+			$lixo = R::load("agenda", $id);
 			R::trash($lixo);
 		}
 		redirect('admin/calendar', 'refresh');
@@ -295,25 +302,24 @@ class calendar extends Admin_Controller {
 
 		
 	}
-	public function idmostra($id=null){
-		$sqlid = "SELECT  	
-						ag.id as id,
-						te.hora as hora,
-						ag.start_date as dtinicial,
-						ag.end_date as dtfinal,
-						ag.color as color,
-						SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
+	public function idmostra($id){
+		$sqlid = "SELECT  ag.id as id,	te.hora as hora, ag.start_date as dtinicial, ag.color as color, pa.nome as nome, pa.email,pa.telefone as telefone, pa.endereco
+							FROM agenda as ag
 
-				FROM agenda as ag
+							inner join tempo as te
+							on te.id = ag.hora
 
-				inner join tempo as te
-				on te.id = ag.hora
+							inner join pacientes as pa
+							on pa.id = ag.idpaciente
 
-				inner join pacientes as pa
-				on pa.id = ag.idpaciente
-
-				where ag.id =".$id; 
-		$this->data['agenda'] = R::getAll($sqlid);
-
+							where ag.id =".$id; 
+				$this->data["agenda"] = R::getAll($sqlid);
+				
+				foreach ($this->data["agenda"] as $ag){
+					$result = $ag;
+				}	
+		
+		echo json_encode($result);		
+	
 	}
 }//fim da classe

@@ -23,6 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		max-width: 1100px;
 		margin: 0 auto;
 	}
+	
 </style>
 
 <div class="content-wrapper">
@@ -104,6 +105,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
 									<option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
 									<option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
+									<option style="color:#b2371fc4;" value="#b2371fc4">&#9724; Brown</option>
+									<option style="color:#de3ddbde;" value="#de3ddbde">&#9724; Pink</option>
+									<option style="color:#464646b5;" value="#464646b5">&#9724; Grey</option>
+									
 								</select>
 							</div>
 						</div>
@@ -130,38 +135,50 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</div>
 <!-- end modal -->
 
-
 	<!----form modal mostrar dados ---->
 	<div id="modal_mostra" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+        <div class="modal-dialog modal-dialog-centered" role="document" id="modal-dialog">
+            <div class="modal-content" id="modal-content">
+                <div class="modal-header" id="modal-header">
                     <button type="button" class="close" data-dismiss="modal" onclick="limpa_model()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"><b>Dados da Reserva:</b></h4>
                 </div>
 
-                <div class="modal-body">
+                <div class="modal-body" id="modal-body">
                     <div class="form-group">
-                        
-                        <label class="control-label col-sm-2" >Nome </label>
-                        <div class="col-sm-10">
-                            <input type="text" name="nome" class="form-control" readonly>
+						<label class="control-label col-sm-2" >Nome </label>
+                        <div class="col-sm-10"> <input type="text" name="nome" class="form-control" readonly>
                         </div>
-                        <label class="control-label col-sm-2" >Horário </label>
+						<label class="control-label col-sm-2" >Telefone </label>
                         <div class="col-sm-10">
-                            <input type="text" name="hora" class="form-control" readonly>
+                            <input type="text" name="telefone" class="form-control" readonly>
                         </div>
-                        <label class="control-label col-sm-2" >Data</label>
+						<label class="control-label col-sm-2" >Email </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="email" class="form-control" readonly>
+                        </div>
+						<label class="control-label col-sm-2" >Endereço </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="endereco" class="form-control" readonly>
+                        </div>
+						<label class="control-label col-sm-2" >Data</label>
                         <div class="col-sm-10">
                             <input type="text" name="start" class="form-control" readonly>
                         </div>
+						<label class="control-label col-sm-2" >Horário </label>
+                        <div class="col-sm-10">
+                            <input type="text" name="hora" class="form-control" readonly>
+                        </div>
+
 						
+                            <input type="hidden" name="id" class="form-control" readonly>
+                        
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-					<button type="button" class="btn btn-default" onclick='apagar()' data-dismiss="modal">Apagar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+					<button type="button" class="btn btn-danger" onclick= apagar() data-dismiss="modal">Apagar</button>
                 
                 </div>
             </div><!-- /.modal-content -->
@@ -203,7 +220,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				eventClick: function(event, element)
 					{
 						mostra(event);
-						//document.location.href = "id ="+event.event.id;
+
+						//id = event.event.id;
+						//console.log(id);
 					},
 			
 				editable: true,
@@ -215,21 +234,41 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							color: '<?php echo $ag['color']; ?>',
 							title: '<?php echo $ag['nome'].' '.$ag['hora']; ?>',
 							start: '<?php echo $ag['dtinicial']; ?>',
-							nome:  '<?php echo $ag['nome']?>',
+							
 						},
 					<?php endforeach; ?>
 				]
 			});
-			
-		calendar.render();
+			calendar.render();
 		});
+		
 		function mostra(event){
-			$('#modal_mostra input[name=nome]').val(htmlEscape(event.event.title.split(' ').slice(0,1).join(' ')));
-			$('#modal_mostra input[name=hora]').val(htmlEscape(event.event.title.split(' ').slice(1,2).join(' ')));
-			$('#modal_mostra input[name=start]').val(moment(event.event.startStr).format('DD/MM/YYYY'));
+			id = event.event.id;
+			//console.log(id);
+			let url = backend_url+'admin/calendar/idmostra/'+id;
+
+			//faz a requisicao para o php
+    		var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", url, false);
+			xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+			
+			var dados = JSON.parse(xhttp.responseText);//arruma os dados para visualizacáo
+
+			//muda a cor
+			let div = document.getElementById('modal-header');
+			div.style.background = dados.color;
+			
+			console.log(dados);
+			$('#modal_mostra input[name=nome]').val(dados.nome);
+			$('#modal_mostra input[name=telefone]').val(dados.telefone);
+			$('#modal_mostra input[name=email]').val(dados.email);
+			$('#modal_mostra input[name=endereco]').val(dados.endereco);
+			$('#modal_mostra input[name=hora]').val(dados.hora);
+			$('#modal_mostra input[name=start]').val(moment(dados.dtinicial).format('DD/MM/YYYY'));
 			
 			$("#modal_mostra").modal({show: true }); 
 		}
+		
 		function save() {
             $('#form_create').submit(function(){
 			    var dados = $(this).serialize();
@@ -254,19 +293,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
               	return false;
             })
         }
+		
 		function apagar(){
 			if (confirm('Tem certeza que deseja apagar o Evento?')) {
-				console.log("apagado");
-				//event.event.remove();
-				//window.location.href =  ($("#base_url").val() + "admin/" + $("#controlador").val() + "/deleteyes/" + event.event.id );
+				window.location.href =  ($("#base_url").val() + "admin/" + $("#controlador").val() + "/deleteyes/" + id );
 			}
 		}
+		
 		function limpa_model(){
 			$('#modal_mostra input[name=nome]').val('');
 			$('#modal_mostra input[name=hora]').val('');
 			$('#modal_mostra input[name=start]').val('');
           
 		}
+		
 		function htmlEscape(s) {
 			return (s + '').replace(/&/g, '&amp;')
 				.replace(/</g, '&lt;')
@@ -274,5 +314,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				.replace(/'/g, '&#039;')
 				.replace(/"/g, '&quot;')
 				.replace(/\n/g, '<br />');
-			}
+		}
+
 </script>
