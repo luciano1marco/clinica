@@ -36,7 +36,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <!----------------------------relatorio quantidade de questionarios-->
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3>Total de Horas por mês</h3>
+                                        <h3>Total de Atendimentos por mês</h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">

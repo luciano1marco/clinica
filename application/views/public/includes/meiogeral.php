@@ -1,7 +1,35 @@
 <style>
     #meiogeral {
         background-color: transparent;
+       
+    }
+    #meiogeral h2{
+        font-size: 20px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        text-align: center;
+        color: #407689;
+       
+    }
+    #meiogeral textarea{
+        font-size: 20px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        text-align: center;
+        color: #407689;
         
+        background-color: #407689;
+        color: #fff;
+    }
+    #meiogeral textarea:hover{
+        background-color: #fff;
+        color: #8bacb8ff;
+    }
+    #meiogeral h3{
+        font-weight: bold;
+        font-size: 24px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        text-align: center;
+        margin-top: 5px;
+        color: #000;
     }
     #meiogeral h4{
         font-weight: bold;
@@ -11,6 +39,14 @@
         margin-top: 5px;
         color: #fff;
     }
+    #meiogeral h6{
+        font-weight: bold;
+        font-size: 36px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        text-align: center;
+        margin-top: 5px;
+        color: #000; 
+    }
     #datatable{
         background-color: #123F60;
         color:#fff;
@@ -18,8 +54,7 @@
    
     body{
         text-align: center;
-        margin: 40px 10px;
-		padding: 0;
+       	padding: 0;
 		font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 		font-size: 14px;
     }
@@ -38,19 +73,68 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container text-white">
                
-                <h4><strong>Epaço para conteúdo</strong></h4>
+                <h4><strong>Profissionais de Psicologia</strong></h4>
                 <br><br>
-                                             
+            
+                <div class="row" >
+                    <div class="col-sm-12">
+                        <?php foreach ($dados as $da) : ?>
+                            <div class="card bg-light mb-3">
+                                <!--inicio do card1-->
+                                <div class="card-body" style="border-radius: 3%;">
+                                    <!--cabeçalho do cartão-->
+                                    <div class="card-title ">
+                                        <h6><?php echo $da['nome']; ?></h6>
+                                    </div>
+                                    <!--texto do cartão-->
+                                    <div class="card-text ">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3 ><?php echo $da['profissao']; ?> </h3>
+                                            </div> 
+                                        </div>    
+                                    </div>
+                                    <!--corpo do cartão-->
+                                    <div class="card-body ">
+                                        <div class="row">
+                                            <div class="col-sm-3 "> 
+                                            <?php $caminho= 'upload/fotos/'.$da['caminho']; ?>  
+                                                <img src="<?php echo $caminho ;?>"  class=" img-fluid rounded-circle">
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <textarea rows= "10" cols="53" readonly><?php echo $da['descricao']; ?></textarea>
+                                               
+                                            </div> 
+                                        </div>    
+                                    </div>
+                                    <!--rodape do cartão-->
+                                    <div class="card-footer">
+                                        <div class="text-center text-bold">
+                                                <ul class="list-inline">
+                                                    <li><a target="_blank" href="<?php echo $da['rede1']; ?>" class="facebook"> <i class="fa fa-facebook" > </i></a></li>
+                                                    <li><a target="_blank" href="<?php echo $da['rede2']; ?>"  class="twitter">  <i class="fa fa-twitter" >  </i></a></li>
+                                                    <li><a target="_blank" href="<?php echo $da['rede3']; ?>"  class="instagram"><i class="fa fa-instagram"> </i></a></li>
+                                                    <li><a target="_blank" href="<?php echo $da['rede4']; ?>"  class="youtube">  <i class="fa fa-youtube" >  </i></a></li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--fim do card1-->
+                            </div>
+                        <?php endforeach; ?>  
+                    </div> 
+                </div>
             </div>    
         </div>
     </section>
+
     <section class="container-fluid" id="sobre">
         <div class="jumbotron jumbotron-fluid">
             <div class="container text-white" >
                 <h4><strong>Sobre</strong></h4>
-                <p>Instalado dentro do Mercado Público de Rio Grande, o primeiro Espaço Público Coworking da zona sul teve 20 estações ocupadas e um workshop de cosméticos, após uma semana da sua inauguração. O local disponibiliza um espaço colaborativo e funcional com recursos de escritório, de uma forma gratuita para qualquer pessoa que precise de um ambiente com wi-fi livre, contendo bancadas para trabalho com tomadas, sala para reuniões e um pequeno auditório para palestras e workshops.</p>
-                <p>A primeira-dama e vereadora Lu Compiani Branco, idealizadora do projeto, ressalta a importância dessa primeira semana de funcionamento do coworking. “Tem sido gratificante verificar que esse espaço está servindo as pessoas que precisam de um local, dentro do contexto do centro histórico, para empreender, se reunir e estudar. Logo, sentimos com essa busca e procura da comunidade, que o coworking realmente veio para atender uma demanda já existente na cidade”.</p>
-                <p>O horário de funcionamento do Coworking Chalé 10 é de segunda a sexta-feira, das 8h30min às 18h, e no sábado das 8h30min às 13h. Para utilizar esse serviço é preciso fazer uma prévia reserva pelo WhatsApp 53 9120-5487. No site da Prefeitura, no topo da coluna da direita, foi disponibilizado um botão que direciona o interessado diretamente para o contato do Coworking. </p>
+                <p>Criado para atender os profissionais de psicologia, com um software integrado com as necessidades individuais de cada profissional. Com agenda interna e pessoal, cadastro de pacientes, Relatórios e outros.</p>
+                <p></p>
+                <p></p>
                
                  <!-- <p><strong>Contamos com a sua participação!</strong></p>-->
             </div>

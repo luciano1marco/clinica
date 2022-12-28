@@ -139,14 +139,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="content-fluid">
             <div class="col-sm-3">
                 <a href="#">
-                    <img class="img-responsive" src="public/images/logo4.png" width="200" height="150" >
+                    <img class="img-responsive" src="public/images/ppbr.png" width="240" height="240" >
                 </a>
             </div>
             <div class="col-sm-6">
                 <div class="col-sm-6">
-                <h5>Simone Loretto Silveira</h5>
+                <h5>Luciano Correa Marco</h5>
                     <h5>Cassino - Rio Grande - Rio Grande do Sul</h5>
-                    <h5>WhatsApp: (53)99999-9999 </h5>
+                    <h5>WhatsApp: (53)984321028 </h5>
                 </div>
                 <div class="col-sm-6">
                     <h5>Localização - Cassino</h5>
@@ -155,7 +155,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </div>
                 </div>        
             </div>
-            <div class="col-md-3" id="sociais">
+      <!----      <div class="col-md-3" id="sociais">
                         <span><h4>
                         <ul class="list-inline">
                                 <li><a target="_blank" href="https://www.facebook.com/PrefeituraMunicipaldoRG" class="facebook"> <i class="fa fa-facebook" > </i></a></li>
@@ -164,7 +164,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <li><a target="_blank" href="https://www.youtube.com/channel/UCeCOe03FRXNUGfOE1VO0lwQ/videos"  class="youtube">  <i class="fa fa-youtube" >  </i></a></li>
                             </ul>
                         </h4></span>
-                    </div>
+                    </div>----->
             </div>
         <div class="topo">
             <a href="#topo"><i class="fa fa-angle-up" > </i></a>
@@ -172,7 +172,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         
     </footer>
    
-    <span> Todos direitos reseverdos ₢2022 - @luciano1marco </span> 
+    <span> Todos direitos reservados ₢2022 - @luciano1marco </span> 
     <!-- END -->
 
     <!-- BASICO -->
@@ -238,6 +238,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     'lengthMenu': [[15, 25, 50,100, -1], [15, 25, 50, 100, 'All']]
                 });
 
-                $.backstretch(dir_base+'public/images/flores.jpg');     
+                $.backstretch(dir_base+'public/images/fundolilas.png');     
             });
     </script>   

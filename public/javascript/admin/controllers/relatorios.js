@@ -118,8 +118,6 @@ $(document).ready(function () {
                     cor.push(data[i].cor);
                 }
 
-               
-
                 var chartdata = {
                     labels: getmes(mes),
                     datasets: [{
@@ -183,8 +181,8 @@ $(document).ready(function () {
                             display: true
                             
                         },
-                        showAllTooltips: true,
-                        tooltips: {
+                        showAllTooltips: true, //mostra a etiqueta em cima do grafico
+                        /*tooltips: {
                             callbacks: {
                                 title: function(tooltipItems, data) {
                                     return '';
@@ -195,11 +193,9 @@ $(document).ready(function () {
                                     return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
                                 }
                             }
-                        }
-
+                        }*/
                     }
                 });
-
             },
             error: function(data) {
                 console.log(data);
@@ -244,7 +240,8 @@ $(document).ready(function () {
                         ticks: {
                             min: 0,
                         }
-                    }]
+                    }],
+                    
                 }
             }
         });
@@ -325,8 +322,6 @@ $(document).ready(function () {
         }
         return mes;
     }
-
-
 
     initGraph();
 

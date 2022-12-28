@@ -94,20 +94,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<?php echo form_dropdown($hora);?>
 							</div>
 						</div>
+						
+						<!--	<div class="form-group">
+							<label for="color" class="col-sm-2 control-label">Cor</label>
+							<div class="col-sm-10" >
+								<ul class= "form-control" >
+									<?php echo 	form_dropdown($color);?>
+								</ul>
+							</div>
+						</div>
+						--->
 						<div class="form-group">
 							<label for="color" class="col-sm-2 control-label">Color</label>
 							<div class="col-sm-10">
 								<select name="color" class="form-control">
 									<option value="">Selecione uma Cor</option>
-									<option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
-									<option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-									<option style="color:#008000;" value="#008000">&#9724; Green</option>                       
-									<option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
-									<option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-									<option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
-									<option style="color:#b2371fc4;" value="#b2371fc4">&#9724; Brown</option>
-									<option style="color:#de3ddbde;" value="#de3ddbde">&#9724; Pink</option>
-									<option style="color:#464646b5;" value="#464646b5">&#9724; Grey</option>
+									<option style="color:#0071c5;" value="#0071c5">&#9724; Azul escuro</option>
+									<option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquesa</option>
+									<option style="color:#008000;" value="#008000">&#9724; Verde</option>                       
+									<option style="color:#FFD700;" value="#FFD700">&#9724; Amarelo</option>
+									<option style="color:#FF8C00;" value="#FF8C00">&#9724; Laranja</option>
+									<option style="color:#FF0000;" value="#FF0000">&#9724; Vermelho</option>
+									<option style="color:#b2371fc4;" value="#b2371fc4">&#9724; Marron</option>
+									<option style="color:#de3ddbde;" value="#de3ddbde">&#9724; Rosa</option>
+									<option style="color:#464646b5;" value="#464646b5">&#9724; Cinza</option>
 									
 								</select>
 							</div>
@@ -123,8 +133,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<!--<a  href="javascript::void" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
 								<a class="btn btn-danger delete_calendar" style="display: none;">Delete</a>
 							-->
+							<button type="submit" class="btn btn-primary">Enviar</button>
 							<button type="reset" class="btn btn-light">Limpar</button> 
-							<button type="submit" class="btn btn-success">Enviar</button>
+							
 						</div>
 						
 					</div>
@@ -169,16 +180,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="col-sm-10">
                             <input type="text" name="hora" class="form-control" readonly>
                         </div>
-
-						
                             <input type="hidden" name="id" class="form-control" readonly>
-                        
                     </div>
                 </div>
-
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
-					<button type="button" class="btn btn-danger" onclick= apagar() data-dismiss="modal">Apagar</button>
+                    <button type="button" id="botao" class="btn btn-primary" data-dismiss="modal">Ok</button>
+					<button type="button"  id="bapaga" class="btn btn-default" onclick= apagar() data-dismiss="modal">Apagar</button>
                 
                 </div>
             </div><!-- /.modal-content -->
@@ -255,9 +262,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			var dados = JSON.parse(xhttp.responseText);//arruma os dados para visualizacáo
 
 			//muda a cor
-			let div = document.getElementById('modal-header');
-			div.style.background = dados.color;
+			let div = document.getElementById('modal-header');//header
+			let bot = document.getElementById('botao');//botáo ok
+			let bap = document.getElementById('bapaga');//botáo apagar
 			
+			div.style.background = dados.color;
+			bot.style.background = dados.color;
+			bap.style.color = dados.color;
+			//fim do muda cor
+			
+			//mostra os dados do paciente
 			console.log(dados);
 			$('#modal_mostra input[name=nome]').val(dados.nome);
 			$('#modal_mostra input[name=telefone]').val(dados.telefone);

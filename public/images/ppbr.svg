@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="54.367233mm"
+   height="55.475441mm"
+   viewBox="0 0 54.367233 55.475441"
+   version="1.1"
+   id="svg4456"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="ppbr.svg"
+   inkscape:export-filename="ppbr.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview4458"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0"
+     inkscape:showpageshadow="false"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#f2f2f2"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showborder="false"
+     borderlayer="false"
+     shape-rendering="crispEdges"
+     showguides="false"
+     inkscape:zoom="2.8649831"
+     inkscape:cx="93.019745"
+     inkscape:cy="156.19638"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs4453" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-42.818244,-94.534656)">
+    <ellipse
+       style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.24181;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99873817"
+       id="path5048"
+       cx="70.363342"
+       cy="127.02299"
+       rx="26.187553"
+       ry="20.638815" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:42.5157px;font-family:'Collection New Style';-inkscape-font-specification:'Collection New Style Bold';fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.33907;stroke-dasharray:none;stroke-opacity:0.99873817"
+       x="52.012245"
+       y="140.4641"
+       id="text4994"
+       transform="scale(1.0084515,0.99161933)"><tspan
+         sodipodi:role="line"
+         id="tspan4992"
+         style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.33907;stroke-dasharray:none;stroke-opacity:0.99873817"
+         x="52.012245"
+         y="140.4641">P</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:42.5157px;font-family:'Collection New Style';-inkscape-font-specification:'Collection New Style Bold';fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.33907;stroke-dasharray:none;stroke-opacity:0.99873817"
+       x="70.397278"
+       y="140.53033"
+       id="text4994-0"
+       transform="scale(1.0084515,0.99161933)"><tspan
+         sodipodi:role="line"
+         id="tspan4992-2"
+         style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:1.33907;stroke-dasharray:none;stroke-opacity:0.99873817"
+         x="70.397278"
+         y="140.53033">P</tspan></text>
+    <path
+       style="fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:0.511;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99873817"
+       d="m 46.06921,135.47436 47.843091,0.11419"
+       id="path9905"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:11.1597px;font-family:'Collection New Style';-inkscape-font-specification:'Collection New Style Bold';fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-width:0.351487;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.99873817"
+       x="56.611324"
+       y="141.45596"
+       id="text9909"
+       transform="scale(0.9814356,1.0189156)"><tspan
+         sodipodi:role="line"
+         id="tspan9907"
+         style="stroke-width:0.351487;fill:#ffffff;fill-opacity:0;stroke:#ffffff;stroke-opacity:0.99873817"
+         x="56.611324"
+         y="141.45596">Procure Psicóloga</tspan></text>
+  </g>
+</svg>

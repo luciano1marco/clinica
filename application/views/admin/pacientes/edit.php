@@ -59,14 +59,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <?php echo form_input($cpf); ?>
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <?php echo form_label('Psicologa', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
-                            <?php echo form_input($id_psico); ?>
-                            </div>
-                        </div>
-                       
+  
                         <?php echo form_fieldset_close(); ?>
                         
                         <div class="form-group">

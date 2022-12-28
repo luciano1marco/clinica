@@ -58,11 +58,14 @@ $methods_array = array('create', 'edit', 'view', 'index');
     <script src="<?php echo base_url($plugins_dir . '/animsition/animsition.min.js'); ?>"></script>
 <?php endif; ?>
 
-<!-- PASSWORD STRENGTH -->
+<!-- PASSWORD STRENGTH para users-->
 <?php if ($this->router->fetch_class() == 'users' && (in_array($this->router->fetch_method(), $methods_array))) : ?>
     <script src="<?php echo base_url($plugins_dir . '/pwstrength/pwstrength.min.js'); ?>"></script>
 <?php endif; ?>
-
+<!-- PASSWORD STRENGTH para alterarSenha-->
+<?php if ($this->router->fetch_class() == 'alterarSenha' && (in_array($this->router->fetch_method(), $methods_array))) : ?>
+    <script src="<?php echo base_url($plugins_dir . '/pwstrength/pwstrength.min.js'); ?>"></script>
+<?php endif; ?>
 <!-- COLORPICKER -->
 <?php
 $colorpicker_array = array('groups');

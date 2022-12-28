@@ -59,13 +59,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label" for="psicologa">Psicologa</label>
-                            <div class="col-sm-4">
-                                <?php echo form_dropdown($id_psico); ?>
-                            </div>
-                        </div>
-
                         <?php echo form_fieldset_close(); ?>
 
                         <div class="form-group">

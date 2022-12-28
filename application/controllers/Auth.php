@@ -159,12 +159,95 @@ class Auth extends MY_Controller {
 
         if ($src == 'admin')
         {
-            redirect('auth/login', 'refresh');
+            redirect('/', 'refresh');
         }
         else
         {
             redirect('/', 'refresh');
         }
 	}
+
+    function esqueciminhasenha(){
+        /* Load */
+        $this->load->config('common/dp_config');
+
+       
+        if (count($this->input->post()) > 0) {
+            $username = $this->input->post("email");
+
+            $existe = R::find('pessoas', "email = '{$username}'");
+
+            if (count($existe) == 1) {
+                $usuario = array_pop($existe);
+                $id = $usuario->id;
+                //cria uma nova senha
+                $novasenha = $this->geraNovaSenha();
+                //chama o id do email enviado
+                $altsenha = R::load("pessoas",$id);
+                //pega a nova senha gerada                
+                $altsenha->senha = md5($novasenha); 
+                
+                //grava no banco a nova senha
+                R::store($altsenha);
+               //envia email 
+                $this->configEmail();
+                $this->email->from('no-reply@riogrande.rs.gov.br');
+                $this->email->to($this->input->post("email"));
+
+                //$this->email->to("matheus.cezar@riogrande.rs.gov.br");
+                $this->email->subject('Concursos - Nova Senha');
+                $corpoemail = "
+                            Olá!<br /><br />
+                            Sua senha foi alterada!<br /><br />
+                            Para acessar o sistema utilize seu e-mail e a senha abaixo:<br />
+                            {$novasenha}<br /><br />
+                            Att.";
+                $this->email->message($corpoemail);
+                $this->email->send();
+            }
+            
+            $this->data['message'] = "<p class='alert alert-success'>Tudo certo! Se seu e-mail está cadastrado, lhe encaminhamos uma mensagem com uma nova senha temporaria. Click em cancelar para voltar </p>";
+            //redirect('./home//', 'refresh');
+           
+        } else {
+            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');  
+        }
+
+        $this->data['email'] = array(
+            'name'        => 'email',
+            'id'          => 'email',
+            'type'        => 'text',
+            'value'       => $this->form_validation->set_value('email'),
+            'class'       => 'form-control',
+            'placeholder' => "Digite seu e-mail aqui",
+            'required' => 'required'
+        );
+
+        /* Load Template */
+        $this->template->auth_render('auth/esqueciminhasenha', $this->data);
+        
+    }
+
+    private function geraNovaSenha() {
+        $caracteres = 'abcdefghijklmnopqrstuvwxyz12345678901234567890';
+        $senha = array(); 
+        $tamLista = strlen($caracteres) - 1; 
+        for ($i = 0; $i < 8; $i++) {
+            $c = rand(0, $tamLista);
+            $senha[] = $caracteres[$c];
+        }
+        return implode($senha);
+    }
+    private function configEmail() {
+        $this->load->library('email');
+        $config['mailtype'] = 'html';
+        $config['protocol'] = 'smtp';
+        $config['smtp_crypto'] = 'ssl';
+        $config['smtp_host'] = 'mail.riogrande.rs.gov.br';
+        $config['smtp_user'] = 'no-reply@riogrande.rs.gov.br';
+        $config['smtp_pass'] = 'd3vn0reply!';
+        $config['smtp_port'] = '465';
+        $this->email->initialize($config);
+    }
 
 }

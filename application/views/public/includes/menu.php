@@ -61,11 +61,11 @@
             <div class="col-lg-12">
                 <div class="col-md-2">
                     <a href="#">
-                        <img class="img-responsive" src="public/images/logo4.png" width="150" height="100" >
+                        <img class="img-responsive" src="/clinica/public/images/ppbr.png" width="230" height="230" >
                     </a>
                 </div>
                 <div class="col-md-6" >
-                    <h2> <a href="#"><img src="/clinica/public/images/simone2.png" width="80%" height="80%"/></a>
+                    <h2> <a href="#"><img src="/clinica/public/images/desenho.png" width="80%" height="80%"/></a>
                     </h2>
                 </div>
                 <div class="col-md-2" >
@@ -82,7 +82,7 @@
                         </div>              
                     </div>  
                 </div>
-                <div class="col-md-2" id="sociais">
+                <!----<div class="col-md-2" id="sociais">
                     <span><h4>
                         <ul class="list-inline">
                             <li><a target="_blank" href="https://www.facebook.com/PrefeituraMunicipaldoRG" class="facebook"> <i class="fa fa-facebook" > </i></a></li>
@@ -91,7 +91,7 @@
                             <li><a target="_blank" href="https://www.youtube.com/channel/UCeCOe03FRXNUGfOE1VO0lwQ/videos"  class="youtube">  <i class="fa fa-youtube" >  </i></a></li>
                         </ul>
                     </h4></span>
-                </div>
+                </div>----->
             </div>
         </div>
     </section>

@@ -64,6 +64,8 @@ class pacientes extends Admin_Controller {
         }
     }
     public function create(){
+
+		$user_id = $this->session->user_id;
         /* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Novo Paciente", 'admin/pacientes/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
@@ -83,7 +85,7 @@ class pacientes extends Admin_Controller {
             $paciente->endereco = $this->input->post('endereco');
            
             $paciente->cpf = $this->input->post('cpf');
-            $paciente->id_psico = $this->input->post('id_psico');
+            $paciente->id_psico = $user_id;
             
             
 			R::store($paciente);
@@ -145,7 +147,7 @@ class pacientes extends Admin_Controller {
         $this->template->admin_render('admin/pacientes/create', $this->data);
     }
 	public function getusers(){
-        $sql = "SELECT u.username,u.id FROM users_groups as ug
+        $sql = "SELECT u.username,u.first_name,u.id FROM users_groups as ug
 
 		inner join groups as g
 		on g.id = ug.group_id
@@ -160,7 +162,7 @@ class pacientes extends Admin_Controller {
         $bairros = R::getAll($sql);        
 
 		foreach ($bairros as $b) {   
-            $options[$b['id']] = $b['username'];           
+            $options[$b['id']] = $b['first_name'];           
         }
 		return $options;
     }
@@ -184,6 +186,7 @@ class pacientes extends Admin_Controller {
 	}
     public function edit($id){
 		$id = (int) $id;
+		$user_id = $this->session->user_id;
 
 		if (! $this->ion_auth->logged_in()) {
 			redirect('auth', 'refresh');
@@ -206,8 +209,7 @@ class pacientes extends Admin_Controller {
            		$paciente->telefone = $this->input->post('telefone');
             	$paciente->endereco = $this->input->post('endereco');
             	$paciente->cpf = $this->input->post('cpf');
-            	$paciente->id_psico = $this->input->post('id_psico');
-				
+            	$paciente->id_psico = $user_id;
 								
 				R::store($paciente);
 

@@ -33,6 +33,22 @@ class Home extends Public_Controller {
 
         $this->data['agend'] = R::getAll($sql);
       
+        /* select para os psicologos */
+        $sqlps = "SELECT d.id,
+                        d.nome,
+                        d.profissao,
+                        d.descricao,
+                        d.rede1,
+                        d.rede2,
+                        d.rede3,
+                        d.rede4,
+                        f.caminho as caminho
+                  FROM dados as d
+
+                  inner join fotos as f
+                  on d.id = f.id_dados ";
+        $this->data['dados'] = R::getAll($sqlps);
+                
         /* Breadcrumbs */
         //$this->data['breadcrumb'] = $this->breadcrumbs->show();
 

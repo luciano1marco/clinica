@@ -10,9 +10,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     .login-box-body{
         background-color:#f7ffffaa;
     }
+
  </style>
     <div class="login-logo" >
-        <a href="#"><b><?php echo $title_lg; ?></b></a>
+        <a href="#"><b>Login</b></a>
     </div>
 
     <div class="login-box-body" >
@@ -31,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="row">
                 <div class="col-xs-8">
                     <div class="checkbox icheck">
-                        <label>
+                        <label style="color:black">
                             <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"'); ?><?php echo lang('auth_remember_me'); ?>
                         </label>
                     </div>
@@ -53,7 +54,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php if ($forgot_password == TRUE): ?>
                     <?php echo anchor('#', lang('auth_forgot_password')); ?><br />
         <?php endif; ?>
-        
+        <p class="mb-1 text-center" >
+				<a style="color:black" href="/auth/esqueciminhasenha">Esqueceu a senha</a>
+		</p>
+
+        <p class="mb-1 text-center" >
+				<a style="color:black" href="../">Home</a>
+		</p>
         <?php if ($new_membership == TRUE): ?>
                 <?php echo anchor('#', lang('auth_new_member')); ?><br />
         <?php endif; ?>

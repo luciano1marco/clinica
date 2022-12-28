@@ -70,15 +70,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <li class="<?=active_link_function('interfaces')?>"><a href="<?php echo site_url('admin/prefs/interfaces/admin'); ?>"><i class="fa fa-eye"></i><?php echo lang('menu_interfaces'); ?></a></li>
                             </ul>
                         </li>
-                        <li class="<?=active_link_controller('menuitens')?>">
-                            <a href="<?php echo site_url('admin/relatorios'); ?>">
-                                <i class="fa fa-bar-chart"></i> <span>Relatórios</span>
-                            </a>
-                        </li>
+                       
                         <?php } ?>
 
                         <?php foreach ($itensMenu as $title => $section) { ?>
-                            <li class="header text-uppercase"><?php echo $title; ?></li>
+                            <li class="header text-uppercase" style= "color:#fff; font-weight: bold;" ><?php echo $title; ?></li>
                             <?php foreach ($section as $item) { ?>
                                 <li class="<?=active_link_controller($item['controller'])?>">
                                     <a href="<?php echo site_url('admin/'.$item['controller']); ?>">

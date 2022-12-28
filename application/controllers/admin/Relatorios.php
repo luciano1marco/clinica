@@ -54,18 +54,44 @@ class Relatorios extends Admin_Controller {
     }
     public function getmes(){      
         header('Content-Type: application/json');
-                    
-        $sql = "SELECT 
+        $user_id = $this->session->user_id;
+
+        if ($user_id == 1){
+            $sql = " SELECT 
                     COUNT(*) AS total, 
-                    MONTH(dagenda) AS mes, 
-                    users.first_name AS nome
-                FROM agenda         
-    
-                INNER JOIN users
-                ON agenda.idpsico = users.id        
-     
-                GROUP BY MONTH(dagenda)
-            ";        
+                    MONTH(start_date) AS mes, 
+                    p.nome AS nome
+
+                    FROM agenda  as ag       
+
+                    INNER JOIN pacientes as p
+                    ON ag.idpaciente = p.id  
+
+                    inner join users as u
+                    on  u.id =ag.user_id 
+                    
+                    GROUP BY MONTH(start_date);
+            "; 
+        }else{
+            $sql = "SELECT 
+                    COUNT(*) AS total, 
+                    MONTH(start_date) AS mes, 
+                    p.nome AS nome
+
+                    FROM agenda  as ag       
+
+                    INNER JOIN pacientes as p
+                    ON ag.idpaciente = p.id  
+
+                    inner join users as u
+                    on  u.id =ag.user_id 
+                    
+                    where ag.user_id = ".$user_id." 
+
+                    GROUP BY MONTH(start_date);
+            "; 
+        }
+               
 
         $rows = R::getAll($sql);
 

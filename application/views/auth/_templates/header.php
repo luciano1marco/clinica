@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="<?php echo $lang; ?>">
     <head>
         <meta charset="<?php echo $charset; ?>">
-        <title><?php echo $title; ?></title>
+        <title>Procure Psicologa</title>
         <?php if ($mobile === FALSE): ?>
             <!--[if IE 8]>
                 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -30,13 +30,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </head>
 
     <!--fundo do login--->
-    <style>
+       <style>
         html, body {
             overflow: hidden;
         }
         .login-page {
             position: relative;
-            background-image: url(http://localhost/clinica/public/images/auth/flores1.jpg);            
+            background-image: url(http://localhost/clinica/public/images/auth/fundolilas.png);            
             background-repeat: no-repeat;
         }
     </style>

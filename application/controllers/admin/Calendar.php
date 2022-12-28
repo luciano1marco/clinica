@@ -26,29 +26,49 @@ class calendar extends Admin_Controller {
         }
         else
         {
+			$user_id = $this->session->user_id;//pega id do usuario logado
+
 			// load calendar
             $this->load->library('calendar');
 			//$this->data['agenda'] = R::load("agenda", $id);
+			if ($user_id == 1){
+				$sql = "SELECT 
+				ag.id,
+				te.hora as hora,
+				ag.start_date as dtinicial,
+				ag.end_date as dtfinal,
+				ag.color as color,
+				SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
 
-			$sql = "SELECT  	
+			FROM `agenda`as ag
+
+			inner join tempo as te
+			on te.id = ag.hora
+
+			inner join pacientes as pa
+			on pa.id = ag.idpaciente"; 
+			}else{	
+
+			$sql = "SELECT 
 						ag.id,
 						te.hora as hora,
 						ag.start_date as dtinicial,
 						ag.end_date as dtfinal,
 						ag.color as color,
 						SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
-
-				FROM agenda as ag
-
-				inner join tempo as te
-				on te.id = ag.hora
-
-				inner join pacientes as pa
-				on pa.id = ag.idpaciente
-
-				";
-
+		
+					FROM `agenda`as ag
+		
+					inner join tempo as te
+					on te.id = ag.hora
+	
+					inner join pacientes as pa
+					on pa.id = ag.idpaciente
+		
+					WHERE ag.user_id =".$user_id;
+			}
 			$this->data['agend'] = R::getAll($sql);
+
            if($id != 0 ){
 			//--busca para mostrar no modal_mostra
 				$sqlid = "SELECT  ag.id as id,	te.hora as hora, ag.start_date as dtinicial, ag.color as color, pa.nome as nome, pa.email,pa.telefone, pa.endereco
@@ -87,6 +107,14 @@ class calendar extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('hora'),
             );
+			$this->data['color'] = array(
+               'name'  => 'color',
+                'id'    => 'color',
+                'options' => $this->getcolor(),
+				'class' => 'form-control',
+				//'style'=> 'color: '.$this->getstyle(),
+                'value' => $this->form_validation->set_value('color'),
+            );
 			$this->data['start_date'] = array(
 				'name'  => 'start_date',
 				'id'    => 'start_date',
@@ -109,7 +137,7 @@ class calendar extends Admin_Controller {
 
 		/* Validate form input */
 		$this->form_validation->set_rules('idpaciente', 'Nome', 'required');
-                
+		$user_id = $this->session->user_id;      
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$age = R::dispense("agenda");
@@ -117,7 +145,8 @@ class calendar extends Admin_Controller {
             $age->hora = $this->input->post('hora');
             $age->color = $this->input->post('color');
             $age->start_date = $this->input->post('start_date');
-            
+            $age->user_id = $user_id;
+
 			R::store($age);
 
 			$this->session->set_flashdata('message', "Dados gravados");
@@ -187,7 +216,14 @@ class calendar extends Admin_Controller {
 		return $options;
     }
 	public function getpaciente() {
-        $sql = "SELECT id,nome FROM pacientes ";
+		$user_id = $this->session->user_id;
+
+		if ($user_id == 1){
+			$sql = "SELECT id,nome,id_psico FROM pacientes";
+		}else{
+			$sql = "SELECT id,nome,id_psico FROM pacientes where id_psico = ".$user_id;
+		}
+        
 
         $options = array("0" => "Selecione um Paciente");
                 
@@ -285,6 +321,7 @@ class calendar extends Admin_Controller {
 		$hor   = $this->input->post('hora');
 		$st    = $this->input->post('start_date');
 		$cor   = $this->input->post('color');
+		$user_id = $this->session->user_id;
 
 		$this->form_validation->set_rules('idpaciente', 'Nome do paciente é obrigatório ', 'required');
 		if ($this->form_validation->run() == TRUE){
@@ -293,7 +330,7 @@ class calendar extends Admin_Controller {
             $agend->hora = $hor;
 			$agend->color = $cor;
             $agend->start_date = $st;
-            
+            $agend->user_id = $user_id;
 			R::store($agend);
 		}
 		
@@ -322,4 +359,27 @@ class calendar extends Admin_Controller {
 		echo json_encode($result);		
 	
 	}
-}//fim da classe
+	public function getcolor(){
+		$sql = "SELECT id,cor,nome FROM cores ";
+
+        $options = array("0" => "Selecione uma Cor" );
+                
+        $tem = R::getAll($sql);        
+		foreach ($tem as $t) {   
+            $options[$t['id']] = $t['nome'];
+			//$selected = $t['cor'];		
+	    }
+		return $options;
+	}
+	
+/*	public function getstyle(){
+		$sql = "SELECT id,cor,nome FROM cores ";
+                      
+        $tem = R::getAll($sql);        
+		foreach ($tem as $t) {   
+            $selected = $t['cor'];		
+	    }
+		return $selected;
+	}
+*/
+}//fim da classe  getstyle
