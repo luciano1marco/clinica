@@ -44,8 +44,8 @@ Temporary Items
 
 # CodeIgniter
 application/session/
-*/config/database.php
-*/config/config.php
+
+
 */system/logs/log-*.php
 */system/cache/*
 */systen/cache/!index.html
