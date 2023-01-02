@@ -80,7 +80,7 @@ if( in_array($_SERVER['HTTP_HOST'], array('127.0.0.1','localhost')) ) {
 	$mainDbDatabase = "bd_clinica";
 	$mainDbDriver = "mysqli";
 	
-} elseif( in_array(explode('.', $_SERVER['HTTP_HOST'])[0], array('dev','homolog','www','prod')) ) {
+} elseif( in_array(explode('.', $_SERVER['HTTP_HOST'])[0], array('dev','master','homolog','www','prod')) ) {
 	$mainDbHost = "50.116.112.67";
 	$mainDbUser = "proc8719_lucianocorrea";
 	$mainDbPassword = "luciano@123";

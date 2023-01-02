@@ -77,7 +77,7 @@
                         </div>   
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-light">
-                                <a href="/clinica/admin/">Login</a>
+                                <a href="/admin/">Login</a>
                             </button>
                         </div>              
                     </div>  

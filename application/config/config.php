@@ -17,9 +17,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-
-//$config['base_url'] = 'localhost/framework_PMRG';
-
+if( in_array($_SERVER['HTTP_HOST'], array('127.0.0.1','localhost')) ) {
+    $config['base_url'] = '/localhost/framework_PMRG';
+}
+else{
+    $config['base_url'] = 'https://www.procurepsicologa.com.br/framework_PMRG';
+}
 define('WEB_PROTOCOL', ($_SERVER['SERVER_PORT'] == '443' || $_SERVER['REQUEST_SCHEME'] == 'https') ? 'https://' : 'http://');
 $config['base_url'] = WEB_PROTOCOL . $_SERVER['HTTP_HOST'];
 $config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
