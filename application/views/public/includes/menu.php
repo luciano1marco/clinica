@@ -61,11 +61,11 @@
             <div class="col-lg-12">
                 <div class="col-md-2">
                     <a href="#">
-                        <img class="img-responsive" src="/clinica/public/images/ppbr.png" width="230" height="230" >
+                        <img class="img-responsive" src="/public/images/ppbr.png" width="230" height="230" >
                     </a>
                 </div>
                 <div class="col-md-6" >
-                    <h2> <a href="#"><img src="/clinica/public/images/desenho.png" width="80%" height="80%"/></a>
+                    <h2> <a href="#"><img src="/public/images/desenho.png" width="80%" height="80%"/></a>
                     </h2>
                 </div>
                 <div class="col-md-2" >
