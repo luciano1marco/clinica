@@ -48,7 +48,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="form-group">
                             <?php echo form_label('Descricao', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
                             <div class="col-sm-6">
-                            <?php echo form_input($descricao); ?>
+                            <?php echo form_textarea($descricao); ?>
                             </div>
                         </div>
                         <div class="form-group">
