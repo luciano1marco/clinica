@@ -56,17 +56,20 @@ class descatende extends Admin_Controller {
 		$this->breadcrumbs->unshift(2, "Novo Analises", 'admin/descatende/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
 		$this->data['texto_create'] = 'Criar';
+		
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
-
+		$this->data['idview'] = $id;
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$descri = R::dispense("descatende");
             $descri->idpa = $id;
 			$descri->descricao = $this->input->post('descricao');
+            $descri->titulo = $this->input->post('titulo');
             
 			R::store($descri);
 
@@ -87,7 +90,13 @@ class descatende extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('descricao'),
             );
-
+			$this->data['titulo'] = array(
+				'name'  => 'titulo',
+				'id'    => 'titulo',
+				'type'  => 'text',
+				'class' => 'form-control',
+				'value' => $this->form_validation->set_value('titulo'),
+			);
 			$this->data['idpa'] = array(
                 'name'  => 'idpa',
                 'id'    => 'idpa',
@@ -132,12 +141,15 @@ class descatende extends Admin_Controller {
 		 $this->data['texto_edit'] = 'Editar Descrição';
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
+		$this->form_validation->set_rules('titulo', 'titulo', 'required');
+		$this->data['idview'] = $id;
 		
 		$descri = R::load("descatende", $id);
 
 		if (isset($_POST) && ! empty($_POST)) {
 			if ($this->form_validation->run()) {
 				$descri->descricao = $this->input->post('descricao');
+				$descri->titulo = $this->input->post('titulo');
            		
 			   R::store($descri);
 
@@ -159,7 +171,13 @@ class descatende extends Admin_Controller {
 			'class' => 'form-control',
 			'value' => $descri->descricao,
 		);
-		
+		$this->data['titulo'] = array(
+			'name'  => 'titulo',
+			'id'    => 'titulo',
+			'type'  => 'text',
+			'class' => 'form-control',
+			'value' => $descri->titulo,
+		);
 		/* Load Template */
 		$this->template->admin_render('admin/descatende/edit', $this->data);
 	}

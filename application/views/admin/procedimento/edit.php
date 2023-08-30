@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 ?>
+<script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
 
 <div class="content-wrapper">
     <section class="content-header">
@@ -22,13 +23,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         <?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form-create_user')); ?>
                         <?php echo form_hidden($id); ?>
-
-                        <?php echo form_fieldset('Dados'); ?>
-
-                        <div class="form-group">
+                        <div class="form-group" >
+                            <?php echo form_label('Titulo', 'titulo', array('class' => 'col-sm-2 control-label')); ?>
+                            <div class="col-md-8">
+                                <?php echo form_input($titulo); ?>
+                            </div>
+                        </div>
+                        <div class="form-group" >
                             <?php echo form_label('Descricao', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
-                            <?php echo form_textarea($descricao); ?>
+                            <div class="col-md-8">
+                                <?php echo form_textarea($descricao); ?>
                             </div>
                         </div>
                        
@@ -60,6 +64,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
     </section>
 </div>
 
+<script>
+    ClassicEditor
+    .create( document.querySelector( '#descricao' ) )
+    .then( descricao => {
+     console.log( descricao );
+    } )
+    
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+<style>
+.ck-editor__editable_inline {
+    min-height: 400px;
+}
+</style>
 
 <div id="modal_delete" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

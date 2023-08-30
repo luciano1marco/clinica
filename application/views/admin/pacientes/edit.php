@@ -8,6 +8,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <?php echo $pagetitle; ?>
         <?php echo $breadcrumb; ?>
         <?php $anchor = 'admin/' . $this->router->class; ?>
+        <?php $anchor1 = 'admin/pacientes' ?>
     </section>
 
     <section class="content">

@@ -14,7 +14,7 @@ class procedimento extends Admin_Controller {
         $this->anchor = 'admin/' . $this->router->class;
 
 		$this->load->helper('utilidades');
-
+		
 		$this->form_validation->set_error_delimiters('<div class="form_val_error">', '</div>');
 
 
@@ -56,15 +56,17 @@ class procedimento extends Admin_Controller {
 		$this->data['texto_create'] = 'Criar Procedimento';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
-
+		$this->data['idview'] = $id;
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$procede = R::dispense("procedimento");
             $procede->idpa = $id;
 			$procede->descricao = $this->input->post('descricao');
+			$procede->titulo = $this->input->post('titulo');
            
 			R::store($procede);
 
@@ -85,7 +87,13 @@ class procedimento extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('descricao'),
             );
-            
+			$this->data['titulo'] = array(
+                'name'  => 'titulo',
+                'id'    => 'titulo',
+                'type'  => 'text',
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('titulo'),
+            );
             $this->data['idpa'] = array(
                 'name'  => 'idpa',
                 'id'    => 'idpa',
@@ -127,10 +135,12 @@ class procedimento extends Admin_Controller {
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Editar Procedimento", 'admin/procedimento/edit');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
+		$this->data['idview'] = $id;
 		 /* Titulo */
 		 $this->data['texto_edit'] = 'Editar Procedimento';
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
+		$this->form_validation->set_rules('titulo', 'titulo', 'required');
 		
 		$procede = R::load("procedimento", $id);
 
@@ -158,7 +168,13 @@ class procedimento extends Admin_Controller {
 			'class' => 'form-control',
 			'value' => $procede->descricao,
 		);
-
+		$this->data['titulo'] = array(
+			'name'  => 'titulo',
+			'id'    => 'titulo',
+			'type'  => 'text',
+			'class' => 'form-control',
+			'value' => $procede->titulo,
+		);
         $this->data['dprocede'] = array(
 			'name'  => 'dprocede',
 			'id'    => 'dprocede',

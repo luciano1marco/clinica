@@ -195,6 +195,7 @@ class pacientes extends Admin_Controller {
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Editar Pacientes", 'admin/pacientes/edit');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
+		$this->data['idview'] = $id;
 		 /* Titulo */
 		 $this->data['texto_edit'] = 'Editar Paciente';
 		/* Validate form input */
@@ -292,7 +293,7 @@ class pacientes extends Admin_Controller {
 			$this->data['paciente'] = R::getAll($sql);			
 			
 			//--- dados do descatende --------------	
-			$sql1 ="SELECT  id,
+			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
 							date_format(datadesc, '%d/%m/%Y') as datadesc
@@ -301,10 +302,10 @@ class pacientes extends Admin_Controller {
 			
 				where idpa = " . $id;
 
-			$this->data["descri"] = R::getAll($sql1);	
+			$this->data["descatende"] = R::getAll($sql1);	
 
 			//--- dados do procedimento --------------	
-			$sql1 ="SELECT  id,
+			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
 							date_format(dataproc, '%d/%m/%Y') as dataproc 
@@ -316,7 +317,7 @@ class pacientes extends Admin_Controller {
 			$this->data["procedimento"] = R::getAll($sql1);	
 
 			//--- dados da analise --------------	
-			$sql2 ="SELECT  id,
+			$sql2 ="SELECT  id,titulo,
 							descricao,
 							idpa,
 							date_format(danalise, '%d/%m/%Y') as danalise
@@ -328,7 +329,7 @@ class pacientes extends Admin_Controller {
 			$this->data['analise'] = R::getAll($sql2);	
 
 			//--- dados da conclusao --------------	
-			$sql1 ="SELECT  id,
+			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
 							date_format(dataconc, '%d/%m/%Y') as dataconc

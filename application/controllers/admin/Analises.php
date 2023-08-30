@@ -56,13 +56,14 @@ class analises extends Admin_Controller {
 		$this->data['texto_create'] = 'Criar Analises';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
-
+		$this->data['idview'] = $id;
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$analise = R::dispense("analises");
+			$analise->titulo = $this->input->post('titulo');
             $analise->descricao = $this->input->post('descricao');
             $analise->idpa = $id;
             
@@ -81,7 +82,13 @@ class analises extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('descricao'),
             );
-            
+			$this->data['titulo'] = array(
+                'name'  => 'titulo',
+                'id'    => 'titulo',
+                'type'  => 'text',
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('titulo'),
+            );
            $this->data['idpa'] = array(
                 'name'  => 'idpa',
                 'id'    => 'idpa',
@@ -126,14 +133,15 @@ class analises extends Admin_Controller {
 		 $this->data['texto_edit'] = 'Editar Analises';
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
+		$this->form_validation->set_rules('titulo', 'titulo', 'required');
 		
 		$analise = R::load("analises", $id);
 
 		if (isset($_POST) && ! empty($_POST)) {
 			if ($this->form_validation->run()) {
 				$analise->descricao = $this->input->post('descricao');
-           		
-				R::store($analise);
+				$analise->titulo = $this->input->post('titulo');
+           		R::store($analise);
 
 				redirect('admin/pacientes', 'refresh');
 			}
@@ -152,6 +160,13 @@ class analises extends Admin_Controller {
 			'type'  => 'text',
 			'class' => 'form-control',
 			'value' => $analise->descricao,
+		);
+		$this->data['titulo'] = array(
+			'name'  => 'titulo',
+			'id'    => 'titulo',
+			'type'  => 'text',
+			'class' => 'form-control',
+			'value' => $analise->titulo,
 		);
 		
 		$this->data['danalise'] = array(

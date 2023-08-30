@@ -2,12 +2,14 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 ?>
+<script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
 
 <div class="content-wrapper">
     <section class="content-header">
         <?php echo $pagetitle; ?>
         <?php echo $breadcrumb; ?>
         <?php $anchor = 'admin/' . $this->router->class; ?>
+        <?php $anchor1 = 'admin/pacientes' ?>
     </section>
 
     <section class="content">
@@ -19,20 +21,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
                     <div class="box-body">
                         <?php echo $message; ?>
-
                         <?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form-create_user')); ?>
-
-                        <?php echo form_fieldset('Dados'); ?>
-
-                        <div class="form-group">
-                            <?php echo form_label('descricao', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
+                        <div class="form-group" >
+                            <?php echo form_label('Titulo', 'titulo', array('class' => 'col-sm-2 control-label')); ?>
+                            <div class="col-md-8">
+                                <?php echo form_input($titulo); ?>
+                            </div>
+                        </div>
+                        <div class="form-group" >
+                            <?php echo form_label('Descricao', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
+                            <div class="col-md-8">
                                 <?php echo form_textarea($descricao); ?>
                             </div>
                         </div>
-
                         <?php echo form_fieldset_close(); ?>
-
+                       
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="btn-group">
@@ -43,11 +46,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     $delete = '<i class="fa fa-trash"></i> <span>Excluir</span>';
                                     $cancel = '<i class="fa fa-times"></i> <span>Cancelar</span>';
                                     ?>
-
                                     <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-primary btn-flat', 'content' => $submit)); ?>
                                     <?php echo form_button(array('type' => 'reset', 'class' => 'btn btn-warning btn-flat', 'content' => $redo)); ?>
-                                    <?php echo anchor($anchor, $cancel, array('class' => 'btn btn-default btn-flat')); ?>
-
+                                    <?php echo anchor($anchor1.'/view/'.$idview, $cancel, array('class' => 'btn btn-default btn-flat')); ?>
                                 </div>
                             </div>
                         </div>
@@ -58,3 +59,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
     </section>
 </div>
+<script>
+    ClassicEditor
+    .create( document.querySelector( '#descricao' ) )
+    .then( descricao => {
+     console.log( descricao );
+    } )
+    
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+<style>
+.ck-editor__editable_inline {
+    min-height: 400px;
+}
+</style>

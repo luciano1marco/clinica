@@ -56,15 +56,17 @@ class conclusao extends Admin_Controller {
 		$this->data['texto_create'] = 'Criar';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
-
+		$this->data['idview'] = $id;
 		/* Validate form input */
-		$this->form_validation->set_rules('descricao', 'descricao', 'required');
+		$this->form_validation->set_rules('Descricao', 'descricao', 'required');
+        $this->form_validation->set_rules('Titulo', 'titulo', 'required');
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$conc = R::dispense("conclusao");
 			$conc->idpa = $id;
             $conc->descricao = $this->input->post('descricao');
+            $conc->titulo = $this->input->post('titulo');
                        
 			R::store($conc);
 
@@ -78,7 +80,6 @@ class conclusao extends Admin_Controller {
 				'id' => $id,
 			);
 
-
             $this->data['descricao'] = array(
                 'name'  => 'descricao',
                 'id'    => 'descricao',
@@ -86,7 +87,13 @@ class conclusao extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('descricao'),
             );
-            
+            $this->data['titulo'] = array(
+                'name'  => 'titulo',
+                'id'    => 'titulo',
+                'type'  => 'text',
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('titulo'),
+            );
             $this->data['idpa'] = array(
                 'name'  => 'idpa',
                 'id'    => 'idpa',
@@ -131,6 +138,7 @@ class conclusao extends Admin_Controller {
 		 $this->data['texto_edit'] = 'Editar';
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
+		$this->form_validation->set_rules('titulo', 'titulo', 'required');
 		
 		$conc = R::load("conclusao", $id);
 
@@ -158,7 +166,13 @@ class conclusao extends Admin_Controller {
 			'class' => 'form-control',
 			'value' => $conc->descricao,
 		);
-		
+		$this->data['titulo'] = array(
+			'name'  => 'titulo',
+			'id'    => 'titulo',
+			'type'  => 'text',
+			'class' => 'form-control',
+			'value' => $conc->titulo,
+		);
 		$this->data['dataconc'] = array(
 			'name'  => 'dataconc',
 			'id'    => 'dataconc',

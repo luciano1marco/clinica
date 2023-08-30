@@ -70,7 +70,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php if ($mobile === FALSE && $admin_prefs['transition_page'] == TRUE): ?>
             <link rel="stylesheet" href="<?php echo base_url($plugins_dir . '/animsition/animsition.min.css'); ?>">
         <?php endif; ?>
-
+       
         <!-- COLORPICKER -->
         <?php
         $colorpicker_array = array('groups');       

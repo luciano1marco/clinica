@@ -60,7 +60,7 @@ class Home extends Public_Controller {
 
 
         // Caso sistema funcione apenas logado, descomentar a linha abaixo e importar o helper URL no construtor
-       // redirect("admin");
+        redirect("admin");
        $this->data['modulo_meiogeral'] = $this->load->view('public/includes/meiogeral.php', $this->data, TRUE);	
        $this->data['modulo_cabecalho'] = $this->load->view('public/includes/header.php', $cfg, TRUE);	
        $this->data['modulo_rodape'] = $this->load->view('public/includes/footer.php',$cfg, TRUE);      

@@ -77,7 +77,7 @@ if( in_array($_SERVER['HTTP_HOST'], array('127.0.0.1','localhost')) ) {
 	$mainDbHost = "localhost";
 	$mainDbUser = "root";
 	$mainDbPassword = "";
-	$mainDbDatabase = "bd_clinica";
+	$mainDbDatabase = "clinica";
 	$mainDbDriver = "mysqli";
 	
 } elseif( in_array(explode('.', $_SERVER['HTTP_HOST'])[0], array('dev','master','homolog','www','prod')) ) {
