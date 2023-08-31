@@ -29,11 +29,7 @@ class comunidade extends Admin_Controller {
         else
         {
             /* dados  */
-           
            // $this->data['comunidade'] = R::findAll("comunidade");
- 
-
-
             /* Breadcrumbs */
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
@@ -44,8 +40,6 @@ class comunidade extends Admin_Controller {
 			$this->data['error'] = NULL;
 
 			//$this->data['aparelhos'] = R::findAll('aparelhos');
-
-
 			/* Load Template */
 			$this->template->admin_render($this->anchor . '/index', $this->data);
         }
