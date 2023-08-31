@@ -18,16 +18,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <section class="content">
 
 <!-- Default box -->
-
-
-    
+   
     <div class="login-logo"> 
         <a href="#"><b>Preencha seu email</b></a>    
            
     </div>
     <div class="login-box-body" style="align-items: center;">
         <?php echo $message;?>
-        <?php echo form_open('home/esqueciminhasenha');?>
+        <?php echo form_open('auth/esqueciminhasenha');?>
             <div class="form-group has-feedback">
                 <?php echo form_input($email);?>
             </div>

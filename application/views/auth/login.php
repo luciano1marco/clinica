@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php echo anchor('#', lang('auth_forgot_password')); ?><br />
         <?php endif; ?>
         <p class="mb-1 text-center" >
-				<a style="color:black" href="/auth/esqueciminhasenha">Esqueceu a senha</a>
+				<a style="color:black" href="/clinica/auth/esqueciminhasenha">Esqueceu a senha</a>
 		</p>
 
         <p class="mb-1 text-center" >

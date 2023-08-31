@@ -175,7 +175,7 @@ class Auth extends MY_Controller {
         if (count($this->input->post()) > 0) {
             $username = $this->input->post("email");
 
-            $existe = R::find('pessoas', "email = '{$username}'");
+            $existe = R::find('users', "email = '{$username}'");
 
             if (count($existe) == 1) {
                 $usuario = array_pop($existe);
@@ -183,7 +183,7 @@ class Auth extends MY_Controller {
                 //cria uma nova senha
                 $novasenha = $this->geraNovaSenha();
                 //chama o id do email enviado
-                $altsenha = R::load("pessoas",$id);
+                $altsenha = R::load("users",$id);
                 //pega a nova senha gerada                
                 $altsenha->senha = md5($novasenha); 
                 
@@ -191,11 +191,11 @@ class Auth extends MY_Controller {
                 R::store($altsenha);
                //envia email 
                 $this->configEmail();
-                $this->email->from('no-reply@riogrande.rs.gov.br');
+                $this->email->from('luciano1marco@gmail.com');
                 $this->email->to($this->input->post("email"));
 
                 //$this->email->to("matheus.cezar@riogrande.rs.gov.br");
-                $this->email->subject('Concursos - Nova Senha');
+                $this->email->subject('Clinica - Nova Senha');
                 $corpoemail = "
                             Olá!<br /><br />
                             Sua senha foi alterada!<br /><br />
@@ -225,7 +225,8 @@ class Auth extends MY_Controller {
 
         /* Load Template */
         $this->template->auth_render('auth/esqueciminhasenha', $this->data);
-        
+   //     $this->template->admin_render($this->anchor . '/auth/esqueciminhasenha', $this->data);
+
     }
 
     private function geraNovaSenha() {

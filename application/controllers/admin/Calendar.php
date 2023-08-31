@@ -36,7 +36,7 @@ class calendar extends Admin_Controller {
 				ag.id,
 				te.hora as hora,
 				ag.start_date as dtinicial,
-				ag.end_date as dtfinal,
+				
 				ag.color as color,
 				SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
 
@@ -53,7 +53,6 @@ class calendar extends Admin_Controller {
 						ag.id,
 						te.hora as hora,
 						ag.start_date as dtinicial,
-						ag.end_date as dtfinal,
 						ag.color as color,
 						SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
 		
@@ -340,7 +339,14 @@ class calendar extends Admin_Controller {
 		
 	}
 	public function idmostra($id){
-		$sqlid = "SELECT  ag.id as id,	te.hora as hora, ag.start_date as dtinicial, ag.color as color, pa.nome as nome, pa.email,pa.telefone as telefone, pa.endereco
+		$sqlid = "SELECT  ag.id as id,
+						  te.hora as hora, 
+						  ag.start_date as dtinicial, 
+						  ag.color as color, 
+						  pa.nome as nome, 
+						  pa.email,
+						  pa.telefone as telefone, 
+						  pa.endereco
 							FROM agenda as ag
 
 							inner join tempo as te
