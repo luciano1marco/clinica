@@ -67,11 +67,11 @@ class descatende extends Admin_Controller {
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$descri = R::dispense("descatende");
-            $descri->idpa = $id;
-			$descri->descricao = $this->input->post('descricao');
-            $descri->titulo = $this->input->post('titulo');
-            
-			R::store($descri);
+				$descri->idpa = $id;
+				$descri->descricao = $this->input->post('descricao');
+				$descri->titulo    = $this->input->post('titulo');
+				$descri->dtcad     = $this->input->post('dtcad');
+         	R::store($descri);
 
 			$this->session->set_flashdata('message', "Dados gravados");
             redirect('admin/pacientes', 'refresh');
@@ -103,6 +103,13 @@ class descatende extends Admin_Controller {
                 'type'  => 'int',
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('idpa'),
+            );
+			$this->data['dtcad'] = array(
+                'name'  => 'dtcad',
+                'id'    => 'dtcad',
+                'type'  => 'date',
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('dtcad'),
             );
             
         }         
@@ -150,6 +157,7 @@ class descatende extends Admin_Controller {
 			if ($this->form_validation->run()) {
 				$descri->descricao = $this->input->post('descricao');
 				$descri->titulo = $this->input->post('titulo');
+				$descri->dtcad = $this->input->post('dtcad');
            		
 			   R::store($descri);
 
@@ -177,6 +185,13 @@ class descatende extends Admin_Controller {
 			'type'  => 'text',
 			'class' => 'form-control',
 			'value' => $descri->titulo,
+		);
+		$this->data['dtcad'] = array(
+			'name'  => 'dtcad',
+			'id'    => 'dtcad',
+			'type'  => 'date',
+			'class' => 'form-control',
+			'value' => $descri->dtcad,
 		);
 		/* Load Template */
 		$this->template->admin_render('admin/descatende/edit', $this->data);

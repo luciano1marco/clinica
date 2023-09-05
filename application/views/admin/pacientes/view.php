@@ -22,7 +22,7 @@
                                 <?php $voltar = '<i class="fa fa-times"></i> <span>Voltar</span>';?>
                                 <?php if ($pac) { ?>
                                     <?php echo anchor('admin/pacientes/edit/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
-                                    <?php echo anchor('admin/pacientes/', "<button class=\"btn btn-primary\"><i class=\"fa fa-reply\"></i> Voltar</button>"); ?>
+                                    <?php echo anchor('admin/pacientes/', "<button class=\"btn btn-default\"><i class=\"fa fa-times\"></i>Cancelar</button>"); ?>
                                 <?php } ?>
                                 </h3>
                             </div>
@@ -59,6 +59,12 @@
                                         <p><?= ($pac['email']); ?>&nbsp;</p>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <label class="col-sm-4">Data de Cadastro</label>
+                                    <div class="col-sm-8">
+                                        <p><?= ($pac['dtcad']); ?>&nbsp;</p>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -88,7 +94,7 @@
                                         <?php foreach($descatende as $da) : ?>
                                             <tr>
                                                 <td><?php echo $da['titulo']; ?></td>
-                                                <td><?php echo $da['datadesc']; ?></td>
+                                                <td><?php echo $da['dtcad']; ?></td>
 
                                                 <!-- Opções -->
                                                 <td>
@@ -126,7 +132,7 @@
                                         <?php foreach($procedimento as $pr) : ?>
                                             <tr>
                                                 <td><?php echo $pr['titulo']; ?></td>
-                                                <td><?php echo $pr['dataproc']; ?></td>
+                                                <td><?php echo $pr['dtcad']; ?></td>
 
                                                 <!-- Opções -->
                                                 <td>
@@ -163,7 +169,7 @@
                                         <?php foreach($analise as $an) : ?>
                                             <tr>
                                                 <td><?php echo $an['titulo']; ?></td>
-                                                <td><?php echo $an['danalise']; ?></td>
+                                                <td><?php echo $an['dtcad']; ?></td>
 
                                                 <!-- Opções -->
                                                 <td>
@@ -200,7 +206,7 @@
                                         <?php foreach($conclusao as $co) : ?>
                                             <tr>
                                                 <td><?php echo $co['titulo']; ?></td>
-                                                <td><?php echo $co['dataconc']; ?></td>
+                                                <td><?php echo $co['dtcad']; ?></td>
 
                                                 <!-- Opções -->
                                                 <td>

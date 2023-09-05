@@ -1,105 +1,5 @@
 $(document).ready(function () {
 
-    function relmes2() {
-        $.ajax({
-            url: '//' + window.location.host + '/clinica/admin/relatorios/getmes',
-            method: "GET",
-            success: function(data) {
-                var qtde = new Array();
-                var mes = new Array();
-                var cor = [];
-
-                for (var i in data) {
-                    //console.log(data);
-                    qtde.push(data[i].qtde);
-                    mes.push(data[i].mes);
-                    cor.push(data[i].cor);
-                }
-
-                var chartdata = {
-                    labels: getmes(mes),
-                    datasets: [{
-                        label: ['Total'],
-                        backgroundColor: getColors(12),
-                        //backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-                        borderColor: 'rgba(200, 200, 200, 0.75)',
-                        hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
-                        hoverBorderColor: 'rgba(200, 200, 200, 1)',
-                        data: qtde
-                    }]
-                };
-
-                var cty = $("#relmes");
-
-                Chart.pluginService.register({
-                    beforeRender: function(chart) {
-                        if (chart.config.options.showAllTooltips) {
-                            chart.pluginTooltips = [];
-                            chart.config.data.datasets.forEach(function(dataset, i) {
-                                chart.getDatasetMeta(i).data.forEach(function(sector, j) {
-                                    chart.pluginTooltips.push(new Chart.Tooltip({
-                                        _chart: chart.chart,
-                                        _chartInstance: chart,
-                                        _data: chart.data,
-                                        _options: chart.options.tooltips,
-                                        _active: [sector]
-                                    }, chart));
-                                });
-                            });
-                            chart.options.tooltips.enabled = false;
-                        }
-                    },
-                    afterDraw: function(chart, easing) {
-                        if (chart.config.options.showAllTooltips) {
-                            if (!chart.allTooltipsOnce) {
-                                if (easing !== 1)
-                                    return;
-                                chart.allTooltipsOnce = true;
-                            }
-
-                            chart.options.tooltips.enabled = true;
-                            Chart.helpers.each(chart.pluginTooltips, function(tooltip) {
-                                tooltip.initialize();
-                                tooltip.update();
-                                tooltip.pivot();
-                                tooltip.transition(easing).draw();
-                            });
-                            chart.options.tooltips.enabled = false;
-                        }
-                    }
-                });
-
-                var barGraph = new Chart(cty, {
-                    type: 'bar',
-                    data: chartdata,
-                    options: {
-                        legend: { display: false, position: 'right', align: 'start' },
-                        title: {
-                            display: true,
-                            text: 'Total por Mês '
-                        },
-                        showAllTooltips: true,
-                        tooltips: {
-                            callbacks: {
-                                title: function(tooltipItems, data) {
-                                    return '';
-                                },
-                                label: function(tooltipItem, data) {
-                                    var datasetLabel = '';
-                                    var label = data.labels[tooltipItem.index];
-                                    return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                }
-                            }
-                        }
-                    }
-                });
-            },
-            error: function(data) {
-                console.log(data);
-            }
-        });
-    }
-
     function relmes() {
         $.ajax({
             url: '//' + window.location.host + '/clinica/admin/relatorios/getmes',
@@ -203,6 +103,107 @@ $(document).ready(function () {
         });
     }
 
+    function relpaciente() {
+        $.ajax({
+            url: '//' + window.location.host + '/clinica/admin/relatorios/getpaciente',
+            method: "GET",
+            success: function(data) {
+                var total = new Array();
+                var nome = new Array();
+                var mes = new Array();
+                var cor = [];
+
+                for (var i in data) {
+                    //console.log(data);
+                    total.push(data[i].total);
+                    nome.push(data[i].nome);
+                    mes.push(data[i].mes);
+                    cor.push(data[i].cor);
+                }
+
+                var chartdata = {
+                    labels: nome,
+                    datasets: [{
+                        label: total,
+                        backgroundColor: getColors(12),
+                        //backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                        borderColor: 'rgba(200, 200, 200, 0.75)',
+                        hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+                        hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                        data: total
+                    }]
+                };
+
+                var cty = $("#relpaciente");
+
+                Chart.pluginService.register({
+                    beforeRender: function(chart) {
+                        if (chart.config.options.showAllTooltips) {
+                            chart.pluginTooltips = [];
+                            chart.config.data.datasets.forEach(function(dataset, i) {
+                                chart.getDatasetMeta(i).data.forEach(function(sector, j) {
+                                    chart.pluginTooltips.push(new Chart.Tooltip({
+                                        _chart: chart.chart,
+                                        _chartInstance: chart,
+                                        _data: chart.data,
+                                        _options: chart.options.tooltips,
+                                        _active: [sector]
+                                    }, chart));
+                                });
+                            });
+                            chart.options.tooltips.enabled = false;
+                        }
+                    },
+                    afterDraw: function(chart, easing) {
+                        if (chart.config.options.showAllTooltips) {
+                            if (!chart.allTooltipsOnce) {
+                                if (easing !== 1)
+                                    return;
+                                chart.allTooltipsOnce = true;
+                            }
+
+                            chart.options.tooltips.enabled = true;
+                            Chart.helpers.each(chart.pluginTooltips, function(tooltip) {
+                                tooltip.initialize();
+                                tooltip.update();
+                                tooltip.pivot();
+                                tooltip.transition(easing).draw();
+                            });
+                            chart.options.tooltips.enabled = false;
+                        }
+                    }
+                });
+
+                var barGraph = new Chart(cty, {
+                    type: 'bar',
+                    data: chartdata,
+                    options: {
+                        legend: { display: false, position: 'right', align: 'start' },
+                        title: {
+                            display: true,
+                            text: 'Total'
+                        },
+                        showAllTooltips: true,
+                        tooltips: {
+                            callbacks: {
+                                title: function(tooltipItems, data) {
+                                    return '';
+                                },
+                                label: function(tooltipItem, data) {
+                                    var datasetLabel = '';
+                                    var label = data.labels[tooltipItem.index];
+                                    return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    }
     //----fim ----------
   
 
@@ -250,7 +251,7 @@ $(document).ready(function () {
 
     function initGraph() {
         relmes();
-        
+        relpaciente();
 
         //fim-----
        

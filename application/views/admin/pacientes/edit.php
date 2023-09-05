@@ -27,37 +27,39 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <?php echo form_fieldset('Dados'); ?>
 
                         <div class="form-group">
-                            <?php echo form_label('Nome', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
+                            <?php echo form_label('Nome', 'nome', array('class' => 'col-sm-2 control-label')); ?>
                             <div class="col-sm-6">
-                            <?php echo form_input($nome); ?>
+                                <?php echo form_input($nome); ?>
                             </div>
                         </div>
-                       
                         <div class="form-group">
-                            <?php echo form_label('Email', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
+                            <?php echo form_label('Endereço', 'nome', array('class' => 'col-sm-2 control-label')); ?>
                             <div class="col-sm-6">
-                            <?php echo form_input($email); ?>
-                            </div>
-                        </div>
-                       
-                        <div class="form-group">
-                            <?php echo form_label('Telefone', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
-                            <?php echo form_input($telefone); ?>
+                                <?php echo form_input($endereco); ?>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <?php echo form_label('Endereço', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
-                            <?php echo form_input($endereco); ?>
+                            <?php echo form_label('Email', 'nome', array('class' => 'col-sm-2 control-label')); ?>
+                            <div class="col-sm-2">
+                                <?php echo form_input($email); ?>
                             </div>
+                        
+                            <?php echo form_label('Telefone', 'nome', array('class' => 'col-sm-2 control-label')); ?>
+                                <div class="col-sm-2">
+                                    <?php echo form_input($telefone); ?>
+                                </div>
                         </div>
 
                         <div class="form-group">
-                            <?php echo form_label('CPF', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
-                            <?php echo form_input($cpf); ?>
+                            <?php echo form_label('CPF', 'nome', array('class' => 'col-sm-2 control-label')); ?>
+                            <div class="col-sm-2">
+                                <?php echo form_input($cpf); ?>
+                            </div>
+                        
+                            <?php echo form_label('Data', 'dtcad', array('class' => 'col-sm-2 control-label')); ?>
+                            <div class="col-sm-2">
+                                <?php echo form_input($dtcad); ?>
                             </div>
                         </div>
   

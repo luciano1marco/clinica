@@ -103,9 +103,27 @@ class Relatorios extends Admin_Controller {
         } 
       
     }
-   
+    public function getpaciente(){      
+        header('Content-Type: application/json');
+        $user_id = $this->session->user_id;
 
-    
+        $sql = " SELECT 
+                    COUNT(*) AS total, 
+                    MONTH(start_date) AS mes, 
+                    p.nome AS nome
+                    FROM agenda  as ag       
+                    INNER JOIN pacientes as p
+                    ON ag.idpaciente = p.id  
+                    inner join users as u
+                    on  u.id =ag.user_id 
+                    GROUP BY nome;
+            "; 
+        $rows = R::getAll($sql);
+        $relatorio = $rows;       
+        if($relatorio !== NULL) {		
+			$j = json_encode($relatorio);
+			echo $j;			
+        } 
+    }
     //---fim dos getrel...()-------------
- 
-}
+ }

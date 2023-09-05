@@ -79,16 +79,14 @@ class pacientes extends Admin_Controller {
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$paciente = R::dispense("pacientes");
-            $paciente->nome = $this->input->post('nome');
-            $paciente->email = $this->input->post('email');
-            $paciente->telefone = $this->input->post('telefone');
-            $paciente->endereco = $this->input->post('endereco');
-           
-            $paciente->cpf = $this->input->post('cpf');
-            $paciente->id_psico = $user_id;
-            
-            
-			R::store($paciente);
+				$paciente->nome     = $this->input->post('nome');
+				$paciente->email    = $this->input->post('email');
+				$paciente->telefone = $this->input->post('telefone');
+				$paciente->endereco = $this->input->post('endereco');
+				$paciente->dtcad    = $this->input->post('dtcad');
+				$paciente->cpf      = $this->input->post('cpf');
+				$paciente->id_psico = $user_id;
+            R::store($paciente);
 
 			$this->session->set_flashdata('message', "Dados gravados");
             redirect('admin/pacientes', 'refresh');
@@ -141,6 +139,13 @@ class pacientes extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('id_psico'),
             );
+			$this->data['dtcad'] = array(
+                'name'  => 'dtcad',
+                'id'    => 'dtcad',
+                'type'  => 'date',
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('dtcad'),
+			);
 
         }         
         /* Load Template */
@@ -210,7 +215,8 @@ class pacientes extends Admin_Controller {
            		$paciente->telefone = $this->input->post('telefone');
             	$paciente->endereco = $this->input->post('endereco');
             	$paciente->cpf = $this->input->post('cpf');
-            	$paciente->id_psico = $user_id;
+				$paciente->dtcad = $this->input->post('dtcad');
+				$paciente->id_psico = $user_id;
 								
 				R::store($paciente);
 
@@ -270,6 +276,13 @@ class pacientes extends Admin_Controller {
 			'class' => 'form-control',
 			'value' => $paciente->id_psico,
 		);
+		$this->data['dtcad'] = array(
+			'name'  => 'dtcad',
+			'id'    => 'dtcad',
+			'type'  => 'date',
+			'class' => 'form-control',
+			'value' => $paciente->dtcad,
+		);
 
 		/* Load Template */
 		$this->template->admin_render('admin/pacientes/edit', $this->data);
@@ -286,8 +299,10 @@ class pacientes extends Admin_Controller {
             $this->data['error'] = NULL;
 
 			//-----------dados paciente -----------------
-			$sql = "SELECT  * FROM pacientes 
-	 				
+			$sql = "SELECT  id,nome,email,telefone,endereco,cpf,
+							date_format(dtcad, '%d/%m/%Y') as dtcad
+					FROM pacientes 
+								 
 					where id =  " .$id;
 
 			$this->data['paciente'] = R::getAll($sql);			
@@ -296,7 +311,7 @@ class pacientes extends Admin_Controller {
 			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
-							date_format(datadesc, '%d/%m/%Y') as datadesc
+							date_format(dtcad, '%d/%m/%Y') as dtcad
 
 				from descatende  
 			
@@ -308,7 +323,7 @@ class pacientes extends Admin_Controller {
 			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
-							date_format(dataproc, '%d/%m/%Y') as dataproc 
+							date_format(dtcad, '%d/%m/%Y') as dtcad
 			
 				 from procedimento  
 			
@@ -320,7 +335,7 @@ class pacientes extends Admin_Controller {
 			$sql2 ="SELECT  id,titulo,
 							descricao,
 							idpa,
-							date_format(danalise, '%d/%m/%Y') as danalise
+							date_format(dtcad, '%d/%m/%Y') as dtcad
 			
 					from analises 
 			
@@ -332,7 +347,7 @@ class pacientes extends Admin_Controller {
 			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
-							date_format(dataconc, '%d/%m/%Y') as dataconc
+							date_format(dtcad, '%d/%m/%Y') as dtcad
 			
 				from conclusao  
 			

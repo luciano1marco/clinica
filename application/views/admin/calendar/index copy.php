@@ -36,8 +36,7 @@
 				<div class="box">
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<h3 align="center">Agendamento </h3>
-								
+								<h3 align="center">Agendamento</h3>
 							</div>
                             <div class="box-header with-border">
 						        <h3 class="box-title"><?php echo anchor('/admin/calendar/create', '<i class="fa fa-plus"></i> ' . $texto_btn_create, array('class' => 'btn btn-block btn-primary btn-flat')); ?></h3>
@@ -287,6 +286,8 @@
 						//error();
         			}
 
+					
+
                 });
               	return false;
             })
@@ -312,6 +313,22 @@
 				.replace(/'/g, '&#039;')
 				.replace(/"/g, '&quot;')
 				.replace(/\n/g, '<br />');
+		}
+
+		function testahora(event){
+			
+			let url = backend_url+'admin/calendar/testa';
+
+			//faz a requisicao para o php
+    		var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", url, false);
+			xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+			
+			var dados = JSON.parse(xhttp.responseText);//arruma os dados para visualizacáo
+
+
+			console.log(dados);
+			
 		}
 
 </script>

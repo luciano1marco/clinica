@@ -32,7 +32,6 @@ class analises extends Admin_Controller {
 			
 		    $this->data['analise'] = R::findAll("analises");
 		   
-
            /* Breadcrumbs */
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
@@ -63,11 +62,11 @@ class analises extends Admin_Controller {
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$analise = R::dispense("analises");
-			$analise->titulo = $this->input->post('titulo');
-            $analise->descricao = $this->input->post('descricao');
-            $analise->idpa = $id;
-            
-			R::store($analise);
+				$analise->titulo    = $this->input->post('titulo');
+				$analise->descricao = $this->input->post('descricao');
+				$analise->idpa      = $id;
+				$analise->dtcad     = $this->input->post('dtcad');
+         	R::store($analise);
 
 			$this->session->set_flashdata('message', "Dados gravados");
             redirect('admin/pacientes', 'refresh');
@@ -96,7 +95,13 @@ class analises extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('idpa'),
             );
-           
+			$this->data['dtcad'] = array(
+                'name'  => 'dtcad',
+                'id'    => 'dtcad',
+                'type'  => 'date',
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('dtcad'),
+            ); 
         }         
         /* Load Template */
         $this->template->admin_render('admin/analises/create', $this->data);
@@ -140,10 +145,11 @@ class analises extends Admin_Controller {
 		if (isset($_POST) && ! empty($_POST)) {
 			if ($this->form_validation->run()) {
 				$analise->descricao = $this->input->post('descricao');
-				$analise->titulo = $this->input->post('titulo');
-           		R::store($analise);
+				$analise->titulo    = $this->input->post('titulo');
+				$analise->dtcad     = $this->input->post('dtcad');
+           	R::store($analise);
 
-				redirect('admin/pacientes', 'refresh');
+			redirect('admin/pacientes', 'refresh');
 			}
 		}
 	
@@ -183,11 +189,15 @@ class analises extends Admin_Controller {
 			'class' => 'form-control',
 			'value' => $analise->idpa,
 		);
-        
-		
+        $this->data['dtcad'] = array(
+			'name'  => 'dtcad',
+			'id'    => 'dtcad',
+			'type'  => 'date',
+			'class' => 'form-control',
+			'value' => $analise->dtcad,
+		);
 		/* Load Template */
 		$this->template->admin_render('admin/analises/edit', $this->data);
 	}
-
 
 }

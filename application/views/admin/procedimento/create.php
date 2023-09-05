@@ -22,18 +22,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="box-body">
                         <?php echo $message; ?>
                         <?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form-create_user')); ?>
+                        
                         <div class="form-group" >
                             <?php echo form_label('Titulo', 'titulo', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-md-8">
+                            <div class="col-md-3">
                                 <?php echo form_input($titulo); ?>
+                            </div>
+                            <?php echo form_label('Data', 'dtcad', array('class' => 'col-sm-1 control-label')); ?>
+                            <div class="col-md-2">
+                                <?php echo form_input($dtcad); ?>
                             </div>
                         </div>
                         <div class="form-group" >
                             <?php echo form_label('Descricao', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <?php echo form_textarea($descricao); ?>
                             </div>
                         </div>
+                        
                         <?php echo form_fieldset_close(); ?>
                        
                         <div class="form-group">

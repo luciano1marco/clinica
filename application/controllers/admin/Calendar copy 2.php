@@ -344,7 +344,7 @@ class calendar extends Admin_Controller {
 			}else{
 				//nao existe a hora na data
 				$testehora = 2;
-				
+				break;
 			}
 		}
 		
@@ -352,9 +352,8 @@ class calendar extends Admin_Controller {
 		if ($this->form_validation->run() == TRUE){
 			if($testehora == 1)
 			{
-				$this->data['message'] = "<p class='alert alert-success'>Horario já existente. </p>";
-				//error.insertAfter('.section_erro');   
-				//$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');	
+				$this->data['message'] = "<p class='alert alert-success'>Tente outro horario,esta já esta marcada </p>";
+     				
 			}else{
 				$agend = R::dispense("agenda");
 					$agend->idpaciente = $idpac;
@@ -410,7 +409,27 @@ class calendar extends Admin_Controller {
 	    }
 		return $options;
 	}
-    
+    public function testehora($hora,$st){
+		$sql = "SELECT *		 
+				FROM agenda
+				where start_date = '$st' ";
+
+		$age = R::getAll($sql); 
+
+		foreach($age as $ag){
+			if($ag['hora'] == $hora){
+				//ja existe a hora na data
+				$testehora = 1;
+				break;
+
+			}else{
+				//nao existe a hora na data
+				$testehora = 2;
+				break;
+			}
+		}
+		return $testehora;
+	}
 	
 /*	public function getstyle(){
 		$sql = "SELECT id,cor,nome FROM cores ";

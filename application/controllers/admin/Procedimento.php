@@ -29,22 +29,14 @@ class procedimento extends Admin_Controller {
 			/* dados  */
 			// pega o id do usuário logado----($user_id)
 			//$user_id = $this->session->user_id;
-			
 		    $this->data['procede'] = R::findAll("procedimento");
-		   
-
-           /* Breadcrumbs */
+		   /* Breadcrumbs */
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
-
 			/* Nome do Botão Criar do INDEX */
 			$this->data['texto_btn_create'] = 'Criar Procedimento';
-
 			/* Data */
 			$this->data['error'] = NULL;
-
 			//$this->data['aparelhos'] = R::findAll('aparelhos');
-
-
 			/* Load Template */
 			$this->template->admin_render($this->anchor . '/index', $this->data);
         }
@@ -64,11 +56,11 @@ class procedimento extends Admin_Controller {
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$procede = R::dispense("procedimento");
-            $procede->idpa = $id;
-			$procede->descricao = $this->input->post('descricao');
-			$procede->titulo = $this->input->post('titulo');
-           
-			R::store($procede);
+				$procede->idpa = $id;
+				$procede->descricao = $this->input->post('descricao');
+				$procede->titulo    = $this->input->post('titulo');
+				$procede->dtcad     = $this->input->post('dtcad');
+           R::store($procede);
 
 			$this->session->set_flashdata('message', "Dados gravados");
             redirect('admin/pacientes', 'refresh');
@@ -101,9 +93,14 @@ class procedimento extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('idpa'),
             );
-
-			
-        }         
+			$this->data['dtcad'] = array(
+                'name'  => 'dtcad',
+                'id'    => 'dtcad',
+                'type'  => 'date',
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('dtcad'),
+            );
+	    }         
         /* Load Template */
         $this->template->admin_render('admin/procedimento/create', $this->data);
     }
@@ -147,8 +144,9 @@ class procedimento extends Admin_Controller {
 		if (isset($_POST) && ! empty($_POST)) {
 			if ($this->form_validation->run()) {
 				$procede->descricao = $this->input->post('descricao');
-								
-				R::store($procede);
+				$procede->titulo    = $this->input->post('titulo');
+				$procede->dtcad     = $this->input->post('dtcad');
+			R::store($procede);
 
 				redirect('admin/pacientes/', 'refresh');
 			}
@@ -187,9 +185,15 @@ class procedimento extends Admin_Controller {
 			'id'    => 'idpa',
 			'type'  => 'int',
 			'class' => 'form-control',
-			'value' => $this->form_validation->set_value('idpa'),
+			'value' => $procede->idpa,
 		);
-        
+        $this->data['dtcad'] = array(
+			'name'  => 'dtcad',
+			'id'    => 'dtcad',
+			'type'  => 'date',
+			'class' => 'form-control',
+			'value' => $procede->dtcad,
+		);
 		
 		/* Load Template */
 		$this->template->admin_render('admin/procedimento/edit', $this->data);

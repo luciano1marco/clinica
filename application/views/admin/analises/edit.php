@@ -25,16 +25,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <?php echo form_hidden($id); ?>
 
                         <?php echo form_fieldset('Dados'); ?>
-                        <div class="form-group">
+                        
+                        <div class="form-group" >
                             <?php echo form_label('Titulo', 'titulo', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
-                            <?php echo form_input($titulo); ?>
+                            <div class="col-md-3">
+                                <?php echo form_input($titulo); ?>
+                            </div>
+                            <?php echo form_label('Data', 'dtcad', array('class' => 'col-sm-1 control-label')); ?>
+                            <div class="col-md-2">
+                                <?php echo form_input($dtcad); ?>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" >
                             <?php echo form_label('Descricao', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
-                            <?php echo form_textarea($descricao); ?>
+                            <div class="col-md-6">
+                                <?php echo form_textarea($descricao); ?>
                             </div>
                         </div>
                        

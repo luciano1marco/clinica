@@ -17,29 +17,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header with-border">
-                        <h4 class="box-title"><?php echo  $texto_create; ?></h>
+                        <h3 class="box-title"><?php echo  $texto_create; ?></h3>
                     </div>
                     <div class="box-body">
                         <?php echo $message; ?>
-
                         <?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form-create_user')); ?>
-                        <?php echo form_hidden($id); ?>
-
-                        <div class="form-group">
+                        
+                        <div class="form-group" >
                             <?php echo form_label('Titulo', 'titulo', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
+                            <div class="col-md-3">
                                 <?php echo form_input($titulo); ?>
                             </div>
+                            <?php echo form_label('Data', 'dtcad', array('class' => 'col-sm-1 control-label')); ?>
+                            <div class="col-md-2">
+                                <?php echo form_input($dtcad); ?>
+                            </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" >
                             <?php echo form_label('Descricao', 'descricao', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <?php echo form_textarea($descricao); ?>
                             </div>
                         </div>
-
+                        
                         <?php echo form_fieldset_close(); ?>
-
+                       
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="btn-group">
@@ -50,11 +52,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     $delete = '<i class="fa fa-trash"></i> <span>Excluir</span>';
                                     $cancel = '<i class="fa fa-times"></i> <span>Cancelar</span>';
                                     ?>
-
                                     <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-primary btn-flat', 'content' => $submit)); ?>
                                     <?php echo form_button(array('type' => 'reset', 'class' => 'btn btn-warning btn-flat', 'content' => $redo)); ?>
                                     <?php echo anchor($anchor1.'/view/'.$idview, $cancel, array('class' => 'btn btn-default btn-flat')); ?>
-
                                 </div>
                             </div>
                         </div>
@@ -77,7 +77,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     } );
 </script>
 <style>
-    .ck-editor__editable_inline {
-        min-height: 400px;
-    }
+.ck-editor__editable_inline {
+    min-height: 400px;
+}
 </style>

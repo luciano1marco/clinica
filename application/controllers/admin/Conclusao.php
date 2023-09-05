@@ -49,26 +49,26 @@ class conclusao extends Admin_Controller {
 			$this->template->admin_render($this->anchor . '/index', $this->data);
         }
     }
-    public function create($id){
+   	public function create($id){
         /* Breadcrumbs */
-		$this->breadcrumbs->unshift(2, "Criar ", 'admin/conclusao/create');
+		$this->breadcrumbs->unshift(2, "Nova Conlcusao", 'admin/conclusao/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Criar';
+		$this->data['texto_create'] = 'Criar Conclusao';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 		$this->data['idview'] = $id;
 		/* Validate form input */
-		$this->form_validation->set_rules('Descricao', 'descricao', 'required');
-        $this->form_validation->set_rules('Titulo', 'titulo', 'required');
+		$this->form_validation->set_rules('descricao', 'descricao', 'required');
+        $this->form_validation->set_rules('titulo', 'titulo', 'required');
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
-			$conc = R::dispense("conclusao");
-			$conc->idpa = $id;
-            $conc->descricao = $this->input->post('descricao');
-            $conc->titulo = $this->input->post('titulo');
-                       
-			R::store($conc);
+			$procede = R::dispense("conclusao");
+				$procede->idpa = $id;
+				$procede->descricao = $this->input->post('descricao');
+				$procede->titulo = $this->input->post('titulo');
+				$procede->dtcad = $this->input->post('dtcad');
+           R::store($procede);
 
 			$this->session->set_flashdata('message', "Dados gravados");
             redirect('admin/pacientes', 'refresh');
@@ -87,7 +87,7 @@ class conclusao extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('descricao'),
             );
-            $this->data['titulo'] = array(
+			$this->data['titulo'] = array(
                 'name'  => 'titulo',
                 'id'    => 'titulo',
                 'type'  => 'text',
@@ -100,6 +100,13 @@ class conclusao extends Admin_Controller {
                 'type'  => 'int',
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('idpa'),
+            );
+			$this->data['dtcad'] = array(
+                'name'  => 'dtcad',
+                'id'    => 'dtcad',
+                'type'  => 'date',
+                'class' => 'form-control',
+                'value' => $this->form_validation->set_value('dtcad'),
             );
 			
         }         
@@ -145,10 +152,11 @@ class conclusao extends Admin_Controller {
 		if (isset($_POST) && ! empty($_POST)) {
 			if ($this->form_validation->run()) {
 				$conc->descricao = $this->input->post('descricao');
-           		
-				R::store($conc);
+				$conc->titulo    = $this->input->post('titulo');
+				$conc->dtcad     = $this->input->post('dtcad');
+			R::store($conc);
 
-				redirect('admin/pacientes/', 'refresh');
+			redirect('admin/pacientes/', 'refresh');
 			}
 		}
 	
@@ -180,7 +188,13 @@ class conclusao extends Admin_Controller {
 			'class' => 'form-control',
 			'value' => $conc->dataconc,
 		);
-		
+		$this->data['dtcad'] = array(
+			'name'  => 'dtcad',
+			'id'    => 'dtcad',
+			'type'  => 'Date',
+			'class' => 'form-control',
+			'value' => $conc->dtcad,
+		);
 		/* Load Template */
 		$this->template->admin_render('admin/conclusao/edit', $this->data);
 	}
