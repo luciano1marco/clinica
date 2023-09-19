@@ -34,6 +34,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<th>Nome</th>
 									<th>Email</th>
 									<th>Telefone</th>
+									<th>Ativo</th>
 									<th>Ação</th>
 								</tr>
 							</thead>
@@ -41,12 +42,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<tbody>
 
 								<?php foreach ($paciente as $pa) : ?>
+								<?php
+									$publicado 	= $pa['ativo'];
+									$pill_success = '<span class="btn-xs btn-success">SIM</span>';
+									$pill_danger = '<span class="btn-xs btn-danger">NÃO</span>';
+	
+									$anchor_enable = anchor($anchor.'/activate/'.$pa['id'], $pill_danger);
+									$anchor_disable = anchor($anchor.'/deactivate/'.$pa['id'], $pill_success);	
+								?>	
+
 									<tr>
 
 										<td><?php echo htmlspecialchars($pa['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
 										<td><?php echo htmlspecialchars($pa['email'], ENT_QUOTES, 'UTF-8'); ?></td>
 										<td><?php echo htmlspecialchars($pa['telefone'], ENT_QUOTES, 'UTF-8'); ?></td>
-										
+										<td><?php echo ($publicado) ? $anchor_disable : $anchor_enable ?></td>
+       	
+
 										<!-- Opções -->
 										<td>
 											<?php echo anchor($anchor . '/edit/' . $pa['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>

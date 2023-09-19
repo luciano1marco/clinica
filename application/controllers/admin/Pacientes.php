@@ -367,6 +367,27 @@ class pacientes extends Admin_Controller {
 
 		}
 
- 	}//fim função view    
+ 	}   
+	 function activate($id) {
+		$id = (int) $id;
 
-}
+		$conc = R::load("pacientes", $id);
+		$conc->ativo = 1;
+		R::store($conc);
+		
+		$this->session->set_flashdata('message', "Paciente ativado");
+		redirect('admin/pacientes', 'refresh');
+	}
+    public function deactivate($id) {
+    
+		$id = (int) $id;
+
+		$conc = R::load("pacientes", $id);
+		$conc->ativo = 0;
+		R::store($conc);
+		
+		$this->session->set_flashdata('message', "Paciente Inativo");
+		redirect('admin/pacientes', 'refresh');    
+
+    } 
+}//fim da class

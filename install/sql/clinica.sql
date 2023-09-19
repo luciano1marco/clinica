@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/09/2023 às 17:37
+-- Tempo de geração: 19/09/2023 às 10:34
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -82,7 +82,12 @@ INSERT INTO `agenda` (`id`, `hora`, `idpaciente`, `color`, `start_date`, `user_i
 (24, 6, 4, '#FFD700', '2023-09-07', 1),
 (25, 4, 4, '#FF8C00', '2023-09-07', 1),
 (26, 5, 4, '#b2371fc4', '2023-09-12', 1),
-(27, 5, 4, '#FF8C00', '2023-09-08', 1);
+(27, 5, 4, '#FF8C00', '2023-09-08', 1),
+(28, 4, 3, '#FFD700', '2023-09-08', 5),
+(29, 12, 3, '#FF0000', '2023-09-08', 5),
+(30, 4, 3, '#008000', '2023-10-10', 5),
+(31, 3, 3, '#de3ddbde', '2023-11-15', 5),
+(32, 6, 3, '#FF0000', '2023-09-14', 1);
 
 -- --------------------------------------------------------
 
@@ -104,7 +109,8 @@ CREATE TABLE `analises` (
 --
 
 INSERT INTO `analises` (`id`, `titulo`, `descricao`, `danalise`, `idpa`, `dtcad`) VALUES
-(4, 'primeira analise', '<p>teste de inclusao de analise&nbsp;</p><p>e tambem do edit</p>', '2023-09-05', 2, '2023-08-02');
+(4, 'primeira analise', '<p>teste de inclusao de analise&nbsp;</p><p>e tambem do edit</p>', '2023-09-05', 2, '2023-08-02'),
+(5, 'anal 1', '<p>teste de analise 1</p>', '2023-09-08', 3, '2023-09-08');
 
 -- --------------------------------------------------------
 
@@ -126,7 +132,9 @@ CREATE TABLE `conclusao` (
 --
 
 INSERT INTO `conclusao` (`id`, `titulo`, `descricao`, `dataconc`, `idpa`, `dtcad`) VALUES
-(2, 'Teste de conclusao', '<p>finalizando os atendimentos do paciebnte</p>', '2023-09-05', 2, '2023-07-11');
+(2, 'Teste de conclusao', '<p>finalizando os atendimentos do paciebnte</p>', '2023-09-05', 2, '2023-07-11'),
+(3, 'previa', '<p>teste1</p>', '2023-09-08', 3, '2023-09-08'),
+(4, 'finalizando', '<p>teste de conclusao de finalizacao</p>', '2023-09-19', 3, '2023-09-20');
 
 -- --------------------------------------------------------
 
@@ -148,7 +156,6 @@ CREATE TABLE `descatende` (
 --
 
 INSERT INTO `descatende` (`id`, `titulo`, `descricao`, `datadesc`, `idpa`, `dtcad`) VALUES
-(2, 'Sobre', '<p><strong>Trabalha:&nbsp;</strong></p><ol><li>informatica</li><li>funcionario publico</li></ol><p><strong>Pessoal:&nbsp;</strong></p><ol><li>tem tres filhas</li><li>casado</li></ol><p>&nbsp;</p><p>&nbsp;</p>', '2023-08-30', 1, ''),
 (4, 'Teste de Descricao', '<h3>Isto é um teste de inclusao de descricao do paciente:</h3><h4>&nbsp; &nbsp; &nbsp;<strong> Lista:</strong></h4><ol><li>teste 1</li><li>teste 2</li><li>teste3</li><li>outros</li></ol>', '2023-08-31', 3, ''),
 (5, 'Teste de Descricao', '<p>uma breve fala sobre o paciente</p>', '2023-09-05', 2, '2023-09-05');
 
@@ -262,7 +269,8 @@ CREATE TABLE `menusection` (
 --
 
 INSERT INTO `menusection` (`id`, `descricao`, `publicado`) VALUES
-(2, 'Clinica', 1);
+(2, 'Clinica', 1),
+(4, 'Laudos', 1);
 
 -- --------------------------------------------------------
 
@@ -278,17 +286,18 @@ CREATE TABLE `pacientes` (
   `endereco` varchar(191) DEFAULT NULL,
   `cpf` varchar(191) DEFAULT NULL,
   `id_psico` int(191) DEFAULT NULL,
-  `dtcad` varchar(50) NOT NULL
+  `dtcad` varchar(50) NOT NULL,
+  `ativo` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `pacientes`
 --
 
-INSERT INTO `pacientes` (`id`, `nome`, `email`, `telefone`, `endereco`, `cpf`, `id_psico`, `dtcad`) VALUES
-(2, 'teste da silva', 'teste@teste.com', '53-98765432', 'Rua Gramado, 2259', '03317397047', 1, '2023-07-03'),
-(3, 'Luciano Correa Marco', 'luciano1marco@gmail.com', '53984321028', 'Rua Gramado, 2259', '62526936004', 5, ''),
-(4, 'fulano de tal', 'fulano@gmail.com', '32323232', 'lkdlskdlskdlskl', '1234556789', 1, '2023-08-30');
+INSERT INTO `pacientes` (`id`, `nome`, `email`, `telefone`, `endereco`, `cpf`, `id_psico`, `dtcad`, `ativo`) VALUES
+(2, 'teste da silva', 'teste@teste.com', '53-98765432', 'Rua Gramado, 2259', '03317397047', 1, '2023-07-03', 1),
+(3, 'Luciano Correa Marco', 'luciano1marco@gmail.com', '53984321028', 'Rua Gramado, 2259', '62526936004', 5, '2023-09-08', 1),
+(4, 'fulano de tal', 'fulano@gmail.com', '32323232', 'lkdlskdlskdlskl', '1234556789', 1, '2023-08-30', 1);
 
 -- --------------------------------------------------------
 
@@ -310,10 +319,11 @@ CREATE TABLE `procedimento` (
 --
 
 INSERT INTO `procedimento` (`id`, `titulo`, `descricao`, `dataproc`, `idpa`, `dtcad`) VALUES
-(5, 'teste', '<p>erggwervfwerfrewgvrewvwrevrwtgregwerf</p>', '2023-08-30', 1, ''),
 (6, 'teste', '<p>aqui voce escreve o que quiser</p>', '2023-09-05', 2, '2023-08-08'),
 (7, 'teste 1', '<p>aqui a continuacao do que quiser.</p><h4><strong>adicionado no editar para teste</strong>:</h4><ol><li>teste1</li><li>teste2</li></ol>', '2023-09-05', 2, '2023-08-15'),
-(8, 'teste do teste', '<p>werewrwqr werewwerrwer &nbsp;ew ewr ew r er &nbsp; ew re wer ew&nbsp;</p>', '2023-09-05', 2, '2023-07-10');
+(8, 'teste do teste', '<p>werewrwqr werewwerrwer &nbsp;ew ewr ew r er &nbsp; ew re wer ew&nbsp;</p>', '2023-09-05', 2, '2023-07-10'),
+(9, 'proc 1', '<p>teste de procedimento</p>', '2023-09-08', 3, '2023-09-08'),
+(10, 'proc 2', '<p>teste 2 de procedimento:</p><ol><li>texto1</li><li>texto2</li><li>texto3</li></ol><p>&nbsp;</p><h4><strong>texto em negrito</strong></h4><p>&nbsp;</p><p>&nbsp;</p>', '2023-09-08', 3, '2023-09-09');
 
 -- --------------------------------------------------------
 
@@ -397,8 +407,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `admin`, `senha`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1693912306, 1, 'Admin', 'istrator', 'ADMIN', '0', 1, NULL),
-(5, '::1', 'simone loretto', '$2y$08$aOhAranh4ixGtAD52mmR9eidIyo5X1SJT/VyIjxLESlglno2eKTpi', NULL, 'siloretto@hotmail.com', NULL, NULL, NULL, NULL, 1612455440, 1693486899, 1, 'Simone', 'Loretto', 'clinica', '92000-6066', 0, NULL);
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1695120742, 1, 'Admin', 'istrator', 'ADMIN', '0', 1, NULL),
+(5, '::1', 'simone loretto', '$2y$08$uXlTRH58Wr0Rd235sUIKD.Y7YM3/euQ5QNcmVirdTXsDJFY2t8UNu', NULL, 'siloretto@hotmail.com', NULL, NULL, NULL, NULL, 1612455440, 1694174246, 1, 'Simone', 'Loretto', 'clinica', '92000-6066', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -418,7 +428,7 @@ CREATE TABLE `users_groups` (
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
-(28, 5, 3);
+(30, 5, 3);
 
 --
 -- Índices para tabelas despejadas
@@ -538,19 +548,19 @@ ALTER TABLE `admin_preferences`
 -- AUTO_INCREMENT de tabela `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de tabela `analises`
 --
 ALTER TABLE `analises`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `conclusao`
 --
 ALTER TABLE `conclusao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `descatende`
@@ -568,7 +578,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT de tabela `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `menugroups`
@@ -586,7 +596,7 @@ ALTER TABLE `menuitens`
 -- AUTO_INCREMENT de tabela `menusection`
 --
 ALTER TABLE `menusection`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `pacientes`
@@ -598,7 +608,7 @@ ALTER TABLE `pacientes`
 -- AUTO_INCREMENT de tabela `procedimento`
 --
 ALTER TABLE `procedimento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `public_preferences`
@@ -622,7 +632,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de tabela `users_groups`
 --
 ALTER TABLE `users_groups`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Restrições para tabelas despejadas

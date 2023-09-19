@@ -70,6 +70,7 @@ class Relatorios extends Admin_Controller {
                     inner join users as u
                     on  u.id =ag.user_id 
                     
+                    where p.ativo = 1
                     GROUP BY MONTH(start_date);
             "; 
         }else{
@@ -86,7 +87,7 @@ class Relatorios extends Admin_Controller {
                     inner join users as u
                     on  u.id =ag.user_id 
                     
-                    where ag.user_id = ".$user_id." 
+                    where ag.user_id = '.$user_id.' and p.ativo = 1
 
                     GROUP BY MONTH(start_date);
             "; 
@@ -110,7 +111,7 @@ class Relatorios extends Admin_Controller {
                     INNER JOIN pacientes as p
                     ON ag.idpaciente = p.id  
                     inner join users as u
-                    on  u.id =ag.user_id 
+                    on  u.id =ag.user_id and ativo = 1
                     GROUP BY nome;
                 "; 
         }else{
@@ -123,7 +124,7 @@ class Relatorios extends Admin_Controller {
                     ON ag.idpaciente = p.id  
                     inner join users as u
                     on  u.id =ag.user_id 
-                    where ag.user_id = ".$user_id." 
+                    where ag.user_id = ".$user_id." and ativo = 1
                     GROUP BY nome;
             "; 
         }

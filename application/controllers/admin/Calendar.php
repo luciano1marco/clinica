@@ -224,7 +224,7 @@ class calendar extends Admin_Controller {
 		$user_id = $this->session->user_id;
 
 		if ($user_id == 1){
-			$sql = "SELECT id,nome,id_psico FROM pacientes";
+			$sql = "SELECT id,nome,id_psico FROM pacientes where ativo = 1";
 		}else{
 			$sql = "SELECT id,nome,id_psico FROM pacientes where id_psico = ".$user_id;
 		}
