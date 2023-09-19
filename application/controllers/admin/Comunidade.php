@@ -20,7 +20,6 @@ class comunidade extends Admin_Controller {
         /* Breadcrumbs :: Common */
        // $this->breadcrumbs->unshift(1, 'apoiador', 'admin/apoiador');
     }
-
 	public function index()	{  
         if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
         {
@@ -34,7 +33,7 @@ class comunidade extends Admin_Controller {
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 			/* Nome do Botão Criar do INDEX */
-			$this->data['texto_btn_create'] = 'Criar Comunidade';
+			$this->data['texto_btn_create'] = 'Adicionar Comunidade';
 
 			/* Data */
 			$this->data['error'] = NULL;
@@ -44,4 +43,4 @@ class comunidade extends Admin_Controller {
 			$this->template->admin_render($this->anchor . '/index', $this->data);
         }
     }
-}
+}//fim da calss

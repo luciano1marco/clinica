@@ -15,7 +15,6 @@ class Panel extends Public_Controller {
 
         $this->form_validation->set_error_delimiters('<div class="form_val_error">', '</div>'); 
     }
-           
     public function index() {
         $this->cfg = configuracao();
         $php = configuracao_PHP();
@@ -418,7 +417,7 @@ class Panel extends Public_Controller {
             'id'    => 'rua_trabalho',
             'type'  => 'text',
             'class' => 'form-control rua_trabalho',            
-            'value' => !empty($this->form_validation->set_value('rua_trabalho')) ? $this->form_validation->set_value('rua_trabalho') : isset($_POST['rua_trabalho']) ? $_POST['rua_trabalho'] : null,            
+            'value' => !empty($this->form_validation->set_value('rua_trabalho')) ? $this->form_validation->set_value('rua_trabalho') : isset($_POST['rua_trabalho']) ,            
         );
 
         $this->data['cidade_trabalho'] = array(
@@ -426,7 +425,7 @@ class Panel extends Public_Controller {
             'id'    => 'cidade_trabalho',
             'type'  => 'text',
             'class' => 'form-control cidade_trabalho',
-            'value' => !empty($this->form_validation->set_value('cidade_trabalho')) ? $this->form_validation->set_value('cidade_trabalho') : isset($_POST['cidade_trabalho']) ? $_POST['cidade_trabalho'] : null,            
+            'value' => !empty($this->form_validation->set_value('cidade_trabalho')) ? $this->form_validation->set_value('cidade_trabalho') : isset($_POST['cidade_trabalho']) ,            
         );
 
         $this->data['bairro_trabalho'] = array(
@@ -434,7 +433,7 @@ class Panel extends Public_Controller {
             'id'    => 'bairro_trabalho',
             'type'  => 'text',
             'class' => 'form-control bairro_trabalho',
-            'value' => !empty($this->form_validation->set_value('bairro_trabalho')) ? $this->form_validation->set_value('bairro_trabalho') : isset($_POST['bairro_trabalho']) ? $_POST['bairro_trabalho'] : null,            
+            'value' => !empty($this->form_validation->set_value('bairro_trabalho')) ? $this->form_validation->set_value('bairro_trabalho') : isset($_POST['bairro_trabalho']) ,            
         );
 
         $this->data['cep_trabalho'] = array(
@@ -442,7 +441,7 @@ class Panel extends Public_Controller {
             'id'    => 'cep_trabalho',
             'type'  => 'text',
             'class' => 'form-control cep_trabalho',
-            'value' => !empty($this->form_validation->set_value('cep_trabalho')) ? $this->form_validation->set_value('cep_trabalho') : isset($_POST['cep_trabalho']) ? $_POST['cep_trabalho'] : null,            
+            'value' => !empty($this->form_validation->set_value('cep_trabalho')) ? $this->form_validation->set_value('cep_trabalho') : isset($_POST['cep_trabalho']),            
         );
 
         $this->data['estado_trabalho'] = array(
@@ -450,7 +449,7 @@ class Panel extends Public_Controller {
             'id'    			=> 'estado_trabalho',
             'options'  			=> 'null',
             'class' 			=> 'form-control select2 estado_trabalho',
-            'value' 			=> !empty($this->form_validation->set_value('estado_trabalho')) ? $this->form_validation->set_value('estado_trabalho') : isset($_POST['estado_trabalho']) ? $_POST['estado_trabalho'] : null,            
+            'value' 			=> !empty($this->form_validation->set_value('estado_trabalho')) ? $this->form_validation->set_value('estado_trabalho') : isset($_POST['estado_trabalho']) ,            
             'data-live-search' 	=> TRUE,						
             'title' 			=> 'Escolha um Estado',
             'options'			=> $this->getEstados(),
@@ -462,7 +461,7 @@ class Panel extends Public_Controller {
             'id'    => 'escolafilho',
             'type'  => 'text',
             'class' => 'form-control escolafilho',
-            'value' => !empty($this->form_validation->set_value('escolafilho')) ? $this->form_validation->set_value('escolafilho') : isset($_POST['escolafilho']) ? $_POST['escolafilho'] : null,
+            'value' => !empty($this->form_validation->set_value('escolafilho')) ? $this->form_validation->set_value('escolafilho') : isset($_POST['escolafilho']) ,
         );
 
         $this->data['escolavcestuda'] = array(
@@ -470,7 +469,7 @@ class Panel extends Public_Controller {
             'id'    => 'escolavcestuda',
             'type'  => 'text',
             'class' => 'form-control escolavcestuda',         
-            'value' => !empty($this->form_validation->set_value('escolavcestuda')) ? $this->form_validation->set_value('escolavcestuda') : isset($_POST['escolavcestuda']) ? $_POST['escolavcestuda'] : null,       
+            'value' => !empty($this->form_validation->set_value('escolavcestuda')) ? $this->form_validation->set_value('escolavcestuda') : isset($_POST['escolavcestuda']) ,       
         );
 
         $this->data['linhaonibusfilho'] = array(
@@ -478,7 +477,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibusfilho',
             'type'  => 'text',
             'class' => 'form-control linhaonibusfilho',            
-            'value' => !empty($this->form_validation->set_value('linhaonibusfilho')) ? $this->form_validation->set_value('linhaonibusfilho') : isset($_POST['linhaonibusfilho']) ? $_POST['linhaonibusfilho'] : null,
+            'value' => !empty($this->form_validation->set_value('linhaonibusfilho')) ? $this->form_validation->set_value('linhaonibusfilho') : isset($_POST['linhaonibusfilho']) ,
         );
 
         $this->data['linhaonibus1filho'] = array(
@@ -486,7 +485,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibus1filho',
             'type'  => 'text',
             'class' => 'form-control linhaonibus1filho',            
-            'value' => !empty($this->form_validation->set_value('linhaonibus1filho')) ? $this->form_validation->set_value('linhaonibus1filho') : isset($_POST['linhaonibus1filho']) ? $_POST['linhaonibus1filho'] : null,
+            'value' => !empty($this->form_validation->set_value('linhaonibus1filho')) ? $this->form_validation->set_value('linhaonibus1filho') : isset($_POST['linhaonibus1filho']) ,
         );
 
         $this->data['linhaonibus2filho'] = array(
@@ -494,7 +493,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibus2filho',
             'type'  => 'text',
             'class' => 'form-control linhaonibus2filho',
-            'value' => !empty($this->form_validation->set_value('linhaonibus2filho')) ? $this->form_validation->set_value('linhaonibus2filho') : isset($_POST['linhaonibus2filho']) ? $_POST['linhaonibus2filho'] : null,        
+            'value' => !empty($this->form_validation->set_value('linhaonibus2filho')) ? $this->form_validation->set_value('linhaonibus2filho') : isset($_POST['linhaonibus2filho']) ,        
         );
 
         $this->data['trocalinhaonibusfilho'] = array(
@@ -502,7 +501,7 @@ class Panel extends Public_Controller {
             'id'    => 'trocalinhaonibusfilho',
             'type'  => 'text',
             'class' => 'form-control trocalinhaonibusfilho',           
-            'value' => !empty($this->form_validation->set_value('trocalinhaonibusfilho')) ? $this->form_validation->set_value('trocalinhaonibusfilho') : isset($_POST['trocalinhaonibusfilho']) ? $_POST['trocalinhaonibusfilho'] : null,        
+            'value' => !empty($this->form_validation->set_value('trocalinhaonibusfilho')) ? $this->form_validation->set_value('trocalinhaonibusfilho') : isset($_POST['trocalinhaonibusfilho']) ,        
         );
 
         $this->data['apptranspfilho'] = array(
@@ -510,7 +509,7 @@ class Panel extends Public_Controller {
             'id'    => 'apptranspfilho',
             'type'  => 'text',
             'class' => 'form-control apptranspfilho',            
-            'value' => !empty($this->form_validation->set_value('apptranspfilho')) ? $this->form_validation->set_value('apptranspfilho') : isset($_POST['apptranspfilho']) ? $_POST['apptranspfilho'] : null,                
+            'value' => !empty($this->form_validation->set_value('apptranspfilho')) ? $this->form_validation->set_value('apptranspfilho') : isset($_POST['apptranspfilho']) ,                
         );
 
         $this->data['outrotranspfilho'] = array(
@@ -518,7 +517,7 @@ class Panel extends Public_Controller {
             'id'    => 'outrotranspfilho',
             'type'  => 'text',
             'class' => 'form-control outrotranspfilho',           
-            'value' => !empty($this->form_validation->set_value('outrotranspfilho')) ? $this->form_validation->set_value('outrotranspfilho') : isset($_POST['outrotranspfilho']) ? $_POST['outrotranspfilho'] : null,                     
+            'value' => !empty($this->form_validation->set_value('outrotranspfilho')) ? $this->form_validation->set_value('outrotranspfilho') : isset($_POST['outrotranspfilho']) ,                     
         );
 
         $this->data['linhaonibustrabalho'] = array(
@@ -526,7 +525,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibustrabalho',
             'type'  => 'text',
             'class' => 'form-control linhaonibustrabalho',            
-            'value' => !empty($this->form_validation->set_value('linhaonibustrabalho')) ? $this->form_validation->set_value('linhaonibustrabalho') : isset($_POST['linhaonibustrabalho']) ? $_POST['linhaonibustrabalho'] : null,
+            'value' => !empty($this->form_validation->set_value('linhaonibustrabalho')) ? $this->form_validation->set_value('linhaonibustrabalho') : isset($_POST['linhaonibustrabalho']) ,
         );
 
         $this->data['linhaonibus1trabalho'] = array(
@@ -534,7 +533,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibus1trabalho',
             'type'  => 'text',
             'class' => 'form-control linhaonibus1trabalho',            
-            'value' => !empty($this->form_validation->set_value('linhaonibus1trabalho')) ? $this->form_validation->set_value('linhaonibus1trabalho') : isset($_POST['linhaonibus1trabalho']) ? $_POST['linhaonibus1trabalho'] : null,
+            'value' => !empty($this->form_validation->set_value('linhaonibus1trabalho')) ? $this->form_validation->set_value('linhaonibus1trabalho') : isset($_POST['linhaonibus1trabalho']) ,
         );
 
         $this->data['linhaonibus2trabalho'] = array(
@@ -542,7 +541,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibus2trabalho',
             'type'  => 'text',
             'class' => 'form-control linhaonibus2trabalho',
-            'value' => !empty($this->form_validation->set_value('linhaonibus2trabalho')) ? $this->form_validation->set_value('linhaonibus2trabalho') : isset($_POST['linhaonibus2trabalho']) ? $_POST['linhaonibus2trabalho'] : null,        
+            'value' => !empty($this->form_validation->set_value('linhaonibus2trabalho')) ? $this->form_validation->set_value('linhaonibus2trabalho') : isset($_POST['linhaonibus2trabalho']) ,        
         );
 
         $this->data['trocalinhaonibustrabalho'] = array(
@@ -550,7 +549,7 @@ class Panel extends Public_Controller {
             'id'    => 'trocalinhaonibustrabalho',
             'type'  => 'text',
             'class' => 'form-control trocalinhaonibustrabalho',           
-            'value' => !empty($this->form_validation->set_value('trocalinhaonibustrabalho')) ? $this->form_validation->set_value('trocalinhaonibustrabalho') : isset($_POST['trocalinhaonibustrabalho']) ? $_POST['trocalinhaonibustrabalho'] : null,        
+            'value' => !empty($this->form_validation->set_value('trocalinhaonibustrabalho')) ? $this->form_validation->set_value('trocalinhaonibustrabalho') : isset($_POST['trocalinhaonibustrabalho']) ,        
         );
 
         $this->data['apptransptrabalho'] = array(
@@ -558,7 +557,7 @@ class Panel extends Public_Controller {
             'id'    => 'apptransptrabalho',
             'type'  => 'text',
             'class' => 'form-control apptransptrabalho',            
-            'value' => !empty($this->form_validation->set_value('apptransptrabalho')) ? $this->form_validation->set_value('apptransptrabalho') : isset($_POST['apptransptrabalho']) ? $_POST['apptransptrabalho'] : null,                
+            'value' => !empty($this->form_validation->set_value('apptransptrabalho')) ? $this->form_validation->set_value('apptransptrabalho') : isset($_POST['apptransptrabalho']),                
         );
 
         $this->data['outrotransptrabalho'] = array(
@@ -566,7 +565,7 @@ class Panel extends Public_Controller {
             'id'    => 'outrotransptrabalho',
             'type'  => 'text',
             'class' => 'form-control outrotransptrabalho',           
-            'value' => !empty($this->form_validation->set_value('outrotransptrabalho')) ? $this->form_validation->set_value('outrotransptrabalho') : isset($_POST['outrotransptrabalho']) ? $_POST['outrotransptrabalho'] : null,                     
+            'value' => !empty($this->form_validation->set_value('outrotransptrabalho')) ? $this->form_validation->set_value('outrotransptrabalho') : isset($_POST['outrotransptrabalho']) ,                     
         );
 
         $this->data['linhaonibusaula'] = array(
@@ -574,7 +573,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibusaula',
             'type'  => 'text',
             'class' => 'form-control linhaonibusaula',            
-            'value' => !empty($this->form_validation->set_value('linhaonibusaula')) ? $this->form_validation->set_value('linhaonibusaula') : isset($_POST['linhaonibusaula']) ? $_POST['linhaonibusaula'] : null,
+            'value' => !empty($this->form_validation->set_value('linhaonibusaula')) ? $this->form_validation->set_value('linhaonibusaula') : isset($_POST['linhaonibusaula']) ,
         );
 
         $this->data['linhaonibus1aula'] = array(
@@ -582,7 +581,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibus1aula',
             'type'  => 'text',
             'class' => 'form-control linhaonibus1aula',            
-            'value' => !empty($this->form_validation->set_value('linhaonibus1aula')) ? $this->form_validation->set_value('linhaonibus1aula') : isset($_POST['linhaonibus1aula']) ? $_POST['linhaonibus1aula'] : null,
+            'value' => !empty($this->form_validation->set_value('linhaonibus1aula')) ? $this->form_validation->set_value('linhaonibus1aula') : isset($_POST['linhaonibus1aula']) ,
         );
 
         $this->data['linhaonibus2aula'] = array(
@@ -590,7 +589,7 @@ class Panel extends Public_Controller {
             'id'    => 'linhaonibus2aula',
             'type'  => 'text',
             'class' => 'form-control linhaonibus2aula',
-            'value' => !empty($this->form_validation->set_value('linhaonibus2aula')) ? $this->form_validation->set_value('linhaonibus2aula') : isset($_POST['linhaonibus2aula']) ? $_POST['linhaonibus2aula'] : null,        
+            'value' => !empty($this->form_validation->set_value('linhaonibus2aula')) ? $this->form_validation->set_value('linhaonibus2aula') : isset($_POST['linhaonibus2aula']) ,        
         );
 
         $this->data['trocalinhaonibusaula'] = array(
@@ -598,7 +597,7 @@ class Panel extends Public_Controller {
             'id'    => 'trocalinhaonibusaula',
             'type'  => 'text',
             'class' => 'form-control trocalinhaonibusaula',           
-            'value' => !empty($this->form_validation->set_value('trocalinhaonibusaula')) ? $this->form_validation->set_value('trocalinhaonibusaula') : isset($_POST['trocalinhaonibusaula']) ? $_POST['trocalinhaonibusaula'] : null,        
+            'value' => !empty($this->form_validation->set_value('trocalinhaonibusaula')) ? $this->form_validation->set_value('trocalinhaonibusaula') : isset($_POST['trocalinhaonibusaula']) ,        
         );
 
         $this->data['apptranspaula'] = array(
@@ -606,7 +605,7 @@ class Panel extends Public_Controller {
             'id'    => 'apptranspaula',
             'type'  => 'text',
             'class' => 'form-control apptranspaula',            
-            'value' => !empty($this->form_validation->set_value('apptranspaula')) ? $this->form_validation->set_value('apptranspaula') : isset($_POST['apptranspaula']) ? $_POST['apptranspaula'] : null,                
+            'value' => !empty($this->form_validation->set_value('apptranspaula')) ? $this->form_validation->set_value('apptranspaula') : isset($_POST['apptranspaula']) ,                
         );
 
         $this->data['outrotranspaula'] = array(
@@ -614,7 +613,7 @@ class Panel extends Public_Controller {
             'id'    => 'outrotranspaula',
             'type'  => 'text',
             'class' => 'form-control outrotranspaula',           
-            'value' => !empty($this->form_validation->set_value('outrotranspaula')) ? $this->form_validation->set_value('outrotranspaula') : isset($_POST['outrotranspaula']) ? $_POST['outrotranspaula'] : null,                     
+            'value' => !empty($this->form_validation->set_value('outrotranspaula')) ? $this->form_validation->set_value('outrotranspaula') : isset($_POST['outrotranspaula']) ,                     
         );
 
         $this->data['horainiciotrabalho'] = array(
@@ -622,7 +621,7 @@ class Panel extends Public_Controller {
             'id'    => 'horainiciotrabalho',
             'type'  => 'text',
             'class' => 'form-control horainiciotrabalho',            
-            'value' => !empty($this->form_validation->set_value('horainiciotrabalho')) ? $this->form_validation->set_value('horainiciotrabalho') : isset($_POST['horainiciotrabalho']) ? $_POST['horainiciotrabalho'] : null,
+            'value' => !empty($this->form_validation->set_value('horainiciotrabalho')) ? $this->form_validation->set_value('horainiciotrabalho') : isset($_POST['horainiciotrabalho']) ,
         );
 
         $this->data['horaterminotrabalho'] = array(
@@ -630,7 +629,7 @@ class Panel extends Public_Controller {
             'id'    => 'horaterminotrabalho',
             'type'  => 'text',
             'class' => 'form-control horaterminotrabalho',            
-            'value' => !empty($this->form_validation->set_value('horaterminotrabalho')) ? $this->form_validation->set_value('horaterminotrabalho') : isset($_POST['horaterminotrabalho']) ? $_POST['horaterminotrabalho'] : null,
+            'value' => !empty($this->form_validation->set_value('horaterminotrabalho')) ? $this->form_validation->set_value('horaterminotrabalho') : isset($_POST['horaterminotrabalho']) ,
         );
 
         $this->data['horainicioaula'] = array(
@@ -638,7 +637,7 @@ class Panel extends Public_Controller {
             'id'    => 'horainicioaula',
             'type'  => 'text',
             'class' => 'form-control horainicioaula',            
-            'value' => !empty($this->form_validation->set_value('horainicioaula')) ? $this->form_validation->set_value('horainicioaula') : isset($_POST['horainicioaula']) ? $_POST['horainicioaula'] : null,
+            'value' => !empty($this->form_validation->set_value('horainicioaula')) ? $this->form_validation->set_value('horainicioaula') : isset($_POST['horainicioaula']) ,
             
         );
 
@@ -647,7 +646,7 @@ class Panel extends Public_Controller {
             'id'    => 'horaterminoaula',
             'type'  => 'text',
             'class' => 'form-control horaterminoaula',
-            'value' => !empty($this->form_validation->set_value('horaterminoaula')) ? $this->form_validation->set_value('horaterminoaula') : isset($_POST['horaterminoaula']) ? $_POST['horaterminoaula'] : null,
+            'value' => !empty($this->form_validation->set_value('horaterminoaula')) ? $this->form_validation->set_value('horaterminoaula') : isset($_POST['horaterminoaula']) ,
         );
 
         // Caso sistema funcione apenas logado, descomentar a linha abaixo e importar o helper URL no construtor
@@ -662,7 +661,6 @@ class Panel extends Public_Controller {
         $this->load->view('public/panel', $this->data);
         }//FIM ELSE
     }   
-    
     public function rules_portador_deficiencia($field_value){        
         if(empty($field_value) && !isset($_POST['deficiente'])){
             $this->form_validation->set_rules('deficiente', 'Possui Deficiências()', 'required');        
@@ -679,7 +677,6 @@ class Panel extends Public_Controller {
             }      
         }
     }
-    
     public function rules_filho_estudante($field_value){        
         if(empty($field_value) && !isset($_POST['temfilhoestudante'])){
             $this->form_validation->set_rules('temfilhoestudante', 'Tem filho(s) Estudante(s)', 'required');        
@@ -704,7 +701,6 @@ class Panel extends Public_Controller {
             }            
         }              
     }
-
     public function rules_trabalhador($field_value){        
         if(empty($field_value) && !isset($_POST['vctrabalha'])){
             $this->form_validation->set_rules('vctrabalha', 'Você Trabalha', 'required');        
@@ -725,7 +721,6 @@ class Panel extends Public_Controller {
             }
         }               
     }
-
     public function rules_estudante($field_value){        
         if(empty($field_value) && !isset($_POST['vcestuda'])){
             $this->form_validation->set_rules('vcestuda', 'Você Estuda', 'required');        
@@ -750,8 +745,6 @@ class Panel extends Public_Controller {
             }
         }               
     }
-
-          
     private function getFaixaEtaria(){
         $ret = array(
             array('id' => '06 a 15 anos', 'nome' => '06 a 15 anos'),
@@ -762,7 +755,6 @@ class Panel extends Public_Controller {
 
         return $ret;
     }
-
     private function getSimNao(){
         $ret = array(
             array('id' => '1', 'nome' => 'SIM'),
@@ -771,7 +763,6 @@ class Panel extends Public_Controller {
 
         return $ret;
     }
-
     private function getSexo(){
         $ret = array(
             array('id' => 'M', 'nome' => 'Masculino'),
@@ -780,7 +771,6 @@ class Panel extends Public_Controller {
 
         return $ret;
     }
-
     private function getGenero(){
         $ret = array(
             array('id' => 'C', 'nome' => 'Cisgênero'),
@@ -789,7 +779,6 @@ class Panel extends Public_Controller {
 
         return $ret;
     }
-
     private function getDeficiencia(){
         $ret = array(
             array('id' => 'auditiva'    , 'nome' => 'Deficiência auditiva'),
@@ -803,7 +792,6 @@ class Panel extends Public_Controller {
 
         return $ret;
     }
-
     private function getFaixaRenda(){
         $ret = array(
             array('id' => '1SM'         , 'nome' => 'Até 1 Salário Mínimo'),
@@ -817,7 +805,6 @@ class Panel extends Public_Controller {
 
         return $ret;
     }
-
     private function getFilhos(){
         for( $i = 1 ; $i <= 10; $i++){
             $array = array('id' => $i, 'nome' => $i);
@@ -828,7 +815,6 @@ class Panel extends Public_Controller {
     
         return $ret;
     }
-
     private function getTransportes(){
         $ret = array(
             array('id' => 'pedestre'        , 'nome' => 'Somente a pé'),
@@ -847,7 +833,6 @@ class Panel extends Public_Controller {
 
         return $ret;       
     }
-
     private function getLocalBicicleta(){
         $ret = array(
             array('id' => 'arvore'          , 'nome' => 'Presa a uma árvore'),
@@ -858,7 +843,6 @@ class Panel extends Public_Controller {
         
         return $ret;              
     }
-
     private function getTempoDeslocamento(){
         $ret = array(
             array('id' => '10min'        , 'nome' => 'Até 10min'),
@@ -870,7 +854,6 @@ class Panel extends Public_Controller {
         return $ret;  
 
     }
-
     private function getTempoDeslocamentolongo(){
         $ret = array(
             array('id' => 'Menos15min'   , 'nome' => 'Menos de 15min'),
@@ -885,7 +868,6 @@ class Panel extends Public_Controller {
         return $ret;  
 
     }
-
     private function getLocalCarro(){
         $ret = array(
             array('id' => 'viapublica'             , 'nome' => 'Em vaga na via pública'),
@@ -900,7 +882,6 @@ class Panel extends Public_Controller {
         
         return $ret;              
     }
-
     private function getOcupacao(){
         $ret = array(
             array('id' => 'assalariado_com_carteira'          , 'nome' => 'Assalariado com carteira'),
@@ -916,7 +897,6 @@ class Panel extends Public_Controller {
         return $ret;           
 
     }
-
     private function getSaidaTrabalho(){
         $ret = array(
             array('id' => 'residencia'          , 'nome' => 'Residência'),
@@ -930,7 +910,6 @@ class Panel extends Public_Controller {
         return $ret;           
 
     }
-
     private function getLocalEnsino(){
         $ret = array(
             array('id' => 'escola'      , 'nome' => 'Escola'),
@@ -939,7 +918,6 @@ class Panel extends Public_Controller {
 
         return $ret;
     }
-
     private function getNivelEnsino(){
         $ret = array(
             array('id' => 'fundamental'             , 'nome' => 'Ensino Fundamental'),
@@ -956,7 +934,6 @@ class Panel extends Public_Controller {
         return $ret;           
 
     }
-
     private function getEstados() {		
         $estados = R::findAll("estado");
     
@@ -968,4 +945,4 @@ class Panel extends Public_Controller {
         
         return $ret;
     }
-}
+}//fim da class

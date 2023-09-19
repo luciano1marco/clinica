@@ -51,7 +51,7 @@ class pacientes extends Admin_Controller {
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 			/* Nome do Botão Criar do INDEX */
-			$this->data['texto_btn_create'] = 'Criar Paciente';
+			$this->data['texto_btn_create'] = 'Adicionar Paciente';
 
 			/* Data */
 			$this->data['error'] = NULL;
@@ -69,7 +69,7 @@ class pacientes extends Admin_Controller {
         /* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Novo Paciente", 'admin/pacientes/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Criar Paciente';
+		$this->data['texto_create'] = 'Adiconar Paciente';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 
@@ -78,12 +78,18 @@ class pacientes extends Admin_Controller {
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
+			//pegar data atual se data vazia
+			$dt = $this->input->post('dtcad');
+			if($dt == ''){
+				$dt = date('Y/m/d');
+			} 
+			
 			$paciente = R::dispense("pacientes");
 				$paciente->nome     = $this->input->post('nome');
 				$paciente->email    = $this->input->post('email');
 				$paciente->telefone = $this->input->post('telefone');
 				$paciente->endereco = $this->input->post('endereco');
-				$paciente->dtcad    = $this->input->post('dtcad');
+				$paciente->dtcad    = $dt;
 				$paciente->cpf      = $this->input->post('cpf');
 				$paciente->id_psico = $user_id;
             R::store($paciente);

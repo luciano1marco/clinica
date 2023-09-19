@@ -37,7 +37,7 @@ class descatende extends Admin_Controller {
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 			/* Nome do Botão Criar do INDEX */
-			$this->data['texto_btn_create'] = 'Criar';
+			$this->data['texto_btn_create'] = 'Adicionar';
 
 			/* Data */
 			$this->data['error'] = NULL;
@@ -55,7 +55,7 @@ class descatende extends Admin_Controller {
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Novo Analises", 'admin/descatende/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Criar';
+		$this->data['texto_create'] = 'Adicionar';
 		
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
@@ -66,11 +66,17 @@ class descatende extends Admin_Controller {
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
+			//pegar data atual se data vazia
+			$dt = $this->input->post('dtcad');
+			if($dt == ''){
+				$dt = date('Y/m/d');
+			} 
+			
 			$descri = R::dispense("descatende");
 				$descri->idpa = $id;
 				$descri->descricao = $this->input->post('descricao');
 				$descri->titulo    = $this->input->post('titulo');
-				$descri->dtcad     = $this->input->post('dtcad');
+				$descri->dtcad     = $dt;
          	R::store($descri);
 
 			$this->session->set_flashdata('message', "Dados gravados");
@@ -196,5 +202,4 @@ class descatende extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/descatende/edit', $this->data);
 	}
-
-}
+}//fim da class

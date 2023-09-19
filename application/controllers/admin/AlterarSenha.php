@@ -50,8 +50,7 @@ class alterarSenha extends Admin_Controller {
 			$this->template->admin_render($this->anchor . '/index', $this->data);
         }
     }
-    public function edit($id)
-	{
+    public function edit($id){
 		$id = (int) $id;
 
 		if ( ! $this->ion_auth->logged_in() OR ( ! $this->ion_auth->is_admin() && ! ($this->ion_auth->user()->row()->id == $id)))
@@ -152,7 +151,4 @@ class alterarSenha extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/alterarSenha/edit', $this->data);
 	}
-
-
-
-}
+}//fim da class

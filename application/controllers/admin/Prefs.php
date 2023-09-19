@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Prefs extends Admin_Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
 
         /* Load :: Common */
@@ -14,10 +13,7 @@ class Prefs extends Admin_Controller {
         /* Breadcrumbs :: Common */
         $this->breadcrumbs->unshift(1, lang('menu_preferences'), 'admin/prefs');
     }
-
-
-	public function index()
-	{
+	public function index()	{
         if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
         {
             redirect('auth/login', 'refresh');
@@ -35,10 +31,7 @@ class Prefs extends Admin_Controller {
             $this->template->admin_render('admin/prefs/index', $this->data);
         }
 	}
-
-
-	public function interfaces($type = NULL)
-	{
+	public function interfaces($type = NULL){
         /* Title Page */
         $this->page_title->push(lang('menu_preferences'), lang('menu_interfaces'));
         $this->data['pagetitle'] = $this->page_title->show();
@@ -123,10 +116,7 @@ class Prefs extends Admin_Controller {
             redirect('admin', 'refresh');
         }
 	}
-
-
-	public function reset_interfaces_admin()
-	{
+	public function reset_interfaces_admin(){
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			redirect('auth', 'refresh');
@@ -149,10 +139,7 @@ class Prefs extends Admin_Controller {
             redirect('admin/prefs/interfaces/admin', 'refresh');
         }
 	}
-
-
-	public function reset_interfaces_public()
-	{
+	public function reset_interfaces_public(){
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			redirect('auth', 'refresh');
@@ -168,4 +155,4 @@ class Prefs extends Admin_Controller {
             redirect('admin/prefs/interfaces/public', 'refresh');
         }
 	}
-}
+}//fim da class

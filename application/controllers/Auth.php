@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends MY_Controller {
 
-	function __construct()
-	{
+	function __construct(){
 		parent::__construct();
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -12,9 +11,7 @@ class Auth extends MY_Controller {
         $this->lang->load('auth');
         $this->auth_mode = $auth_mode[1];
 	}
-
-	function index()
-	{
+	function index(){
         if ( ! $this->ion_auth->logged_in())
         {die;
             redirect('auth/login', 'refresh');
@@ -24,9 +21,7 @@ class Auth extends MY_Controller {
             redirect('/', 'refresh');
         }
 	}
-
-    function login()
-	{
+    function login(){
         if ( ! $this->ion_auth->logged_in())
         {
             /* Load */
@@ -149,10 +144,7 @@ class Auth extends MY_Controller {
             redirect('/', 'refresh');
         }
    }
-
-
-    function logout($src = NULL)
-	{
+    function logout($src = NULL){
         $logout = $this->ion_auth->logout();
 
         $this->session->set_flashdata('message', $this->ion_auth->messages());
@@ -166,7 +158,6 @@ class Auth extends MY_Controller {
             redirect('/', 'refresh');
         }
 	}
-
     function esqueciminhasenha(){
         /* Load */
         $this->load->config('common/dp_config');
@@ -226,9 +217,7 @@ class Auth extends MY_Controller {
         /* Load Template */
         $this->template->auth_render('auth/esqueciminhasenha', $this->data);
    //     $this->template->admin_render($this->anchor . '/auth/esqueciminhasenha', $this->data);
-
     }
-
     private function geraNovaSenha() {
         $caracteres = 'abcdefghijklmnopqrstuvwxyz12345678901234567890';
         $senha = array(); 
@@ -250,5 +239,4 @@ class Auth extends MY_Controller {
         $config['smtp_port'] = '465';
         $this->email->initialize($config);
     }
-
-}
+}//fim da class

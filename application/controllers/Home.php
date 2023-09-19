@@ -69,7 +69,6 @@ class Home extends Public_Controller {
 
         $this->load->view('public/home', $this->data);
 	}
-
     public function getmesas() {
         $tipo = R::findAll("mesas");
 		foreach ($tipo as $e) {
@@ -77,7 +76,6 @@ class Home extends Public_Controller {
 		}
 		return $options;
     }
-
 	public function gettempo() {
         $sql = "SELECT id,hora FROM tempo ";
 
@@ -90,7 +88,6 @@ class Home extends Public_Controller {
         }
 		return $options;
     }
-
     public function deleteyes($dt,$hr) {
 		if ( ! $this->ion_auth->logged_in() ) {
 			return show_error('voce não esta logado');
@@ -188,5 +185,4 @@ class Home extends Public_Controller {
         /* Load Template */
         $this->template->admin_render('public/home/create', $this->data);
     }
-
-}
+}//fim da class

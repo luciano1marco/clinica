@@ -2,8 +2,7 @@
 
 class Auth extends CI_Controller {
 
-	function __construct()
-	{
+	function __construct(){
 		parent::__construct();
 		$this->load->database();
 		$this->load->library(array('ion_auth','form_validation'));
@@ -13,10 +12,8 @@ class Auth extends CI_Controller {
 
 		$this->lang->load('auth');
 	}
-
 	// redirect if needed, otherwise display the user list
-	function index()
-	{
+	function index(){
 
 		if (!$this->ion_auth->logged_in())
 		{
@@ -43,10 +40,8 @@ class Auth extends CI_Controller {
 			$this->_render_page('auth/index', $this->data);
 		}
 	}
-
 	// log the user in
-	function login()
-	{
+	function login(){
 		$this->data['title'] = "Login";
 
 		//validate form input
@@ -93,10 +88,8 @@ class Auth extends CI_Controller {
 			$this->_render_page('auth/login', $this->data);
 		}
 	}
-
 	// log the user out
-	function logout()
-	{
+	function logout(){
 		$this->data['title'] = "Logout";
 
 		// log the user out
@@ -106,10 +99,8 @@ class Auth extends CI_Controller {
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
 		redirect('auth/login', 'refresh');
 	}
-
 	// change password
-	function change_password()
-	{
+	function change_password(){
 		$this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
 		$this->form_validation->set_rules('new', $this->lang->line('change_password_validation_new_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[new_confirm]');
 		$this->form_validation->set_rules('new_confirm', $this->lang->line('change_password_validation_new_password_confirm_label'), 'required');
@@ -174,10 +165,8 @@ class Auth extends CI_Controller {
 			}
 		}
 	}
-
 	// forgot password
-	function forgot_password()
-	{
+	function forgot_password(){
 		// setting validation rules by checking wheather identity is username or email
 		if($this->config->item('identity', 'ion_auth') != 'email' )
 		{
@@ -244,10 +233,8 @@ class Auth extends CI_Controller {
 			}
 		}
 	}
-
 	// reset password - final step for forgotten password
-	public function reset_password($code = NULL)
-	{
+	public function reset_password($code = NULL){
 		if (!$code)
 		{
 			show_404();
@@ -334,11 +321,8 @@ class Auth extends CI_Controller {
 			redirect("auth/forgot_password", 'refresh');
 		}
 	}
-
-
 	// activate the user
-	function activate($id, $code=false)
-	{
+	function activate($id, $code=false)	{
 		if ($code !== false)
 		{
 			$activation = $this->ion_auth->activate($id, $code);
@@ -361,10 +345,8 @@ class Auth extends CI_Controller {
 			redirect("auth/forgot_password", 'refresh');
 		}
 	}
-
 	// deactivate the user
-	function deactivate($id = NULL)
-	{
+	function deactivate($id = NULL)	{
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
 		{
 			// redirect them to the home page because they must be an administrator to view this
@@ -407,10 +389,8 @@ class Auth extends CI_Controller {
 			redirect('auth', 'refresh');
 		}
 	}
-
 	// create a new user
-	function create_user()
-	{
+	function create_user(){
 		$this->data['title'] = "Create User";
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -501,10 +481,8 @@ class Auth extends CI_Controller {
 			$this->_render_page('auth/create_user', $this->data);
 		}
 	}
-
 	// edit a user
-	function edit_user($id)
-	{
+	function edit_user($id)	{
 		$this->data['title'] = "Edit User";
 
 		if (!$this->ion_auth->logged_in() || (!$this->ion_auth->is_admin() && !($this->ion_auth->user()->row()->id == $id)))
@@ -652,10 +630,8 @@ class Auth extends CI_Controller {
 
 		$this->_render_page('auth/edit_user', $this->data);
 	}
-
 	// create a new group
-	function create_group()
-	{
+	function create_group()	{
 		$this->data['title'] = $this->lang->line('create_group_title');
 
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -699,10 +675,8 @@ class Auth extends CI_Controller {
 			$this->_render_page('auth/create_group', $this->data);
 		}
 	}
-
 	// edit a group
-	function edit_group($id)
-	{
+	function edit_group($id){
 		// bail if no group id given
 		if(!$id || empty($id))
 		{
@@ -763,10 +737,7 @@ class Auth extends CI_Controller {
 
 		$this->_render_page('auth/edit_group', $this->data);
 	}
-
-
-	function _get_csrf_nonce()
-	{
+	function _get_csrf_nonce()	{
 		$this->load->helper('string');
 		$key   = random_string('alnum', 8);
 		$value = random_string('alnum', 20);
@@ -775,9 +746,7 @@ class Auth extends CI_Controller {
 
 		return array($key => $value);
 	}
-
-	function _valid_csrf_nonce()
-	{
+	function _valid_csrf_nonce(){
 		if ($this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
 			$this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue'))
 		{
@@ -788,9 +757,8 @@ class Auth extends CI_Controller {
 			return FALSE;
 		}
 	}
-
-	function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense
-	{
+	//I think this makes more sense
+	function _render_page($view, $data=null, $returnhtml=false)	{
 
 		$this->viewdata = (empty($data)) ? $this->data: $data;
 
@@ -798,5 +766,4 @@ class Auth extends CI_Controller {
 
 		if ($returnhtml) return $view_html;//This will return html on 3rd argument being true
 	}
-
-}
+}//fim da class

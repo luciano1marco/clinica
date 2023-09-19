@@ -77,7 +77,7 @@
                                 <h3 class="box-title">Descrição do Paciente
                                 &nbsp;&nbsp;
                                 <?php if ($pac) { ?>
-                                    <?php echo anchor('admin/descatende/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Criar</button>"); ?>&nbsp;&nbsp;
+                                    <?php echo anchor('admin/descatende/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Adicionar</button>"); ?>&nbsp;&nbsp;
                                 <?php } ?>
                                 </h3>
                             </div>
@@ -115,7 +115,7 @@
                                 <h3 class="box-title">Procedimento
                                 &nbsp;&nbsp;
                                 <?php if ($pac) { ?>
-                                    <?php echo anchor('admin/procedimento/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Criar</button>"); ?>&nbsp;&nbsp;
+                                    <?php echo anchor('admin/procedimento/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Adicionar</button>"); ?>&nbsp;&nbsp;
                                 <?php } ?>
                                 </h3>
                             </div>
@@ -152,7 +152,7 @@
                                 <h3 class="box-title">Analises 
                                 &nbsp;&nbsp;
                                 <?php if ($pac) { ?>
-                                    <?php echo anchor('admin/analises/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Criar</button>"); ?>&nbsp;&nbsp;
+                                    <?php echo anchor('admin/analises/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Adicionar</button>"); ?>&nbsp;&nbsp;
                                 <?php } ?>
                                 </h3>
                             </div>
@@ -189,7 +189,7 @@
                                 <h3 class="box-title">Conclusão 
                                 &nbsp;&nbsp;
                                 <?php if ($pac) { ?>
-                                    <?php echo anchor('admin/conclusao/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Criar</button>"); ?>&nbsp;&nbsp;
+                                    <?php echo anchor('admin/conclusao/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Adicionar</button>"); ?>&nbsp;&nbsp;
                                 <?php } ?>
                                 </h3>
                             </div>

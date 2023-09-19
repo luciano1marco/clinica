@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Menuitens extends Admin_Controller {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		/* Title Page :: Common */
@@ -26,9 +25,7 @@ class Menuitens extends Admin_Controller {
 		/* Breadcrumbs :: Common */
 		$this->breadcrumbs->unshift(1, "Itens de Menu", 'admin/menuitens');
 	}
-
-	public function index()
-	{
+	public function index()	{
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
@@ -55,7 +52,6 @@ class Menuitens extends Admin_Controller {
 			$this->template->admin_render('admin/menuitens/index', $this->data);
 		}
 	}
-
 	public function create() {
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, 'Novo Item de Menu', 'admin/menuitens/create');
@@ -155,7 +151,6 @@ class Menuitens extends Admin_Controller {
 			$this->template->admin_render('admin/menuitens/create', $this->data);
 		}
 	}
-
 	public function edit($id) {
 		$id = (int) $id;
 
@@ -264,7 +259,6 @@ class Menuitens extends Admin_Controller {
 			$this->template->admin_render('admin/menuitens/edit', $this->data);
 		}
 	}
-
 	public function deleteyes($id) {
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin()) {
 			return show_error('You must be an administrator to view this page.');
@@ -281,7 +275,6 @@ class Menuitens extends Admin_Controller {
 
 		redirect('admin/menuitens', 'refresh');
 	}
-
 	private function getSections() {
 		$ret = array();
 		$data = R::findAll("menusection");
@@ -290,9 +283,7 @@ class Menuitens extends Admin_Controller {
 		}
 		return $ret;
 	}
-
-	public function profile($id)
-	{
+	public function profile($id){
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, lang('menu_users_profile'), 'admin/menuitens/profile');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
@@ -309,7 +300,6 @@ class Menuitens extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/menuitens/profile', $this->data);
 	}
-
 	function activate($id) {
 		$id = (int) $id;
 	
@@ -322,7 +312,6 @@ class Menuitens extends Admin_Controller {
 		$this->session->set_flashdata('message', "Item de Menu ativado");
 		redirect('admin/menuitens', 'refresh');
 	}
-
 	public function deactivate($id) {
 		$id = (int) $id;
 
@@ -334,4 +323,4 @@ class Menuitens extends Admin_Controller {
 		$this->session->set_flashdata('message', "Item de Menu desativado");		
 		redirect('admin/menuitens', 'refresh');
 	}
-}
+}//fim da class

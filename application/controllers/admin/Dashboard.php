@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Dashboard extends Admin_Controller {
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
 
         /* Load :: Common */
@@ -15,10 +14,7 @@ class Dashboard extends Admin_Controller {
         $this->load->helper('utilidades');
 
     }
-
-
-	public function index()
-	{
+	public function index()	{
         if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
         {
             redirect('auth/login', 'refresh');
@@ -54,4 +50,4 @@ class Dashboard extends Admin_Controller {
             $this->template->admin_render('admin/dashboard/index', $this->data);
         }
 	}
-}
+}//fim da class

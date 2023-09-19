@@ -9,7 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <?php echo $breadcrumb; ?>
         <?php $anchor = 'admin/' . $this->router->class; ?>
     </section>
-
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <section class="content">
         <div class="row">
             <div class="col-md-12">

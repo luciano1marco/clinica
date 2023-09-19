@@ -33,7 +33,7 @@ class procedimento extends Admin_Controller {
 		   /* Breadcrumbs */
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 			/* Nome do Botão Criar do INDEX */
-			$this->data['texto_btn_create'] = 'Criar Procedimento';
+			$this->data['texto_btn_create'] = 'Adicionar Procedimento';
 			/* Data */
 			$this->data['error'] = NULL;
 			//$this->data['aparelhos'] = R::findAll('aparelhos');
@@ -45,21 +45,27 @@ class procedimento extends Admin_Controller {
         /* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Novo Procedimento", 'admin/procedimento/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Criar Procedimento';
+		$this->data['texto_create'] = 'Adicionar Procedimento';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 		$this->data['idview'] = $id;
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
         $this->form_validation->set_rules('titulo', 'titulo', 'required');
-                
-        /* cria a tabela com seus campos */
+        
+		/* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
+			//pegar data atual se data vazia
+				$dt = $this->input->post('dtcad');
+				if($dt == ''){
+					$dt = date('Y/m/d');
+				}       
+						
 			$procede = R::dispense("procedimento");
 				$procede->idpa = $id;
 				$procede->descricao = $this->input->post('descricao');
 				$procede->titulo    = $this->input->post('titulo');
-				$procede->dtcad     = $this->input->post('dtcad');
+				$procede->dtcad     = $dt;
            R::store($procede);
 
 			$this->session->set_flashdata('message', "Dados gravados");

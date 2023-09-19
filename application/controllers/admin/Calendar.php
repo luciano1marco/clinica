@@ -410,8 +410,6 @@ class calendar extends Admin_Controller {
 	    }
 		return $options;
 	}
-    
-	
 /*	public function getstyle(){
 		$sql = "SELECT id,cor,nome FROM cores ";
                       
@@ -422,4 +420,4 @@ class calendar extends Admin_Controller {
 		return $selected;
 	}
 */
-}//fim da classe  getstyle
+}//fim da class

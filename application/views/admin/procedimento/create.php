@@ -11,7 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <?php $anchor = 'admin/' . $this->router->class; ?>
         <?php $anchor1 = 'admin/pacientes' ?>
     </section>
-
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <section class="content">
         <div class="row">
             <div class="col-md-12">
@@ -65,6 +65,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
     </section>
 </div>
+
 <script>
     ClassicEditor
     .create( document.querySelector( '#descricao' ) )

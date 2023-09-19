@@ -36,7 +36,7 @@ class analises extends Admin_Controller {
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 			/* Nome do Botão Criar do INDEX */
-			$this->data['texto_btn_create'] = 'Criar Analises';
+			$this->data['texto_btn_create'] = 'Adicionar Analises';
 
 			/* Data */
 			$this->data['error'] = NULL;
@@ -52,7 +52,7 @@ class analises extends Admin_Controller {
         /* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Novo Analises", 'admin/analises/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Criar Analises';
+		$this->data['texto_create'] = 'Adicionar Analises';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 		$this->data['idview'] = $id;
@@ -61,11 +61,17 @@ class analises extends Admin_Controller {
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
+			//pegar data atual se data vazia
+			$dt = $this->input->post('dtcad');
+			if($dt == ''){
+				$dt = date('Y/m/d');
+			} 
+
 			$analise = R::dispense("analises");
 				$analise->titulo    = $this->input->post('titulo');
 				$analise->descricao = $this->input->post('descricao');
 				$analise->idpa      = $id;
-				$analise->dtcad     = $this->input->post('dtcad');
+				$analise->dtcad     = $dt;
          	R::store($analise);
 
 			$this->session->set_flashdata('message', "Dados gravados");
@@ -199,5 +205,4 @@ class analises extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/analises/edit', $this->data);
 	}
-
-}
+}//fim da class

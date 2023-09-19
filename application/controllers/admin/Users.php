@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends Admin_Controller {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		/* Load :: Common */
@@ -20,9 +19,7 @@ class Users extends Admin_Controller {
 		/* Breadcrumbs :: Common */
 		$this->breadcrumbs->unshift(1, lang('menu_users'), 'admin/users');
 	}
-
-	public function index()
-	{
+	public function index(){
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
@@ -43,9 +40,7 @@ class Users extends Admin_Controller {
 			$this->template->admin_render('admin/users/index', $this->data);
 		}
 	}
-
-	public function create()
-	{
+	public function create(){
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, lang('menu_users_create'), 'admin/users/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
@@ -140,15 +135,11 @@ class Users extends Admin_Controller {
 			$this->template->admin_render('admin/users/create', $this->data);
 		}
 	}
-
-	public function delete()
-	{
+	public function delete(){
 		/* Load Template */
 		$this->template->admin_render('admin/users/delete', $this->data);
 	}
-
-	public function edit($id)
-	{
+	public function edit($id){
 		$id = (int) $id;
 
 		if ( ! $this->ion_auth->logged_in() OR ( ! $this->ion_auth->is_admin() && ! ($this->ion_auth->user()->row()->id == $id)))
@@ -298,9 +289,7 @@ class Users extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/users/edit', $this->data);
 	}
-
-	function activate($id, $code = FALSE)
-	{
+	function activate($id, $code = FALSE){
 		$id = (int) $id;
 
 		if ($code !== FALSE)
@@ -323,9 +312,7 @@ class Users extends Admin_Controller {
 			redirect('auth/forgot_password', 'refresh');
 		}
 	}
-
-	public function deactivate($id = NULL)
-	{
+	public function deactivate($id = NULL){
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			return show_error('You must be an administrator to view this page.');
@@ -372,7 +359,6 @@ class Users extends Admin_Controller {
 			redirect('admin/users', 'refresh');
 		}
 	}
-
 	public function deleteyes($id = null) {
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin()) {
 			return show_error('You must be an administrator to view this page.');
@@ -390,9 +376,7 @@ class Users extends Admin_Controller {
 		}
 		redirect('admin/users', 'refresh');
 	}
-
-	public function profile($id)
-	{
+	public function profile($id){
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, lang('menu_users_profile'), 'admin/groups/profile');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
@@ -409,10 +393,7 @@ class Users extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/users/profile', $this->data);
 	}
-
-
-	public function _get_csrf_nonce()
-	{
+	public function _get_csrf_nonce(){
 		$this->load->helper('string');
 		$key   = random_string('alnum', 8);
 		$value = random_string('alnum', 20);
@@ -421,9 +402,7 @@ class Users extends Admin_Controller {
 
 		return array($key => $value);
 	}
-
-	public function _valid_csrf_nonce()
-	{
+	public function _valid_csrf_nonce(){
 		if ($this->input->post($this->session->flashdata('csrfkey')) !== FALSE && $this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue'))
 		{
 			return TRUE;
@@ -433,4 +412,4 @@ class Users extends Admin_Controller {
 			return FALSE;
 		}
 	}
-}
+}//fim class

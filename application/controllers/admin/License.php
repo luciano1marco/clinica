@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class License extends Admin_Controller {
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
 
         /* Title Page :: Common */
@@ -14,10 +13,7 @@ class License extends Admin_Controller {
         /* Breadcrumbs :: Common */
         $this->breadcrumbs->unshift(1, lang('menu_license'), 'admin/license');
     }
-
-
-	public function index()
-	{
+	public function index()	{
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			redirect('auth', 'refresh');
@@ -31,4 +27,4 @@ class License extends Admin_Controller {
             $this->template->admin_render('admin/license/index', $this->data);
         }
 	}
-}
+}//fim da class

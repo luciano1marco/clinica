@@ -57,7 +57,7 @@ class dados extends Admin_Controller {
         /* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Novo dado", 'admin/dados/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Criar dados';
+		$this->data['texto_create'] = 'Adicionar dados';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 
@@ -376,5 +376,4 @@ class dados extends Admin_Controller {
 
 		redirect('admin/dados/arquivos/' .$ae->id_dados, 'refresh');
 	}
-
-}
+}//fim da class

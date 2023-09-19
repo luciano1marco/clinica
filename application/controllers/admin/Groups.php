@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Groups extends Admin_Controller {
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
 
         $this->lang->load('admin/groups');
@@ -19,9 +18,7 @@ class Groups extends Admin_Controller {
         /* Breadcrumbs :: Common */
         $this->breadcrumbs->unshift(1, lang('menu_security_groups'), 'admin/groups');
     }
-
-	public function index()
-	{
+	public function index(){
         if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
         {
             redirect('auth/login', 'refresh');
@@ -38,9 +35,7 @@ class Groups extends Admin_Controller {
             $this->template->admin_render('admin/groups/index', $this->data);
         }
     }
-
-	public function create()
-	{
+	public function create(){
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			redirect('auth', 'refresh');
@@ -92,9 +87,7 @@ class Groups extends Admin_Controller {
             $this->template->admin_render('admin/groups/create', $this->data);
 		}
 	}
-
-	public function delete()
-	{
+	public function delete(){
         if ( ! $this->ion_auth->logged_in())
         {
             redirect('auth/login', 'refresh');
@@ -108,9 +101,7 @@ class Groups extends Admin_Controller {
             $this->load->view('admin/groups/delete');
         }
 	}
-
-	public function edit($id)
-	{
+	public function edit($id){
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin() OR ! $id OR empty($id))
 		{
 			redirect('auth', 'refresh');
@@ -181,7 +172,6 @@ class Groups extends Admin_Controller {
         /* Load Template */
         $this->template->admin_render('admin/groups/edit', $this->data);
 	}
-
 	public function deleteyes($id) {
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin()) {
 			return show_error('You must be an administrator to view this page.');
@@ -198,9 +188,7 @@ class Groups extends Admin_Controller {
 		
 		redirect('admin/groups', 'refresh');
 	}
-
-	public function profile($id)
-	{
+	public function profile($id){
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, lang('menu_users_profile'), 'admin/groups/profile');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
@@ -227,4 +215,4 @@ class Groups extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/groups/profile', $this->data);
 	}
-}
+}//fim da class

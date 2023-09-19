@@ -37,7 +37,7 @@ class conclusao extends Admin_Controller {
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 			/* Nome do Botão Criar do INDEX */
-			$this->data['texto_btn_create'] = 'Criar';
+			$this->data['texto_btn_create'] = 'Adicionar';
 
 			/* Data */
 			$this->data['error'] = NULL;
@@ -53,7 +53,7 @@ class conclusao extends Admin_Controller {
         /* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Nova Conlcusao", 'admin/conclusao/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Criar Conclusao';
+		$this->data['texto_create'] = 'Adicionar Conclusao';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 		$this->data['idview'] = $id;
@@ -63,11 +63,17 @@ class conclusao extends Admin_Controller {
                 
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
+			//pegar data atual se data vazia
+			$dt = $this->input->post('dtcad');
+			if($dt == ''){
+				$dt = date('Y/m/d');
+			} 
+
 			$procede = R::dispense("conclusao");
 				$procede->idpa = $id;
 				$procede->descricao = $this->input->post('descricao');
 				$procede->titulo = $this->input->post('titulo');
-				$procede->dtcad = $this->input->post('dtcad');
+				$procede->dtcad = $dt;
            R::store($procede);
 
 			$this->session->set_flashdata('message', "Dados gravados");
@@ -198,5 +204,4 @@ class conclusao extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/conclusao/edit', $this->data);
 	}
-
-}
+}//fim da class

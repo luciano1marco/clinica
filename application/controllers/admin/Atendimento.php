@@ -33,7 +33,7 @@ class atendimento extends Admin_Controller {
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 
 			/* Nome do Botão Criar do INDEX */
-			$this->data['texto_btn_create'] = 'Criar Atendimento';
+			$this->data['texto_btn_create'] = 'Adicionar Atendimento';
 
 			/* Data */
 			$this->data['error'] = NULL;
@@ -42,13 +42,11 @@ class atendimento extends Admin_Controller {
 			$this->template->admin_render($this->anchor . '/index', $this->data);
         }
     }
-
-    public function create()
-    {
+    public function create() {
         /* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Novo Atendimento", 'admin/atendimento/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Criar Atendimento';
+		$this->data['texto_create'] = 'Adicionar Atendimento';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 
@@ -58,12 +56,11 @@ class atendimento extends Admin_Controller {
         /* cria a tabela com seus campos */
 		if ($this->form_validation->run()) {
 			$atende = R::dispense("atendimento");
-            $atende->idpa = $this->input->post('idpa');
-            $atende->descricao   = $this->input->post('descricao');
-            $atende-> datende = date();
-            $atende->conclusao = $this->input->post('conclusao');
-            
-			R::store($atende);
+				$atende->idpa = $this->input->post('idpa');
+				$atende->descricao   = $this->input->post('descricao');
+				$atende-> datende = date();
+				$atende->conclusao = $this->input->post('conclusao');
+          	R::store($atende);
 
 			$this->session->set_flashdata('message', "Dados gravados");
             redirect('admin/pacientes', 'refresh');
@@ -100,7 +97,6 @@ class atendimento extends Admin_Controller {
         /* Load Template */
         $this->template->admin_render('admin/atendimento/create', $this->data);
     }
-   
     public function deleteyes($id) {
 		if ( ! $this->ion_auth->logged_in() ) {
 			return show_error('voce não esta logado');
@@ -119,7 +115,6 @@ class atendimento extends Admin_Controller {
 		}
 		redirect('admin/atendimento', 'refresh');
 	}
-
     public function edit($id) {
 		$id = (int) $id;
 
@@ -193,7 +188,6 @@ class atendimento extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/atendimento/edit', $this->data);
 	}
-
 	public function view($id){
         if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
             { redirect('auth/login', 'refresh'); }
@@ -239,6 +233,4 @@ class atendimento extends Admin_Controller {
 		}
 
  	}//fim função view    
-
-
-}//fim da classe atendimento
+}//fim da class

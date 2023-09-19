@@ -3,8 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Sections extends Admin_Controller {
 
-	public function __construct()
-	{
+	public function __construct(){
 		parent::__construct();
 
 		/* Title Page :: Common */
@@ -17,9 +16,7 @@ class Sections extends Admin_Controller {
 		/* Breadcrumbs :: Common */
 		$this->breadcrumbs->unshift(1, "Sessões de Menu", 'admin/sections');
 	}
-
-	public function index()
-	{
+	public function index(){
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
 		{
 			redirect('auth/login', 'refresh');
@@ -36,7 +33,6 @@ class Sections extends Admin_Controller {
 			$this->template->admin_render('admin/sections/index', $this->data);
 		}
 	}
-
 	public function create() {
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, 'Nova Sessão de Menu', 'admin/sections/create');
@@ -81,7 +77,6 @@ class Sections extends Admin_Controller {
 			$this->template->admin_render('admin/sections/create', $this->data);
 		}
 	}
-
 	public function edit($id) {
 		$id = (int) $id;
 
@@ -130,7 +125,6 @@ class Sections extends Admin_Controller {
 			$this->template->admin_render('admin/sections/edit', $this->data);
 		}
 	}
-
 	public function deleteyes($id = null) {
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin()) {
 			return show_error('You must be an administrator to view this page.');
@@ -147,9 +141,7 @@ class Sections extends Admin_Controller {
 
 		redirect('admin/sections', 'refresh');
 	}
-
-	public function profile($id)
-	{
+	public function profile($id){
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, lang('menu_users_profile'), 'admin/groups/profile');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
@@ -166,7 +158,6 @@ class Sections extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/sections/profile', $this->data);
 	}
-
 	function activate($id) {
 		$id = (int) $id;
 	
@@ -179,7 +170,6 @@ class Sections extends Admin_Controller {
 		$this->session->set_flashdata('message', "Seção de Menu ativada");
 		redirect('admin/sections', 'refresh');
 	}
-
 	public function deactivate($id) {
 		$id = (int) $id;
 
@@ -191,4 +181,4 @@ class Sections extends Admin_Controller {
 		$this->session->set_flashdata('message', "Seção de Menu desativada");		
 		redirect('admin/sections', 'refresh');
 	}
-}
+}//fim da class
