@@ -51,6 +51,7 @@ class calendar extends Admin_Controller {
 						te.hora as hora,
 						ag.start_date as dtinicial,
 						ag.color as color,
+						pa.ativo,
 						SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
 					FROM `agenda`as ag
 		
@@ -221,9 +222,9 @@ class calendar extends Admin_Controller {
 		$user_id = $this->session->user_id;
 
 		if ($user_id == 1){
-			$sql = "SELECT id,nome,id_psico FROM pacientes where ativo = 1";
+			$sql = "SELECT id,nome,id_psico,ativo FROM pacientes where ativo = 1";
 		}else{
-			$sql = "SELECT id,nome,id_psico,ativo FROM pacientes where id_psico = '.$user_id.' and ativo = 1";
+			$sql = "SELECT id,nome,id_psico,ativo FROM pacientes where id_psico =" .$user_id. " and ativo = 1";
 		}
    
         $options = array("0" => "Selecione um Paciente");
