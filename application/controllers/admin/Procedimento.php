@@ -21,11 +21,8 @@ class procedimento extends Admin_Controller {
 	}
 	public function index(){  
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-        }
-        else
-        {
+		{ redirect('auth/login', 'refresh');
+        }else {
 			/* dados  */
 			// pega o id do usuário logado----($user_id)
 			//$user_id = $this->session->user_id;
@@ -60,7 +57,6 @@ class procedimento extends Admin_Controller {
 				if($dt == ''){
 					$dt = date('Y/m/d');
 				}       
-						
 			$procede = R::dispense("procedimento");
 				$procede->idpa = $id;
 				$procede->descricao = $this->input->post('descricao');

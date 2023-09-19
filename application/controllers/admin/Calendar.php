@@ -36,10 +36,8 @@ class calendar extends Admin_Controller {
 						ag.id,
 						te.hora as hora,
 						ag.start_date as dtinicial,
-						
 						ag.color as color,
 						SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
-
 					FROM `agenda`as ag
 
 					inner join tempo as te
@@ -54,7 +52,6 @@ class calendar extends Admin_Controller {
 						ag.start_date as dtinicial,
 						ag.color as color,
 						SUBSTRING_INDEX(SUBSTRING_INDEX(pa.nome, ' ', 1), ' ', -1) as nome     
-		
 					FROM `agenda`as ag
 		
 					inner join tempo as te
@@ -63,7 +60,7 @@ class calendar extends Admin_Controller {
 					inner join pacientes as pa
 					on pa.id = ag.idpaciente
 		
-					WHERE ag.user_id =".$user_id;
+					WHERE ag.user_id ='.$user_id.' and pa.ativo = 1";
 			}
 			$this->data['agend'] = R::getAll($sql);
 
@@ -226,10 +223,9 @@ class calendar extends Admin_Controller {
 		if ($user_id == 1){
 			$sql = "SELECT id,nome,id_psico FROM pacientes where ativo = 1";
 		}else{
-			$sql = "SELECT id,nome,id_psico FROM pacientes where id_psico = ".$user_id;
+			$sql = "SELECT id,nome,id_psico,ativo FROM pacientes where id_psico = '.$user_id.' and ativo = 1";
 		}
-        
-
+   
         $options = array("0" => "Selecione um Paciente");
                 
         $tem = R::getAll($sql);        

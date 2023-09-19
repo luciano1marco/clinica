@@ -21,21 +21,16 @@ class pacientes extends Admin_Controller {
 	}
 	public function index(){  
 		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
-		{
-			redirect('auth/login', 'refresh');
-        }
-        else
-        {
+		{ redirect('auth/login', 'refresh');
+        } else {
 			/* dados  */
 			// pega o id do usuário logado----($user_id)
 			$user_id = $this->session->user_id;
-			
 		   // $this->data['paciente'] = R::findAll("pacientes");
 		   if ($user_id == 1){
 					$sql = "SELECT * FROM pacientes"; 
-
 		   }else{
-					$sql = "SELECT p.id,p.nome,p.email,p.telefone, p.id_psico 
+					$sql = "SELECT p.id,p.nome,p.email,p.telefone, p.id_psico,p.ativo 
 					FROM pacientes as p
 
 					inner join users as u 
@@ -43,22 +38,14 @@ class pacientes extends Admin_Controller {
 					
 					where u.id = ". $user_id ;
 		   }
-		   	
 			$this->data['paciente'] = R::getAll($sql);
-
-
            /* Breadcrumbs */
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
-
 			/* Nome do Botão Criar do INDEX */
 			$this->data['texto_btn_create'] = 'Adicionar Paciente';
-
 			/* Data */
 			$this->data['error'] = NULL;
-
 			//$this->data['aparelhos'] = R::findAll('aparelhos');
-
-
 			/* Load Template */
 			$this->template->admin_render($this->anchor . '/index', $this->data);
         }
