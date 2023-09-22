@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 19/09/2023 às 10:34
+-- Tempo de geração: 22/09/2023 às 12:51
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.0.28
 
@@ -87,7 +87,8 @@ INSERT INTO `agenda` (`id`, `hora`, `idpaciente`, `color`, `start_date`, `user_i
 (29, 12, 3, '#FF0000', '2023-09-08', 5),
 (30, 4, 3, '#008000', '2023-10-10', 5),
 (31, 3, 3, '#de3ddbde', '2023-11-15', 5),
-(32, 6, 3, '#FF0000', '2023-09-14', 1);
+(32, 6, 3, '#FF0000', '2023-09-14', 1),
+(33, 5, 3, '#40E0D0', '2023-09-20', 5);
 
 -- --------------------------------------------------------
 
@@ -158,6 +159,28 @@ CREATE TABLE `descatende` (
 INSERT INTO `descatende` (`id`, `titulo`, `descricao`, `datadesc`, `idpa`, `dtcad`) VALUES
 (4, 'Teste de Descricao', '<h3>Isto é um teste de inclusao de descricao do paciente:</h3><h4>&nbsp; &nbsp; &nbsp;<strong> Lista:</strong></h4><ol><li>teste 1</li><li>teste 2</li><li>teste3</li><li>outros</li></ol>', '2023-08-31', 3, ''),
 (5, 'Teste de Descricao', '<p>uma breve fala sobre o paciente</p>', '2023-09-05', 2, '2023-09-05');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `grau`
+--
+
+CREATE TABLE `grau` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `grau`
+--
+
+INSERT INTO `grau` (`id`, `descricao`) VALUES
+(1, 'Pai'),
+(2, 'Mãe'),
+(3, 'Tio(a)'),
+(4, 'Irmão(ã)'),
+(5, 'Outro(s)');
 
 -- --------------------------------------------------------
 
@@ -287,17 +310,45 @@ CREATE TABLE `pacientes` (
   `cpf` varchar(191) DEFAULT NULL,
   `id_psico` int(191) DEFAULT NULL,
   `dtcad` varchar(50) NOT NULL,
-  `ativo` int(11) UNSIGNED DEFAULT NULL
+  `ativo` int(11) UNSIGNED DEFAULT NULL,
+  `dtnasc` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Despejando dados para a tabela `pacientes`
 --
 
-INSERT INTO `pacientes` (`id`, `nome`, `email`, `telefone`, `endereco`, `cpf`, `id_psico`, `dtcad`, `ativo`) VALUES
-(2, 'teste da silva', 'teste@teste.com', '53-98765432', 'Rua Gramado, 2259', '03317397047', 1, '2023-07-03', 1),
-(3, 'Luciano Correa Marco', 'luciano1marco@gmail.com', '53984321028', 'Rua Gramado, 2259', '62526936004', 5, '2023-09-08', 1),
-(4, 'fulano de tal', 'fulano@gmail.com', '32323232', 'lkdlskdlskdlskl', '1234556789', 1, '2023-08-30', 1);
+INSERT INTO `pacientes` (`id`, `nome`, `email`, `telefone`, `endereco`, `cpf`, `id_psico`, `dtcad`, `ativo`, `dtnasc`) VALUES
+(2, 'teste da silva', 'teste@teste.com', '53-98765432', 'Rua Gramado, 2259', '03317397047', 1, '2023-07-03', 1, '2000-12-27'),
+(3, 'Luciano Correa Marco', 'luciano1marco@gmail.com', '53984321028', 'Rua Gramado, 2259', '62526936004', 1, '2023-09-08', 1, '1970-05-12'),
+(4, 'fulano de tal', 'fulano@gmail.com', '32323232', 'lkdlskdlskdlskl', '1234556789', 1, '2023-08-30', 1, '1990-06-19');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `parentes`
+--
+
+CREATE TABLE `parentes` (
+  `id` int(11) NOT NULL,
+  `idpa` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `grau` varchar(100) NOT NULL,
+  `dtnasc` date DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `telefone` varchar(100) NOT NULL,
+  `cpf` varchar(100) NOT NULL,
+  `endereco` varchar(100) NOT NULL,
+  `dtcad` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `parentes`
+--
+
+INSERT INTO `parentes` (`id`, `idpa`, `nome`, `grau`, `dtnasc`, `email`, `telefone`, `cpf`, `endereco`, `dtcad`) VALUES
+(1, 4, 'Fulana de Tal', '2', '1963-08-13', '', '', '', 'rua sobe desce, 123', '2023-09-22'),
+(2, 3, 'Eda marco', '2', '1945-10-13', '', '', '', '', '2023-09-22');
 
 -- --------------------------------------------------------
 
@@ -407,8 +458,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `admin`, `senha`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1695120742, 1, 'Admin', 'istrator', 'ADMIN', '0', 1, NULL),
-(5, '::1', 'simone loretto', '$2y$08$uXlTRH58Wr0Rd235sUIKD.Y7YM3/euQ5QNcmVirdTXsDJFY2t8UNu', NULL, 'siloretto@hotmail.com', NULL, NULL, NULL, NULL, 1612455440, 1694174246, 1, 'Simone', 'Loretto', 'clinica', '92000-6066', 0, NULL);
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, NULL, 1268889823, 1695380169, 1, 'Admin', 'istrator', 'ADMIN', '0', 1, NULL),
+(5, '::1', 'simone loretto', '$2y$08$uXlTRH58Wr0Rd235sUIKD.Y7YM3/euQ5QNcmVirdTXsDJFY2t8UNu', NULL, 'siloretto@hotmail.com', NULL, NULL, NULL, NULL, 1612455440, 1695131537, 1, 'Simone', 'Loretto', 'clinica', '92000-6066', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -466,6 +517,12 @@ ALTER TABLE `descatende`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `grau`
+--
+ALTER TABLE `grau`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices de tabela `groups`
 --
 ALTER TABLE `groups`
@@ -499,6 +556,12 @@ ALTER TABLE `menusection`
 -- Índices de tabela `pacientes`
 --
 ALTER TABLE `pacientes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `parentes`
+--
+ALTER TABLE `parentes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -548,7 +611,7 @@ ALTER TABLE `admin_preferences`
 -- AUTO_INCREMENT de tabela `agenda`
 --
 ALTER TABLE `agenda`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de tabela `analises`
@@ -569,6 +632,12 @@ ALTER TABLE `descatende`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de tabela `grau`
+--
+ALTER TABLE `grau`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de tabela `groups`
 --
 ALTER TABLE `groups`
@@ -578,7 +647,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT de tabela `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `menugroups`
@@ -603,6 +672,12 @@ ALTER TABLE `menusection`
 --
 ALTER TABLE `pacientes`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `parentes`
+--
+ALTER TABLE `parentes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `procedimento`
