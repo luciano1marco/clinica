@@ -99,7 +99,6 @@
                                         <?php echo anchor('admin/parentes/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Familiar</button>");} ?>
                                 </h3>
                             </div>
-
                             <div class="box-body">
                                 <div class="row">
                                     <label class="col-sm-4">Parentesco</label>
@@ -144,13 +143,6 @@
                                         <p><?= ($pac['emailpe']); ?>&nbsp;</p>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <label class="col-sm-4">Data de Cadastro</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['dtcadpe']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-
                             </div>
 
                         </div>
