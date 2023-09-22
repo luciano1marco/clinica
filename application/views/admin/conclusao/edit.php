@@ -9,6 +9,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <?php echo $pagetitle; ?>
         <?php echo $breadcrumb; ?>
         <?php $anchor = 'admin/' . $this->router->class; ?>
+        <?php $anchor1 = 'admin/pacientes' ; ?>
     </section>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <section class="content">
@@ -59,7 +60,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-primary btn-flat', 'content' => $submit)); ?>
                                     <?php echo form_button(array('type' => 'reset', 'class' => 'btn btn-warning btn-flat', 'content' => $redo)); ?>
                                     <?php echo form_button(array('type' => 'button', 'class' => 'btn btn-danger btn-flat', 'content' => $delete, "id" => "btExcluir")); ?>
-                                    <?php echo anchor('/admin/pacientes/', $cancel, array('class' => 'btn btn-default btn-flat')); ?>
+                                    <?php echo anchor($anchor1.'/view/'.$idview, $cancel, array('class' => 'btn btn-default btn-flat')); ?>
                                 </div>
                             </div>
                         </div>

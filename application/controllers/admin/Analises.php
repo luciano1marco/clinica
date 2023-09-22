@@ -130,13 +130,13 @@ class analises extends Admin_Controller {
 		}
 		redirect('admin/pacientes', 'refresh');
 	}
-    public function edit($id){
+    public function edit($id,$idpa){
 		$id = (int) $id;
 
 		if (! $this->ion_auth->logged_in()) {
 			redirect('auth', 'refresh');
 		}
-
+		$this->data['idview'] = $idpa;
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Editar Analises", 'admin/analises/edit');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();

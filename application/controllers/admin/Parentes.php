@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class pacientes extends Admin_Controller {
+class parentes extends Admin_Controller {
 
 	public function __construct(){
         parent::__construct();
 
         /* Title Page :: Common */
-        $this->page_title->push(lang('pacientes'));
+        $this->page_title->push(lang('parentes'));
         $this->data['pageicon'] = 'ul-list';
         $this->data['pagetitle'] = $this->page_title->show();
 
@@ -26,26 +26,11 @@ class pacientes extends Admin_Controller {
 			/* dados  */
 			// pega o id do usuário logado----($user_id)
 			$user_id = $this->session->user_id;
-		   // $this->data['paciente'] = R::findAll("pacientes");
-		   if ($user_id == 1){
-					$sql = "SELECT id,nome,email,telefone,id_psico,ativo,
-									date_format(dtnasc, '%d/%m/%Y') as dtnasc
-	 						FROM pacientes "; 
-		   }else{
-					$sql = "SELECT p.id,p.nome,p.email,p.telefone, p.id_psico,p.ativo,
-								   date_format(dtnasc, '%d/%m/%Y') as dtnasc, 
-					FROM pacientes as p
-
-					inner join users as u 
-					on p.id_psico = u.id
-					
-					where u.id = ". $user_id ;
-		   }
-			$this->data['paciente'] = R::getAll($sql);
-           /* Breadcrumbs */
+		   // $this->data['parentes'] = R::findAll("parentes");
+		    /* Breadcrumbs */
 			$this->data['breadcrumb'] = $this->breadcrumbs->show();
 			/* Nome do Botão Criar do INDEX */
-			$this->data['texto_btn_create'] = 'Adicionar Paciente';
+			$this->data['texto_btn_create'] = 'Adicionar Familiar';
 			/* Data */
 			$this->data['error'] = NULL;
 			//$this->data['aparelhos'] = R::findAll('aparelhos');
@@ -53,13 +38,13 @@ class pacientes extends Admin_Controller {
 			$this->template->admin_render($this->anchor . '/index', $this->data);
         }
     }
-    public function create(){
+    public function create($id){
 
-		$user_id = $this->session->user_id;
+		$this->data['idpa'] = $id;
         /* Breadcrumbs */
-		$this->breadcrumbs->unshift(2, "Novo Paciente", 'admin/pacientes/create');
+		$this->breadcrumbs->unshift(2, "Novo Familiar", 'admin/parentes/create');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['texto_create'] = 'Adiconar Paciente';
+		$this->data['texto_create'] = 'Adiconar Familiar';
 		/* Variables */
 		$tables = $this->config->item('tables', 'ion_auth');
 
@@ -74,16 +59,17 @@ class pacientes extends Admin_Controller {
 				$dt = date('Y/m/d');
 			} 
 			
-			$paciente = R::dispense("pacientes");
-				$paciente->nome     = $this->input->post('nome');
-				$paciente->email    = $this->input->post('email');
-				$paciente->telefone = $this->input->post('telefone');
-				$paciente->endereco = $this->input->post('endereco');
-				$paciente->dtcad    = $dt;
-				$paciente->cpf      = $this->input->post('cpf');
-				$paciente->dtnasc   = $this->input->post('dtnasc');
-				$paciente->id_psico = $user_id;
-            R::store($paciente);
+			$parentes = R::dispense("parentes");
+				$parentes->nome     = $this->input->post('nome');
+				$parentes->email    = $this->input->post('email');
+				$parentes->telefone = $this->input->post('telefone');
+				$parentes->endereco = $this->input->post('endereco');
+				$parentes->dtcad    = $dt;
+				$parentes->dtnasc   = $this->input->post('dtnasc');
+				$parentes->cpf      = $this->input->post('cpf');
+				$parentes->grau     = $this->input->post('grau');
+				$parentes->idpa     = $id;
+            R::store($parentes);
 
 			$this->session->set_flashdata('message', "Dados gravados");
             redirect('admin/pacientes', 'refresh');
@@ -129,12 +115,12 @@ class pacientes extends Admin_Controller {
                 'class' => 'form-control',
                 'value' => $this->form_validation->set_value('cpf'),
 			);
-			$this->data['id_psico'] = array(
-                'name'  => 'id_psico',
-                'id'    => 'id_psico',
-                'options' => $this->getusers(),
+			$this->data['grau'] = array(
+                'name'  => 'grau',
+                'id'    => 'grau',
+                'options' => $this->getgrau(),
                 'class' => 'form-control',
-                'value' => $this->form_validation->set_value('id_psico'),
+                'value' => $this->form_validation->set_value('grau'),
             );
 			$this->data['dtcad'] = array(
                 'name'  => 'dtcad',
@@ -153,25 +139,14 @@ class pacientes extends Admin_Controller {
 
         }         
         /* Load Template */
-        $this->template->admin_render('admin/pacientes/create', $this->data);
+        $this->template->admin_render('admin/parentes/create', $this->data);
     }
-	public function getusers(){
-        $sql = "SELECT u.username,u.first_name,u.id FROM users_groups as ug
-
-		inner join groups as g
-		on g.id = ug.group_id
-		
-		inner join users as u
-		on u.id = ug.user_id
-		
-		where g.name = 'Psicologa'";
-
-        $options = array("0" => "Selecione uma Psicologa");
-                
-        $bairros = R::getAll($sql);        
-
-		foreach ($bairros as $b) {   
-            $options[$b['id']] = $b['first_name'];           
+	public function getgrau(){
+        $sql = "SELECT * FROM grau";
+        $options = array("0" => "Selecione Grau de Parentensco");
+        $resp = R::getAll($sql);        
+		foreach ($resp as $r) {   
+            $options[$r['id']] = $r['descricao'];           
         }
 		return $options;
     }
@@ -184,48 +159,49 @@ class pacientes extends Admin_Controller {
 
 		if (!isset($id) || $id == null) {
             return show_error('id não confere');
-			redirect('admin/pacientes', 'refresh');
+			redirect('admin/parentes', 'refresh');
 		}
 
 		if ($this->ion_auth->logged_in()) {
-			$lixo = R::load("pacientes", $id);
+			$lixo = R::load("parentes", $id);
 			R::trash($lixo);
 		}
-		redirect('admin/pacientes', 'refresh');
+		redirect('admin/parentes', 'refresh');
 	}
-    public function edit($id){
+    public function edit($id,$idp){
 		$id = (int) $id;
 		$user_id = $this->session->user_id;
-		$this->dados['idview'] = $id;
+
 		if (! $this->ion_auth->logged_in()) {
 			redirect('auth', 'refresh');
 		}
 
 		/* Breadcrumbs */
-		$this->breadcrumbs->unshift(2, "Editar Pacientes", 'admin/pacientes/edit');
+		$this->breadcrumbs->unshift(2, "Editar parentes", 'admin/parentes/edit');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['idview'] = $id;
+		$this->data['idview'] = $idp;
 		 /* Titulo */
-		 $this->data['texto_edit'] = 'Editar Paciente';
+		 $this->data['texto_edit'] = 'Editar Familiar';
 		/* Validate form input */
 		$this->form_validation->set_rules('nome', 'nome', 'required');
 		
-		$paciente = R::load("pacientes", $id);
+		$parentes = R::load("parentes", $id);
 
 		if (isset($_POST) && ! empty($_POST)) {
 			if ($this->form_validation->run()) {
-				$paciente->nome = $this->input->post('nome');
-				$paciente->email = $this->input->post('email');
-           		$paciente->telefone = $this->input->post('telefone');
-            	$paciente->endereco = $this->input->post('endereco');
-            	$paciente->cpf = $this->input->post('cpf');
-				$paciente->dtcad = $this->input->post('dtcad');
-				$paciente->dtnasc = $this->input->post('dtnasc');
-				$paciente->id_psico = $user_id;
+				$parentes->nome     = $this->input->post('nome');
+				$parentes->email    = $this->input->post('email');
+				$parentes->telefone = $this->input->post('telefone');
+				$parentes->endereco = $this->input->post('endereco');
+				$parentes->dtcad    = $dt;
+				$parentes->dtnasc   = $this->input->post('dtnasc');
+				$parentes->cpf      = $this->input->post('cpf');
+				$parentes->grau     = $this->input->post('grau');
+				//$parentes->idpa     = $idp;
 								
-				R::store($paciente);
+				R::store($parentes);
 
-				redirect('admin/pacientes/', 'refresh');
+				redirect('admin/parentes/', 'refresh');
 			}
 		}
 	
@@ -233,7 +209,7 @@ class pacientes extends Admin_Controller {
 		$this->data['message'] = (validation_errors() ? validation_errors() : "");
 
 		$this->data['id'] = array(
-			'id' => $paciente->id,
+			'id' => $parentes->id,
 		);
 
 		$this->data['nome'] = array(
@@ -241,7 +217,7 @@ class pacientes extends Admin_Controller {
 			'id'    => 'nome',
 			'type'  => 'text',
 			'class' => 'form-control',
-			'value' => $paciente->nome,
+			'value' => $parentes->nome,
 		);
 
         $this->data['email'] = array(
@@ -249,7 +225,7 @@ class pacientes extends Admin_Controller {
 			'id'    => 'email',
 			'type'  => 'text',
 			'class' => 'form-control',
-			'value' => $paciente->email,
+			'value' => $parentes->email,
         );
         
 		$this->data['telefone'] = array(
@@ -257,14 +233,14 @@ class pacientes extends Admin_Controller {
 			'id'    => 'telefome',
 			'type'  => 'int',
 			'class' => 'form-control',
-			'value' => $paciente->telefone,
+			'value' => $parentes->telefone,
 		);
 		$this->data['endereco'] = array(
 			'name'  => 'endereco',
 			'id'    => 'endereco',
 			'type'  => 'text',
 			'class' => 'form-control',
-			'value' => $paciente->endereco,
+			'value' => $parentes->endereco,
 		);
 		
 		$this->data['cpf'] = array(
@@ -272,32 +248,32 @@ class pacientes extends Admin_Controller {
 			'id'    => 'cpf',
 			'type'  => 'int',
 			'class' => 'form-control',
-			'value' => $paciente->cpf,
+			'value' => $parentes->cpf,
 		);
-		$this->data['id_psico'] = array(
-			'name'  => 'id_psico',
-			'id'    => 'id_psico',
+		$this->data['grau'] = array(
+			'name'  => 'grau',
+			'id'    => 'grau',
 			'type'  => 'int',
 			'class' => 'form-control',
-			'value' => $paciente->id_psico,
+			'value' => $parentes->grau,
 		);
 		$this->data['dtcad'] = array(
 			'name'  => 'dtcad',
 			'id'    => 'dtcad',
 			'type'  => 'date',
 			'class' => 'form-control',
-			'value' => $paciente->dtcad,
+			'value' => $parentes->dtcad,
 		);
 		$this->data['dtnasc'] = array(
 			'name'  => 'dtnasc',
 			'id'    => 'dtnasc',
 			'type'  => 'date',
 			'class' => 'form-control',
-			'value' => $paciente->dtnasc,
+			'value' => $parentes->dtnasc,
 		);
 
 		/* Load Template */
-		$this->template->admin_render('admin/pacientes/edit', $this->data);
+		$this->template->admin_render('admin/parentes/edit', $this->data);
 	}
 	public function view($id){
         if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
@@ -310,37 +286,15 @@ class pacientes extends Admin_Controller {
 			/* -- Data -----------------------------------------------------------*/
             $this->data['error'] = NULL;
 
-			//-----------dados paciente -----------------
-			$sql = "SELECT  	
-						p.id,
-						p.nome as nomep,
-						p.email as emailp,
-						p.telefone as telefonep,
-						p.endereco enderecop,
-						p.cpf as cpfp,
-						date_format(p.dtcad, '%d/%m/%Y') as dtcadp,
-						p.dtnasc as dtnascp,
-						pe.id as idpe,
-						pe.nome as nomepe,
-						pe.email as emailpe,
-						pe.telefone as telefonepe,
-						pe.endereco as enderecope,
-						pe.grau as graupe,
-						pe.cpf as cpfpe,
-						date_format(pe.dtcad, '%d/%m/%Y') as dtcadpe,
-						pe.dtnasc as dtnascpe,
-						g.descricao as grau
-				FROM pacientes as p
+			//-----------dados parentes -----------------
+			$sql = "SELECT  id,nome,email,telefone,endereco,cpf,
+							date_format(dtcad, '%d/%m/%Y') as dtcad,
+							dtnasc
+					FROM parentes 
+								 
+					where id =  " .$id;
 
-				left join parentes as pe
-				on pe.idpa = p.id
-				
-				left join grau as g
-				on g.id = pe.grau
-
-				where p.id =   " .$id;
-
-			$this->data['paciente'] = R::getAll($sql);			
+			$this->data['parentes'] = R::getAll($sql);			
 			
 			//--- dados do descatende --------------	
 			$sql1 ="SELECT  id,titulo,
@@ -355,7 +309,7 @@ class pacientes extends Admin_Controller {
 			$this->data["descatende"] = R::getAll($sql1);	
 
 			//--- dados do procedimento --------------	
-			$sql2 ="SELECT  id,titulo,
+			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
 							date_format(dtcad, '%d/%m/%Y') as dtcad
@@ -364,10 +318,10 @@ class pacientes extends Admin_Controller {
 			
 				where idpa = " . $id;
 
-			$this->data["procedimento"] = R::getAll($sql2);	
+			$this->data["procedimento"] = R::getAll($sql1);	
 
 			//--- dados da analise --------------	
-			$sql3 ="SELECT  id,titulo,
+			$sql2 ="SELECT  id,titulo,
 							descricao,
 							idpa,
 							date_format(dtcad, '%d/%m/%Y') as dtcad
@@ -376,10 +330,10 @@ class pacientes extends Admin_Controller {
 			
 					where idpa = " .$id;
 
-			$this->data['analise'] = R::getAll($sql3);	
+			$this->data['analise'] = R::getAll($sql2);	
 
 			//--- dados da conclusao --------------	
-			$sql4 ="SELECT  id,titulo,
+			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
 							date_format(dtcad, '%d/%m/%Y') as dtcad
@@ -388,11 +342,11 @@ class pacientes extends Admin_Controller {
 			
 				where idpa = " . $id;
 
-			$this->data["conclusao"] = R::getAll($sql4);	
+			$this->data["conclusao"] = R::getAll($sql1);	
 
 
 			//---
-			$this->template->admin_render('admin/pacientes/view', $this->data);
+			$this->template->admin_render('admin/parentes/view', $this->data);
 
 		}
 
@@ -400,23 +354,23 @@ class pacientes extends Admin_Controller {
 	 function activate($id) {
 		$id = (int) $id;
 
-		$conc = R::load("pacientes", $id);
+		$conc = R::load("parentes", $id);
 		$conc->ativo = 1;
 		R::store($conc);
 		
-		$this->session->set_flashdata('message', "Paciente ativado");
-		redirect('admin/pacientes', 'refresh');
+		$this->session->set_flashdata('message', "parentes ativado");
+		redirect('admin/parentes', 'refresh');
 	}
     public function deactivate($id) {
     
 		$id = (int) $id;
 
-		$conc = R::load("pacientes", $id);
+		$conc = R::load("parentes", $id);
 		$conc->ativo = 0;
 		R::store($conc);
 		
-		$this->session->set_flashdata('message', "Paciente Inativo");
-		redirect('admin/pacientes', 'refresh');    
+		$this->session->set_flashdata('message', "parentes Inativo");
+		redirect('admin/parentes', 'refresh');    
 
     } 
 }//fim da class

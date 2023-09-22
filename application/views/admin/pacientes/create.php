@@ -26,8 +26,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         <div class="form-group">
                             <?php echo form_label('Nome', 'nome', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <?php echo form_input($nome); ?>
+                            </div>
+                            <?php echo form_label('Data Nasc.', 'dtnasc', array('class' => 'col-sm-1 control-label')); ?>
+                            <div class="col-sm-2">
+                                <?php echo form_input($dtnasc); ?>
                             </div>
                         </div>
                         <div class="form-group">

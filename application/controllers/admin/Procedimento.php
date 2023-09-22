@@ -124,7 +124,7 @@ class procedimento extends Admin_Controller {
 		}
 		redirect('admin/pacientes', 'refresh');
 	}
-	public function edit($id) {
+	public function edit($id,$idpa) {
 		$id = (int) $id;
 
 		if (! $this->ion_auth->logged_in()) {
@@ -134,7 +134,7 @@ class procedimento extends Admin_Controller {
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Editar Procedimento", 'admin/procedimento/edit');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['idview'] = $id;
+		$this->data['idview'] = $idpa;
 		 /* Titulo */
 		 $this->data['texto_edit'] = 'Editar Procedimento';
 		/* Validate form input */

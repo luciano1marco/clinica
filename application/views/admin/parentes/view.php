@@ -6,24 +6,20 @@
         <?php echo $breadcrumb; ?>
         <?php $anchor = 'admin/' . $this->router->class; ?>
         <h3 class="box-title" align="center">Atendimento Psicológico</h3>
+
     </section>
+
     <!------------------------------------------------------------------------------->
     <section class="content">
         <div class="row">
             <?php foreach ($paciente as $pac) : ?>
                 <!--dados do paciente ------------------------------------------>
-                    <?php  //calcula idade paciente
-                    $dataNascimento = $pac['dtnascp']; 
+                    <?php  //calcula idade
+                    $dataNascimento = $pac['dtnasc']; 
                     $date = new DateTime($dataNascimento ); 
                     $interval = $date->diff( new DateTime( date('Y-m-d') ) );
                     $idade = $interval->format( '%Y anos' );
-                    //idade familiar
-                    if($pac['dtnascpe']){
-                        $dataNasc = $pac['dtnascpe']; 
-                        $dt = new DateTime($dataNasc ); 
-                        $inter = $dt->diff( new DateTime( date('Y-m-d') ) );
-                        $idadepe = $inter->format( '%Y anos' );
-                    }else{$idadepe = 'Náo consta no cadastro';}
+                    //var_dump($idade);die;
                     ?>
                     <div class="col-md-6">
                         <div class="box">
@@ -34,6 +30,7 @@
                                 <?php if ($pac) { ?>
                                     <?php echo anchor('admin/pacientes/edit/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
                                     <?php echo anchor('admin/pacientes/', "<button class=\"btn btn-default\"><i class=\"fa fa-times\"></i>Cancelar</button>"); ?>&nbsp;&nbsp;
+                                    <?php echo anchor('admin/parentes/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Familiar</button>");?>
                                 <?php } ?>
                                 </h3>
                             </div>
@@ -42,7 +39,7 @@
                                 <div class="row">
                                     <label class="col-sm-4">Nome</label>
                                     <div class="col-sm-8">
-                                        <p> <?= $pac['nomep'] ?> </p>
+                                        <p> <?= $pac['nome'] ?> </p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -54,100 +51,32 @@
                                 <div class="row">
                                     <label class="col-sm-4">Endereço</label>
                                     <div class="col-sm-8">
-                                        <p><?= ($pac['enderecop']); ?>&nbsp;</p>
+                                        <p><?= ($pac['endereco']); ?>&nbsp;</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-4">Telefone</label>
                                     <div class="col-sm-8">
-                                        <p><?= ($pac['telefonep']); ?>&nbsp;</p>
+                                        <p><?= ($pac['telefone']); ?>&nbsp;</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-4">CPF</label>
                                     <div class="col-sm-8">
-                                        <p><?= ($pac['cpfp']); ?>&nbsp;</p>
+                                        <p><?= ($pac['cpf']); ?>&nbsp;</p>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <label class="col-sm-4">E-mail</label>
                                     <div class="col-sm-8">
-                                        <p><?= ($pac['emailp']); ?>&nbsp;</p>
+                                        <p><?= ($pac['email']); ?>&nbsp;</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="col-sm-4">Data de Cadastro</label>
                                     <div class="col-sm-8">
-                                        <p><?= ($pac['dtcadp']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                <!--Dados do Familiar------------------------------------------------------->
-                    <div class="col-md-6">
-                        <div class="box">
-                            <div class="box">
-                                <h3 class="box-title">Dados do Familiar
-                                    &nbsp;&nbsp;
-                                    <?php if ($pac['idpe']) { ?>
-                                        <?php echo anchor('admin/parentes/edit/'.$pac['idpe'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
-                                    <?php }else{ ;?> 
-                                        <?php echo anchor('admin/parentes/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Familiar</button>");} ?>
-                                </h3>
-                            </div>
-
-                            <div class="box-body">
-                                <div class="row">
-                                    <label class="col-sm-4">Parentesco</label>
-                                    <div class="col-sm-8">
-                                        <p> <?= $pac['grau'] ?> </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">Nome</label>
-                                    <div class="col-sm-8">
-                                        <p> <?= $pac['nomepe'] ?> </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">Idade</label>
-                                    <div class="col-sm-8">
-                                        <p> <?= $idadepe ?> </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">Endereço</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['enderecope']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">Telefone</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['telefonepe']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">CPF</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['cpfpe']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <label class="col-sm-4">E-mail</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['emailpe']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">Data de Cadastro</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['dtcadpe']); ?>&nbsp;</p>
+                                        <p><?= ($pac['dtcad']); ?>&nbsp;</p>
                                     </div>
                                 </div>
 
@@ -156,7 +85,7 @@
                         </div>
                     </div>
                 <!--descricao------------------------------------------------------->
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="box">
                             <div class="box">
                                 <h3 class="box-title">Descrição do Paciente
@@ -183,7 +112,7 @@
 
                                                 <!-- Opções -->
                                                 <td>
-                                                    <?php echo anchor('admin/descatende/edit/'.$da['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
+                                                    <?php echo anchor('admin/descatende/edit/'.$da['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
                                                 </td>  
                                             </tr>
                                         <?php endforeach; ?>
@@ -221,7 +150,7 @@
 
                                                 <!-- Opções -->
                                                 <td>
-                                                    <?php echo anchor('admin/procedimento/edit/'.$pr['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
+                                                    <?php echo anchor('admin/procedimento/edit/'.$pr['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
                                                 </td>  
                                             </tr>
                                         <?php endforeach; ?>
@@ -258,7 +187,7 @@
 
                                                 <!-- Opções -->
                                                 <td>
-                                                    <?php echo anchor('admin/analises/edit/'.$an['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
+                                                    <?php echo anchor('admin/analises/edit/'.$an['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
                                                 </td>  
                                             </tr>
                                         <?php endforeach; ?>
@@ -295,7 +224,7 @@
 
                                                 <!-- Opções -->
                                                 <td>
-                                                    <?php echo anchor('admin/conclusao/edit/'.$co['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
+                                                    <?php echo anchor('admin/conclusao/edit/'.$co['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
                                                 </td>  
                                             </tr>
                                         <?php endforeach; ?>
@@ -310,6 +239,7 @@
     </section>
     <!---------------------------------------------------------------------------------->
 </div>
+
 <!----Modal para deletar usuariorede----------------------------------------------------->
 <div id="modal_delete" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

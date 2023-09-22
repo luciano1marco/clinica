@@ -140,7 +140,7 @@ class descatende extends Admin_Controller {
 		}
 		redirect('admin/pacientes', 'refresh');
 	}
-    public function edit($id){
+    public function edit($id,$idpa){
 		$id = (int) $id;
 
 		if (! $this->ion_auth->logged_in()) {
@@ -155,7 +155,7 @@ class descatende extends Admin_Controller {
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
 		$this->form_validation->set_rules('titulo', 'titulo', 'required');
-		$this->data['idview'] = $id;
+		$this->data['idview'] = $idpa;
 		
 		$descri = R::load("descatende", $id);
 

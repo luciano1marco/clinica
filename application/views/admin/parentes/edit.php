@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 ?>
 
 <div class="content-wrapper">
@@ -43,6 +44,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="col-sm-2">
                                 <?php echo form_input($email); ?>
                             </div>
+                        
                             <?php echo form_label('Telefone', 'telefone', array('class' => 'col-sm-2 control-label')); ?>
                                 <div class="col-sm-2">
                                     <?php echo form_input($telefone); ?>
@@ -53,6 +55,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="col-sm-2">
                                 <?php echo form_input($cpf); ?>
                             </div>
+                        
                             <?php echo form_label('Data', 'dtcad', array('class' => 'col-sm-2 control-label')); ?>
                             <div class="col-sm-2">
                                 <?php echo form_input($dtcad); ?>
@@ -72,7 +75,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-primary btn-flat', 'content' => $submit)); ?>
                                     <?php echo form_button(array('type' => 'reset', 'class' => 'btn btn-warning btn-flat', 'content' => $redo)); ?>
                                     <!--<?php echo form_button(array('type' => 'button', 'class' => 'btn btn-danger btn-flat', 'content' => $delete, "id" => "btExcluir")); ?>---->
-                                    <?php echo anchor($anchor1.'/view/'.$idview, $cancel, array('class' => 'btn btn-default btn-flat')); ?>
+                                    <?php echo anchor($anchor1 .'/view/'.$idview, $cancel, array('class' => 'btn btn-default btn-flat')); ?>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +86,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
     </section>
 </div>
-
 <div id="modal_delete" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -91,11 +93,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"><b>Atenção!</b></h4>
             </div>
-
             <div class="modal-body">
                 <p>Deseja realmente excluir esse registro?</p>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-danger" id="btExcluirConfirmar">Excluir</button>
