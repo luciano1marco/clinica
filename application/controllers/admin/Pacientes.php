@@ -33,7 +33,7 @@ class pacientes extends Admin_Controller {
 	 						FROM pacientes "; 
 		   }else{
 					$sql = "SELECT p.id,p.nome,p.email,p.telefone, p.id_psico,p.ativo,
-								   date_format(dtnasc, '%d/%m/%Y') as dtnasc, 
+								   date_format(dtnasc, '%d/%m/%Y') as dtnasc
 					FROM pacientes as p
 
 					inner join users as u 
