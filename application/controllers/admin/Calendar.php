@@ -334,17 +334,12 @@ class calendar extends Admin_Controller {
 		$teste = 0;
 		foreach($age as $ag){
 			if($ag['hora'] == $hor){
-				//ja existe a hora na data
-				$testehora = 1;
+				$testehora = 1; //ja existe a hora na data
 				break;
-
 			}else{
-				//nao existe a hora na data
-				$testehora = 2;
-				
+				$testehora = 2;  //nao existe a hora na data
 			}
 		}
-		
 		$this->form_validation->set_rules('idpaciente', 'Nome do paciente é obrigatório ', 'required');
 		if ($this->form_validation->run() == TRUE){
 			if($testehora == 1)
@@ -353,6 +348,7 @@ class calendar extends Admin_Controller {
 				//error.insertAfter('.section_erro');   
 				//$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');	
 			}else{
+				$this->data['message'] ="";
 				$agend = R::dispense("agenda");
 					$agend->idpaciente = $idpac;
 					$agend->hora = $hor;
@@ -386,11 +382,11 @@ class calendar extends Admin_Controller {
 							on pa.id = ag.idpaciente
 
 							where ag.id =".$id; 
-				$this->data["agenda"] = R::getAll($sqlid);
+		$this->data["agenda"] = R::getAll($sqlid);
 				
-				foreach ($this->data["agenda"] as $ag){
+		foreach ($this->data["agenda"] as $ag){
 					$result = $ag;
-				}	
+		}	
 		
 		echo json_encode($result);		
 	

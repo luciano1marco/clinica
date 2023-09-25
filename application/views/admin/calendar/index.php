@@ -37,7 +37,6 @@
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<h3 align="center">Agendamento </h3>
-								
 							</div>
                             <div class="box-header with-border">
 						        <h3 class="box-title"><?php echo anchor('/admin/calendar/create', '<i class="fa fa-plus"></i> ' . $texto_btn_create, array('class' => 'btn btn-block btn-primary btn-flat')); ?></h3>
@@ -266,7 +265,7 @@
 		}
 		
 		function save() {
-			
+				
 			$('#form_create').submit(function(){
 			    var dados = $(this).serialize();
 				var element = $(this);
@@ -285,6 +284,7 @@
 						// Executado em caso de erro.
 						alert(jqXHR+" - "+ textStatus+" - "+ errorThrown);
 						//error();
+						
         			}
 
                 });
