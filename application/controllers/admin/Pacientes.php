@@ -342,7 +342,7 @@ class pacientes extends Admin_Controller {
 
 			$this->data['paciente'] = R::getAll($sql);			
 			
-			//--- dados do descatende --------------	
+			//--- dados do descatende --atendimento------------	
 			$sql1 ="SELECT  id,titulo,
 							descricao,
 							idpa,
@@ -419,4 +419,34 @@ class pacientes extends Admin_Controller {
 		redirect('admin/pacientes', 'refresh');    
 
     } 
+	public function generate_funcionando(){
+		// Carrega a classe de utilitário do banco de dados 
+		$this->load->dbutil();
+
+		// Faça backup de todo o seu banco de dados e atribua-o a uma variável 
+		$backup = $this->dbutil->backup();
+
+		// Carregue o arquivo auxiliar e grave o arquivo em seu servidor 
+		$this->load->helper('file');
+		write_file('/path/to/clinica.gz', $backup);
+
+		// Carrega o download helper e envia o arquivo para sua área de trabalho 
+		$this->load->helper('download');
+		force_download('clinica.gz', $backup);
+		
+	}
+
+	public function generate(){
+		// Carrega a classe de utilitário do banco de dados 
+		$this->load->dbutil();
+		// Faça backup de todo o seu banco de dados e atribua-o a uma variável 
+		$backup = $this->dbutil->backup();
+		//acrescenta a data atual ao nome do arquivo
+		$name  = date('Y/m/d');
+		// Carrega o download helper e envia o arquivo para sua área de trabalho 
+		$this->load->helper('download');
+		force_download('clinica'.$name.'.gz', $backup);
+		
+	}
+
 }//fim da class

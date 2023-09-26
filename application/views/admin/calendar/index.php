@@ -66,8 +66,8 @@
 						</button>
 						<h4 class="modal-title" id="myModalLabel">Agendar um Espaço</h4>
 					</div>
-					
-					<?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form_create')); ?>
+								
+				<?php echo form_open(current_url(), array('class' => 'form-horizontal', 'id' => 'form_create')); ?>
 
 					<div class="modal-body">
 						<div class="form-group">
@@ -117,7 +117,7 @@
 							<!--<a  href="javascript::void" class="btn btn-secondary" data-dismiss="modal">Cancel</a>
 								<a class="btn btn-danger delete_calendar" style="display: none;">Delete</a>
 							-->
-							<button type="submit" class="btn btn-primary">Enviar</button>
+							<button type="submit" onclick = "testealerta()" class="btn btn-primary">Enviar</button>
 							<button type="reset" class="btn btn-light">Limpar</button> 
 						</div>
 					</div>
@@ -312,6 +312,11 @@
 				.replace(/'/g, '&#039;')
 				.replace(/"/g, '&quot;')
 				.replace(/\n/g, '<br />');
+		}
+
+		function testealerta(){
+			
+			alert("alerta de teste esta em calendar/index.php;");
 		}
 
 </script>

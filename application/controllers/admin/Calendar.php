@@ -331,7 +331,7 @@ class calendar extends Admin_Controller {
 		
 		$age = R::getAll($sql); 
 		
-		$teste = 0;
+		$testehora = 0;
 		foreach($age as $ag){
 			if($ag['hora'] == $hor){
 				$testehora = 1; //ja existe a hora na data
@@ -345,10 +345,11 @@ class calendar extends Admin_Controller {
 			if($testehora == 1)
 			{
 				$this->data['message'] = "<p class='alert alert-success'>Horario já existente. </p>";
+				//$this->form_validation->set_rules('hora', 'hora', 'required');
 				//error.insertAfter('.section_erro');   
 				//$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');	
 			}else{
-				$this->data['message'] ="";
+				
 				$agend = R::dispense("agenda");
 					$agend->idpaciente = $idpac;
 					$agend->hora = $hor;
@@ -403,6 +404,7 @@ class calendar extends Admin_Controller {
 	    }
 		return $options;
 	}
+	
 /*	public function getstyle(){
 		$sql = "SELECT id,cor,nome FROM cores ";
                       

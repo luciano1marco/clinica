@@ -79,6 +79,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </script>
 <style>
 .ck-editor__editable_inline {
-    min-height: 400px;
+    min-height: 200px;
 }
 </style>

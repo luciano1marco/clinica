@@ -13,10 +13,12 @@
             <?php foreach ($paciente as $pac) : ?>
                 <!--dados do paciente ------------------------------------------>
                     <?php  //calcula idade paciente
+                    if($pac['dtnascp']){
                     $dataNascimento = $pac['dtnascp']; 
                     $date = new DateTime($dataNascimento ); 
                     $interval = $date->diff( new DateTime( date('Y-m-d') ) );
                     $idade = $interval->format( '%Y anos' );
+                    }else{ $dataNascimento = 'Náo consta no cadastro';}
                     //idade familiar
                     if($pac['dtnascpe']){
                         $dataNasc = $pac['dtnascpe']; 
@@ -52,28 +54,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <label class="col-sm-4">Endereço</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['enderecop']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <label class="col-sm-4">Telefone</label>
                                     <div class="col-sm-8">
                                         <p><?= ($pac['telefonep']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">CPF</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['cpfp']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <label class="col-sm-4">E-mail</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['emailp']); ?>&nbsp;</p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -118,25 +101,7 @@
                                         <p> <?= $idadepe ?> </p>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <label class="col-sm-4">Endereço</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['enderecope']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">Telefone</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['telefonepe']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <label class="col-sm-4">CPF</label>
-                                    <div class="col-sm-8">
-                                        <p><?= ($pac['cpfpe']); ?>&nbsp;</p>
-                                    </div>
-                                </div>
-
+                                
                                 <div class="row">
                                     <label class="col-sm-4">E-mail</label>
                                     <div class="col-sm-8">
@@ -147,11 +112,11 @@
 
                         </div>
                     </div>
-                <!--descricao------------------------------------------------------->
+                <!--descricao-Atendimento-------------------------------------->
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box">
-                                <h3 class="box-title">Descrição do Paciente
+                                <h3 class="box-title">Atendimento
                                 &nbsp;&nbsp;
                                 <?php if ($pac) { ?>
                                     <?php echo anchor('admin/descatende/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Adicionar</button>"); ?>&nbsp;&nbsp;
@@ -184,12 +149,12 @@
                             </div>
                         </div>
                     </div>
-                <!--procedimento-------------------------------------->
+                <!--procedimento-documento------------------------------------->
                 
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box">
-                                <h3 class="box-title">Procedimento
+                                <h3 class="box-title">Documento
                                 &nbsp;&nbsp;
                                 <?php if ($pac) { ?>
                                     <?php echo anchor('admin/procedimento/create/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-plus\"></i> Adicionar</button>"); ?>&nbsp;&nbsp;
@@ -201,7 +166,7 @@
                                     <thead>
                                         <tr>
                                             <th>Titulo</th>
-                                            <th>Data do Procedimento</th>
+                                            <th>Data de Inicio</th>
                                             <th>Ação</th>
                                         </tr>
                                     </thead>
@@ -222,7 +187,7 @@
                             </div>
                         </div>
                     </div>
-                <!--analises ------------------------------------------->
+                <!--analises ----------------------------------------
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box">
@@ -248,7 +213,7 @@
                                                 <td><?php echo $an['titulo']; ?></td>
                                                 <td><?php echo $an['dtcad']; ?></td>
 
-                                                <!-- Opções -->
+                                            
                                                 <td>
                                                     <?php echo anchor('admin/analises/edit/'.$an['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
                                                 </td>  
@@ -259,7 +224,7 @@
                             </div>
                         </div>
                     </div>
-                <!--conclusão do atendimento  -->                
+                conclusão do atendimento                 
                     <div class="col-md-12">
                         <div class="box">
                             <div class="box">
@@ -285,7 +250,7 @@
                                                 <td><?php echo $co['titulo']; ?></td>
                                                 <td><?php echo $co['dtcad']; ?></td>
 
-                                                <!-- Opções -->
+                                               
                                                 <td>
                                                     <?php echo anchor('admin/conclusao/edit/'.$co['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
                                                 </td>  
@@ -296,7 +261,7 @@
                             </div>
                         </div>
                     </div> 
-                <!--fim conclusao---->         
+                fim conclusao---->         
             <?php endforeach; ?>
         </div>
     </section>
