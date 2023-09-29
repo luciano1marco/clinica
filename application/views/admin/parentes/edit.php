@@ -34,8 +34,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                         </div>
                         <div class="form-group">
+                            <?php echo form_label('Grau Parentesco', 'nome', array('class' => 'col-sm-2 control-label')); ?>
+                                <div class="col-sm-3">
+                                    <?php echo form_dropdown($grau); ?>
+                                </div>
                             <?php echo form_label('Endereço', 'nome', array('class' => 'col-sm-2 control-label')); ?>
-                            <div class="col-sm-6">
+                            <div class="col-sm-3">
                                 <?php echo form_input($endereco); ?>
                             </div>
                         </div>

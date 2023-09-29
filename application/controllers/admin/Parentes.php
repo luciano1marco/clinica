@@ -72,7 +72,7 @@ class parentes extends Admin_Controller {
             R::store($parentes);
 
 			$this->session->set_flashdata('message', "Dados gravados");
-            redirect('admin/pacientes', 'refresh');
+            redirect('admin/pacientes/view/'.$id, 'refresh');
 		} 
         else {
             $this->data['message'] = (validation_errors() ? validation_errors() : "");
@@ -168,7 +168,7 @@ class parentes extends Admin_Controller {
 		}
 		redirect('admin/parentes', 'refresh');
 	}
-    public function edit($id,$idp){
+    public function edit($id,$idpa){
 		$id = (int) $id;
 		$user_id = $this->session->user_id;
 
@@ -179,7 +179,7 @@ class parentes extends Admin_Controller {
 		/* Breadcrumbs */
 		$this->breadcrumbs->unshift(2, "Editar parentes", 'admin/parentes/edit');
 		$this->data['breadcrumb'] = $this->breadcrumbs->show();
-		$this->data['idview'] = $idp;
+		$this->data['idview'] = $idpa;
 		 /* Titulo */
 		 $this->data['texto_edit'] = 'Editar Familiar';
 		/* Validate form input */
@@ -194,6 +194,7 @@ class parentes extends Admin_Controller {
 				$parentes->telefone = $this->input->post('telefone');
 				$parentes->endereco = $this->input->post('endereco');
 				$parentes->dtcad    = $dt;
+				$parentes->grau     = $this->input->post('grau');
 				$parentes->dtnasc   = $this->input->post('dtnasc');
 				$parentes->cpf      = $this->input->post('cpf');
 				$parentes->grau     = $this->input->post('grau');
@@ -201,7 +202,7 @@ class parentes extends Admin_Controller {
 								
 				R::store($parentes);
 
-				redirect('admin/parentes/', 'refresh');
+				redirect('admin/pacientes/view/'.$idpa, 'refresh');
 			}
 		}
 	
@@ -250,11 +251,14 @@ class parentes extends Admin_Controller {
 			'class' => 'form-control',
 			'value' => $parentes->cpf,
 		);
+		
 		$this->data['grau'] = array(
 			'name'  => 'grau',
 			'id'    => 'grau',
+			'options' => $this->getgrau(),
 			'type'  => 'int',
 			'class' => 'form-control',
+			'selected'=> $parentes->grau,
 			'value' => $parentes->grau,
 		);
 		$this->data['dtcad'] = array(

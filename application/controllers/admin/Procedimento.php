@@ -65,7 +65,7 @@ class procedimento extends Admin_Controller {
            R::store($procede);
 
 			$this->session->set_flashdata('message', "Dados gravados");
-            redirect('admin/pacientes', 'refresh');
+            redirect('admin/pacientes/view/'.$id, 'refresh');
 		} 
         else {
             $this->data['message'] = (validation_errors() ? validation_errors() : "");
@@ -140,17 +140,21 @@ class procedimento extends Admin_Controller {
 		/* Validate form input */
 		$this->form_validation->set_rules('descricao', 'descricao', 'required');
 		$this->form_validation->set_rules('titulo', 'titulo', 'required');
-		
+		//pegar data atual se data vazia
+		$dt = $this->input->post('dtcad');
+		if($dt == ''){
+			$dt = date('Y/m/d');
+		} 
 		$procede = R::load("procedimento", $id);
 
 		if (isset($_POST) && ! empty($_POST)) {
 			if ($this->form_validation->run()) {
 				$procede->descricao = $this->input->post('descricao');
 				$procede->titulo    = $this->input->post('titulo');
-				$procede->dtcad     = $this->input->post('dtcad');
+				$procede->dtcad     = $dt;
 			R::store($procede);
 
-				redirect('admin/pacientes/', 'refresh');
+				redirect('admin/pacientes/view/'.$idpa, 'refresh');
 			}
 		}
 	

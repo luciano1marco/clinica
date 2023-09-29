@@ -80,7 +80,7 @@ class descatende extends Admin_Controller {
          	R::store($descri);
 
 			$this->session->set_flashdata('message', "Dados gravados");
-            redirect('admin/pacientes', 'refresh');
+            redirect('admin/pacientes/view/'.$id, 'refresh');
 		} 
         else {
             $this->data['message'] = (validation_errors() ? validation_errors() : "");
@@ -157,17 +157,23 @@ class descatende extends Admin_Controller {
 		$this->form_validation->set_rules('titulo', 'titulo', 'required');
 		$this->data['idview'] = $idpa;
 		
+		//pegar data atual se data vazia
+		$dt = $this->input->post('dtcad');
+		if($dt == ''){
+			$dt = date('Y/m/d');
+		} 
+
 		$descri = R::load("descatende", $id);
 
 		if (isset($_POST) && ! empty($_POST)) {
 			if ($this->form_validation->run()) {
 				$descri->descricao = $this->input->post('descricao');
 				$descri->titulo = $this->input->post('titulo');
-				$descri->dtcad = $this->input->post('dtcad');
+				$descri->dtcad = $dt;
            		
 			   R::store($descri);
 
-				redirect('admin/pacientes/', 'refresh');
+				redirect('admin/pacientes/view/'.$idpa, 'refresh');
 			}
 		}
 	

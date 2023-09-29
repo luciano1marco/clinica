@@ -225,7 +225,7 @@ class pacientes extends Admin_Controller {
 								
 				R::store($paciente);
 
-				redirect('admin/pacientes/', 'refresh');
+				redirect('admin/pacientes/view/'.$id, 'refresh');
 			}
 		}
 	
@@ -419,23 +419,6 @@ class pacientes extends Admin_Controller {
 		redirect('admin/pacientes', 'refresh');    
 
     } 
-	public function generate_funcionando(){
-		// Carrega a classe de utilitário do banco de dados 
-		$this->load->dbutil();
-
-		// Faça backup de todo o seu banco de dados e atribua-o a uma variável 
-		$backup = $this->dbutil->backup();
-
-		// Carregue o arquivo auxiliar e grave o arquivo em seu servidor 
-		$this->load->helper('file');
-		write_file('/path/to/clinica.gz', $backup);
-
-		// Carrega o download helper e envia o arquivo para sua área de trabalho 
-		$this->load->helper('download');
-		force_download('clinica.gz', $backup);
-		
-	}
-
 	public function generate(){
 		// Carrega a classe de utilitário do banco de dados 
 		$this->load->dbutil();
@@ -443,10 +426,15 @@ class pacientes extends Admin_Controller {
 		$backup = $this->dbutil->backup();
 		//acrescenta a data atual ao nome do arquivo
 		$name  = date('Y/m/d');
+
+		// Carregue o arquivo auxiliar e grave o arquivo em seu servidor 
+		//$this -> load -> helper ( 'file' ); 
+		//write_file ( './upload/backup/'.$name.'.gz' ,  $backup );
 		// Carrega o download helper e envia o arquivo para sua área de trabalho 
 		$this->load->helper('download');
 		force_download('clinica'.$name.'.gz', $backup);
-		
-	}
+		 
+	 }
+	
 
 }//fim da class
