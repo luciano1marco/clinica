@@ -24,7 +24,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</div>
 					<div class="box-header with-border">
 						<h3 class="box-title"><?php echo anchor($anchor . '/create', '<i class="fa fa-plus"></i> ' . $texto_btn_create, array('class' => 'btn btn-block btn-primary btn-flat')); ?></h3>&nbsp;&nbsp;
-						<?php echo anchor($anchor . '/generate/', "<button class=\"btn btn-primary\"><i class=\"fa fa-search\"></i> Backup</button>"); ?>
+						<?php echo anchor($anchor . '/gerabackup/', "<button class=\"btn btn-primary\"><i class=\"fa fa-search\"></i> Backup</button>"); ?>
 						              			
 					</div>
 					<div class="box-body">

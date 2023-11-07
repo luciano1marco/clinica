@@ -390,10 +390,8 @@ class pacientes extends Admin_Controller {
 
 			$this->data["conclusao"] = R::getAll($sql4);	
 
-
 			//---
 			$this->template->admin_render('admin/pacientes/view', $this->data);
-
 		}
 
  	}   
@@ -419,7 +417,7 @@ class pacientes extends Admin_Controller {
 		redirect('admin/pacientes', 'refresh');    
 
     } 
-	public function generate(){
+	public function gerabackup(){
 		// Carrega a classe de utilitário do banco de dados 
 		$this->load->dbutil();
 		// Faça backup de todo o seu banco de dados e atribua-o a uma variável 
@@ -434,7 +432,6 @@ class pacientes extends Admin_Controller {
 		$this->load->helper('download');
 		force_download('clinica'.$name.'.gz', $backup);
 		 
-	 }
+	}
 	
-
 }//fim da class
