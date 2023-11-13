@@ -314,9 +314,9 @@
 				.replace(/\n/g, '<br />');
 		}
 
-		function testealerta(){
+		//function testealerta(){
 			
-			alert("alerta de teste esta em calendar/index.php;");
-		}
+		//	alert("alerta de teste esta em calendar/index.php;");
+		//}
 
 </script>

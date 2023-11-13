@@ -61,7 +61,7 @@ class calendar extends Admin_Controller {
 					inner join pacientes as pa
 					on pa.id = ag.idpaciente
 		
-					WHERE ag.user_id ='.$user_id.' and pa.ativo = 1";
+					WHERE pa.ativo = 1 and ag.user_id =" .$user_id;
 			}
 			$this->data['agend'] = R::getAll($sql);
 
