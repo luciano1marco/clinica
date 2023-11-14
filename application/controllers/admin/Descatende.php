@@ -208,4 +208,29 @@ class descatende extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/descatende/edit', $this->data);
 	}
+	public function view($id,$idpa){
+		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
+			{ redirect('auth/login', 'refresh'); }
+		else{ 
+		
+		$this->data['idview'] = $idpa;
+		/* -- Breadcrumbs ----------------------------------------------------*/
+		$this->data['breadcrumb'] = $this->breadcrumbs->show();
+		$this->anchor = 'admin/' . $this->router->class;
+		/* -- Data -----------------------------------------------------------*/
+		$this->data['error'] = NULL;
+
+		//--- dados do procedimento --------------	
+		$sql2 ="SELECT  *
+			 from descatende  
+			where id = " . $id;
+		$this->data["descat"] = R::getAll($sql2);	
+
+		$sql=" SELECT * FROM pacientes where id = " .$idpa;	
+		$this->data["pacie"] = R::getAll($sql);	
+
+			$this->template->admin_render('admin/descatende/view', $this->data);
+		}
+	}
+
 }//fim da class

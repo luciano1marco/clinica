@@ -243,6 +243,7 @@ class procedimento extends Admin_Controller {
 		$nomearquivo = $nome .date('d-m-Y') . '.pdf';
 		
 		//---titulo do laudo
+		
 		$titulo ='<h3 align="center">'. $procede->titulo .'</h3>' ;
 		//--texto do laudo
 		$texto = 'teste de inclusao para laudo escrito do fulano &nbsp;';
@@ -250,7 +251,6 @@ class procedimento extends Admin_Controller {
 		$texto .= '&nbsp;segue testo do laudo';
 		//--descricao digitada no clinica
 		$desc = $procede->descricao;
-		
 		//--dados a serem mostrados
 		$dadospdf = $titulo .$texto .$desc ;
 		$pdf = $this->pdf->createPDF($dadospdf, $nomearquivo, true, true);

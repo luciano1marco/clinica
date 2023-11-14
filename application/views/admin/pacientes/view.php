@@ -141,7 +141,8 @@
                                                 <!-- Opções -->
                                                 <td>
                                                     <?php echo anchor('admin/descatende/edit/'.$da['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
-                                                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Ver </button>--->
+                                                    <?php echo anchor('admin/descatende/view/'.$da['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-search\"></i> </button>"); ?>&nbsp;&nbsp;
+                                                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Ver </button>--->
                                                 </td>  
                                             </tr>
                                         <?php endforeach; ?>
@@ -180,7 +181,7 @@
                                                 <!-- Opções -->
                                                 <td>
                                                     <?php echo anchor('admin/procedimento/edit/'.$pr['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
-                                                    <?php echo anchor('admin/procedimento/view/'.$pr['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-search\"></i> Visualizar</button>"); ?>&nbsp;&nbsp;
+                                                    <?php echo anchor('admin/procedimento/view/'.$pr['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-search\"></i></button>"); ?>&nbsp;&nbsp;
                                                 </td>  
                                             </tr>
                                         <?php endforeach; ?>
