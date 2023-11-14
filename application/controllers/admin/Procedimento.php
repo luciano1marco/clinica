@@ -14,6 +14,8 @@ class procedimento extends Admin_Controller {
         $this->anchor = 'admin/' . $this->router->class;
 
 		$this->load->helper('utilidades');
+
+		$this->load->library("Pdf");
 		
 		$this->form_validation->set_error_delimiters('<div class="form_val_error">', '</div>');
 
@@ -204,5 +206,57 @@ class procedimento extends Admin_Controller {
 		/* Load Template */
 		$this->template->admin_render('admin/procedimento/edit', $this->data);
 	}
+	public function view($id,$idpa){
+		if ( ! $this->ion_auth->logged_in() OR ! $this->ion_auth->is_admin())
+			{ redirect('auth/login', 'refresh'); }
+		else{ 
+		
+		$this->data['idview'] = $idpa;
+		/* -- Breadcrumbs ----------------------------------------------------*/
+		$this->data['breadcrumb'] = $this->breadcrumbs->show();
+		$this->anchor = 'admin/' . $this->router->class;
+		/* -- Data -----------------------------------------------------------*/
+		$this->data['error'] = NULL;
 
-}
+		//--- dados do procedimento --------------	
+		$sql2 ="SELECT  id,titulo,
+						descricao,
+						idpa,
+						date_format(dtcad, '%d/%m/%Y') as dtcad
+			 from procedimento  
+			where id = " . $id;
+			$this->data["procedimento"] = R::getAll($sql2);	
+
+		$sql=" SELECT * FROM pacientes where id = " .$idpa;	
+		$this->data["pacie"] = R::getAll($sql);	
+
+			$this->template->admin_render('admin/procedimento/view', $this->data);
+		}
+	}
+
+	public function imprime($id,$idpa){
+		$procede  = R::load("procedimento", $id);
+		$paciente = R::load("pacientes" , $idpa);
+
+		//--cria o nome do arquivo pdf
+		$nome  = $procede->titulo;
+		$nomearquivo = $nome .date('d-m-Y') . '.pdf';
+		
+		//---titulo do laudo
+		$titulo ='<h3 align="center">'. $procede->titulo .'</h3>' ;
+		//--texto do laudo
+		$texto = 'teste de inclusao para laudo escrito do fulano &nbsp;';
+		$texto .= $paciente->nome;
+		$texto .= '&nbsp;segue testo do laudo';
+		//--descricao digitada no clinica
+		$desc = $procede->descricao;
+		
+		//--dados a serem mostrados
+		$dadospdf = $titulo .$texto .$desc ;
+		$pdf = $this->pdf->createPDF($dadospdf, $nomearquivo, true, true);
+
+		//echo $pdf;
+	
+	}
+
+}//fim da class

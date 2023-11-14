@@ -10,7 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <?php echo $breadcrumb; ?>
         <?php $anchor = 'admin/' . $this->router->class; ?>
         <?php $anchor1 = 'admin/pacientes' ; ?>
-        
+        <?php $anchor2 = 'admin/procedimento' ; ?>
     </section>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <section class="content">
@@ -54,12 +54,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     $redo = '<i class="fa fa-refresh"></i> <span>Reiniciar</span>';
                                     $delete = '<i class="fa fa-trash"></i> <span>Excluir</span>';
                                     $cancel = '<i class="fa fa-times"></i> <span>Cancelar</span>';
+                                    $imprimir = '<i class="fa fa-times"></i> <span>Imprimir</span>';
                                     ?>
-
                                     <?php echo form_button(array('type' => 'submit', 'class' => 'btn btn-primary btn-flat', 'content' => $submit)); ?>
                                     <?php echo form_button(array('type' => 'reset', 'class' => 'btn btn-warning btn-flat', 'content' => $redo)); ?>
                                     <?php echo form_button(array('type' => 'button', 'class' => 'btn btn-danger btn-flat', 'content' => $delete, "id" => "btExcluir")); ?>
                                     <?php echo anchor($anchor1.'/view/'.$idview, $cancel, array('class' => 'btn btn-default btn-flat')); ?>
+                                   
                                 </div>
                             </div>
                         </div>

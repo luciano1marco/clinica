@@ -180,6 +180,7 @@
                                                 <!-- Opções -->
                                                 <td>
                                                     <?php echo anchor('admin/procedimento/edit/'.$pr['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-pencil\"></i> Editar</button>"); ?>&nbsp;&nbsp;
+                                                    <?php echo anchor('admin/procedimento/view/'.$pr['id'].'/'.$pac['id'], "<button class=\"btn btn-primary\"><i class=\"fa fa-search\"></i> Visualizar</button>"); ?>&nbsp;&nbsp;
                                                 </td>  
                                             </tr>
                                         <?php endforeach; ?>
