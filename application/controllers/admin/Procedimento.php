@@ -237,26 +237,41 @@ class procedimento extends Admin_Controller {
 	public function imprime($id,$idpa){
 		$procede  = R::load("procedimento", $id);
 		$paciente = R::load("pacientes" , $idpa);
+		$user_id = $this->session->user_id;
+		$usuario = R::load("users",$user_id);
 
 		//--cria o nome do arquivo pdf
 		$nome  = $procede->titulo;
 		$nomearquivo = $nome .date('d-m-Y') . '.pdf';
-		
+		//---data atual por extenso
+		$hoje = strftime(',%d de %B de %Y', strtotime('today'));
+
 		//---titulo do laudo
-		
 		$titulo ='<h3 align="center">'. $procede->titulo .'</h3>' ;
-		//--texto do laudo
+		
+		//--texto padrao do laudo
 		$texto = 'teste de inclusao para laudo escrito do fulano &nbsp;';
 		$texto .= $paciente->nome;
 		$texto .= '&nbsp;segue testo do laudo';
-		//--descricao digitada no clinica
+		$texto .= '<br>';
+		
+		//--descricao digitada no sistema clinica
 		$desc = $procede->descricao;
+
+		//--dados da psicologa
+		$psico = $usuario->first_name . '&nbsp;' . $usuario->last_name ; 
+		$psico .= '&nbsp; CRP: 123456 <br>';
+
+		//--Rodape 
+		$rodape = '<br><br><h4 align="right">'.$psico .'<br> Rio Grande';
+		$rodape .= $hoje;
+		$rodape .= '</h4>';
+				
 		//--dados a serem mostrados
-		$dadospdf = $titulo .$texto .$desc ;
+		$dadospdf = $titulo .$texto .$desc .$rodape;
 		$pdf = $this->pdf->createPDF($dadospdf, $nomearquivo, true, true);
 
 		//echo $pdf;
-	
 	}
 
 }//fim da class
