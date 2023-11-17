@@ -250,13 +250,13 @@ class procedimento extends Admin_Controller {
 		$titulo ='<h3 align="center">'. $procede->titulo .'</h3>' ;
 		
 		//--texto padrao do laudo
-		$texto = 'teste de inclusao para laudo escrito do fulano &nbsp;';
+		$texto = '<p align="justify"> teste de inclusao para laudo escrito do fulano &nbsp;';
 		$texto .= $paciente->nome;
-		$texto .= '&nbsp;segue testo do laudo';
+		$texto .= '&nbsp;segue testo do laudo</p>';
 		$texto .= '<br>';
 		
 		//--descricao digitada no sistema clinica
-		$desc = $procede->descricao;
+		$desc = $procede->descricao ;
 
 		//--dados da psicologa
 		$psico = $usuario->first_name . '&nbsp;' . $usuario->last_name ; 

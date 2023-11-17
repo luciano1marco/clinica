@@ -86,9 +86,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
     } );
 </script>
 <style>
-.ck-editor__editable_inline {
-    min-height: 400px;
-}
+    .ck-editor__editable_inline {
+        min-height: 400px;
+    }
 </style>
 
 <div id="modal_delete" class="modal fade" tabindex="-1" role="dialog">

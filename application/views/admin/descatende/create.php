@@ -69,7 +69,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     ClassicEditor
     .create( document.querySelector( '#descricao' ) )
     .then( descricao => {
-     console.log( descricao );
+     //console.log( descricao );
     } )
     
     .catch( error => {
@@ -79,5 +79,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <style>
 .ck-editor__editable_inline {
     min-height: 200px;
+    
 }
 </style>
